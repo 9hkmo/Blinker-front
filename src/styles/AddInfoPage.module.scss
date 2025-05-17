@@ -1,1 +1,61 @@
-.container {}
+@mixin flex(
+  $direction: row,
+  $align-items: center,
+  $justify-content: center,
+  $gap: null
+) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+// 틀만 생성해놓기
+
+.container {
+  @include flex(column);
+  width: 100%;
+  height: 1080px;
+
+  .header {
+    .titleImg {
+      flex: 1;
+    }
+  }
+  .contents {
+    @include flex(column, $gap: 20px);
+    .selectContainer {
+      @include flex();
+      .Dropdown {
+        .selectImg {
+        }
+      }
+    }
+    .description {
+      .moveChar {
+        flex: 1;
+      }
+      .text {
+      }
+    }
+    .tagContainer {
+      @include flex($gap: 10px);
+      max-width: 700px;
+      flex-wrap: wrap;
+    }
+  }
+
+  .linkButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 25px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

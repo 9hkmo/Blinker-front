@@ -55,26 +55,26 @@ export const AddInfoPage = () => {
               <img src="" alt="bottomArrow" />
             </div>
           </div>
-          <div className={styles.description}>
-            <div className={styles.moveChar}>
-              <img src="" alt="moveChar" />
-            </div>
-            <div className={styles.text}>
-              다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요
-            </div>
+        </div>
+        <div className={styles.description}>
+          <div className={styles.moveChar}>
+            <img src="" alt="moveChar" />
           </div>
-          <div className={styles.tagContainer}>
-            {tags.map((tag, index) => {
-              return (
-                <Tag
-                  key={index}
-                  title={tag}
-                  choiceTags={choiceTags}
-                  setChoiceTags={setChoiceTags}
-                />
-              );
-            })}
+          <div className={styles.text}>
+            다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요
           </div>
+        </div>
+        <div className={styles.tagContainer}>
+          {tags.map((tag, index) => {
+            return (
+              <Tag
+                key={index}
+                title={tag}
+                choiceTags={choiceTags}
+                setChoiceTags={setChoiceTags}
+              />
+            );
+          })}
         </div>
       </div>
       {/* 링크 버튼도 컴포넌트로 빼도될듯? */}
