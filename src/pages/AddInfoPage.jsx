@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Tag } from "../components/Tag";
 import styles from "../styles/AddInfoPage.module.scss";
 
@@ -24,6 +25,16 @@ const tags = [
 ];
 
 export const AddInfoPage = () => {
+  const [choiceTags, setChoiceTags] = useState([]);
+
+  // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
+  const handleClick = () => {};
+
+  // 태그 선택되었는지 확인
+  useEffect(() => {
+    console.log(choiceTags);
+  }, [choiceTags]);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -54,13 +65,22 @@ export const AddInfoPage = () => {
           </div>
           <div className={styles.tagContainer}>
             {tags.map((tag, index) => {
-              return <Tag title={tag} key={index} />;
+              return (
+                <Tag
+                  key={index}
+                  title={tag}
+                  choiceTags={choiceTags}
+                  setChoiceTags={setChoiceTags}
+                />
+              );
             })}
           </div>
         </div>
       </div>
       {/* 링크 버튼도 컴포넌트로 빼도될듯? */}
-      <div className={styles.linkButton}>결과 보러가기</div>
+      <div className={styles.linkButton} onClick={handleClick}>
+        결과 보러가기
+      </div>
     </div>
   );
 };
