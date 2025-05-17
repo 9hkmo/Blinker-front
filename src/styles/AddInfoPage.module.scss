@@ -27,8 +27,15 @@
     @include flex(column, $gap: 20px);
     .selectContainer {
       @include flex();
-      .Dropdown {
+      .dropdown {
         .selectImg {
+        }
+        .dropdownBox {
+          border: 1px solid black;
+          border-radius: 20px;
+          padding: 10px;
+          width: 100px;
+          text-align: center;
         }
       }
     }

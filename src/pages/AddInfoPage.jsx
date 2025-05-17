@@ -26,9 +26,12 @@ const tags = [
 
 export const AddInfoPage = () => {
   const [choiceTags, setChoiceTags] = useState([]);
-
+  const [ageRange, setAgeRange] = useState("");
+  const [eyeRange, setEyeRange] = useState(0.0);
   // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
-  const handleClick = () => {};
+  const handleClick = () => {
+
+  };
 
   // 태그 선택되었는지 확인
   useEffect(() => {
@@ -45,15 +48,41 @@ export const AddInfoPage = () => {
       <div className={styles.contents}>
         {/* 드롭다운 구현해야 함 */}
         <div className={styles.selectContainer}>
-          <div className={styles.Dropdown}>
+          <div className={styles.dropdown}>
             <div className={styles.selectImg}>
               <img src="" alt="bottomArrow" />
             </div>
+            <select
+              value={ageRange}
+              onChange={(e) => setAgeRange(e.target.value)}
+              className={styles.dropdownBox}
+            >
+              <option value="">나이</option>
+              <option value="under10">10세 이하</option>
+              <option value="10s">10~19세</option>
+              <option value="20s">20~29세</option>
+              <option value="30s">30~39세</option>
+              <option value="40s">40~49세</option>
+              <option value="50s">50~59세</option>
+              <option value="60s">60~69세</option>
+              <option value="70plus">70세 이상</option>
+            </select>
           </div>
-          <div className={styles.Dropdown}>
+          <div className={styles.dropdown}>
             <div className={styles.selectImg}>
               <img src="" alt="bottomArrow" />
             </div>
+            <select
+              value={eyeRange}
+              onChange={(e) => setEyeRange(e.target.value)}
+              className={styles.dropdownBox}
+            >
+              <option value="">시력</option>
+              <option value="under10">0.0~0.4</option>
+              <option value="10s">0.5~0.9</option>
+              <option value="20s">1.0~1.4</option>
+              <option value="30s">1.5~2.0</option>
+            </select>
           </div>
         </div>
         <div className={styles.description}>
