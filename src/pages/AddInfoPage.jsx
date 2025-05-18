@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Tag } from "../components/Tag";
 import styles from "../styles/AddInfoPage.module.scss";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 const tags = [
   "두통",
@@ -40,10 +41,11 @@ const ageOptions = [
 
 const eyeOptions = [
   { value: null, label: "시력" },
-  { value: 0.0, label: "0.0~0.4" },
-  { value: 0.5, label: "0.5~0.9" },
-  { value: 1.0, label: "1.0~1.4" },
-  { value: 1.5, label: "1.5~2.0" },
+  { value: "idk", label: "잘 모르겠다" },
+  { value: "0.0", label: "0.0~0.4" },
+  { value: "0.5", label: "0.5~0.9" },
+  { value: "1.0", label: "1.0~1.4" },
+  { value: "1.5", label: "1.5~2.0" },
 ];
 
 // react-select에 스타일을 적용하려면 2가지 방법으로 적용해야한다.
@@ -78,9 +80,40 @@ export const AddInfoPage = () => {
   // Select는 객체 반환
   const [selectedAge, setSelectedAge] = useState({});
   const [selectedEye, setSelectedEye] = useState({});
+  const [isModal, setIsModal] = useState(false);
+
+  const navigate = useNavigate();
 
   // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
-  const handleClick = () => {};
+  // 주소 값은 임의로 설정. 전달해줄 값은 나이, 시력, 선택한 태그들
+  // 검사 페이지에서 백엔드에 전송해줄 때 이 값들을 같이 넘겨주면 될듯하다.
+  // 검사 페이지에서는 state가 있는지 꼭 확인해줘야함(없으면 에러 페이지 또는 추가 정보 페이지로 이동)
+  const handleClick = () => {
+    // 태그는 아무것도 없을 수 있음
+    if (selectedAge.value && selectedEye.value) {
+      console.log("전송");
+      navigate("/quiz", {
+        state: {
+          tags: choiceTags,
+          age: selectedAge.value,
+          eye: selectedEye.value,
+        },
+      });
+    } else {
+      console.log("오류");
+      setIsModal(true);
+    }
+  };
+
+  useEffect(() => {
+    const modalOpen = setTimeout(() => {
+      setIsModal(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(modalOpen); // 언마운트 시 타이머 삭제
+    };
+  }, [isModal]);
 
   // 태그 선택되었는지 확인
   useEffect(() => {
@@ -100,6 +133,11 @@ export const AddInfoPage = () => {
 
   return (
     <div className={styles.container}>
+      <div
+        className={`${styles.modalContainer} ${isModal ? "" : styles.hidden}`}
+      >
+        {!selectedAge.value ? "나이를 선택해주세요!" : "시력을 선택해주세요!"}
+      </div>
       <div className={styles.header}>
         <div className={styles.titleImg}>
           <img src="" alt="BLINKER" />

@@ -12,7 +12,6 @@
 }
 
 // 틀만 생성해놓기
-
 .container {
   @include flex(column);
   width: 100%;
@@ -56,3 +55,15 @@
   }
 }
 
+.modalContainer {
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform 0.7s ease-out, opacity 0.5s ease-out;
+  position: fixed;
+  bottom: 10px;
+}
+.hidden {
+  opacity: 0;
+  transform: translateY(100%);
+}
