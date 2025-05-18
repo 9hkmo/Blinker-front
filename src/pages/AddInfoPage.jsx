@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../components/Tag";
 import styles from "../styles/AddInfoPage.module.scss";
+import Select from "react-select";
 
 const tags = [
   "두통",
@@ -24,19 +25,50 @@ const tags = [
   "뻑뻑함",
 ];
 
+const ageOptions = [
+  { value: null, label: "나이" },
+  { value: "10under", label: "9세 이하" },
+  { value: "10s", label: "10~19세" },
+  { value: "20s", label: "20~29세" },
+  { value: "30s", label: "30~39세" },
+  { value: "40s", label: "40~49세" },
+  { value: "50s", label: "50~59세" },
+  { value: "60s", label: "60~69세" },
+  { value: "70plus", label: "70세 이상" },
+];
+
+const eyeOptions = [
+  { value: null, label: "시력" },
+  { value: 0.0, label: "0.0~0.4" },
+  { value: 0.5, label: "0.5~0.9" },
+  { value: 1.0, label: "1.0~1.4" },
+  { value: 1.5, label: "1.5~2.0" },
+];
+
 export const AddInfoPage = () => {
   const [choiceTags, setChoiceTags] = useState([]);
-  const [ageRange, setAgeRange] = useState("");
-  const [eyeRange, setEyeRange] = useState(0.0);
-  // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
-  const handleClick = () => {
+  // Select는 객체 반환
+  const [selectedAge, setSelectedAge] = useState({});
+  const [selectedEye, setSelectedEye] = useState({});
 
-  };
+  // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
+  const handleClick = () => {};
 
   // 태그 선택되었는지 확인
   useEffect(() => {
     console.log(choiceTags);
   }, [choiceTags]);
+
+  // 나이 선택 함수
+  const handleAgeChange = (option) => {
+    setSelectedAge(option);
+    console.log(selectedAge.value);
+  };
+  // 시력 선택 함수
+  const handleEyeChange = (option) => {
+    setSelectedEye(option);
+    console.log(selectedEye.value);
+  };
 
   return (
     <div className={styles.container}>
@@ -46,44 +78,25 @@ export const AddInfoPage = () => {
         </div>
       </div>
       <div className={styles.contents}>
-        {/* 드롭다운 구현해야 함 */}
         <div className={styles.selectContainer}>
-          <div className={styles.dropdown}>
-            <div className={styles.selectImg}>
-              <img src="" alt="bottomArrow" />
-            </div>
-            <select
-              value={ageRange}
-              onChange={(e) => setAgeRange(e.target.value)}
-              className={styles.dropdownBox}
-            >
-              <option value="">나이</option>
-              <option value="under10">10세 이하</option>
-              <option value="10s">10~19세</option>
-              <option value="20s">20~29세</option>
-              <option value="30s">30~39세</option>
-              <option value="40s">40~49세</option>
-              <option value="50s">50~59세</option>
-              <option value="60s">60~69세</option>
-              <option value="70plus">70세 이상</option>
-            </select>
-          </div>
-          <div className={styles.dropdown}>
-            <div className={styles.selectImg}>
-              <img src="" alt="bottomArrow" />
-            </div>
-            <select
-              value={eyeRange}
-              onChange={(e) => setEyeRange(e.target.value)}
-              className={styles.dropdownBox}
-            >
-              <option value="">시력</option>
-              <option value="under10">0.0~0.4</option>
-              <option value="10s">0.5~0.9</option>
-              <option value="20s">1.0~1.4</option>
-              <option value="30s">1.5~2.0</option>
-            </select>
-          </div>
+          <Select
+            className={styles.selectBox}
+            defaultValue={ageOptions[0]}
+            name="나이"
+            options={ageOptions}
+            placeholder="연령대 선택"
+            onChange={handleAgeChange}
+            classNamePrefix={styles.dropdown}
+          />
+          <Select
+            className={styles.selectBox}
+            defaultValue={eyeOptions[0]}
+            name="시력"
+            options={eyeOptions}
+            placeholder="시력 선택"
+            onChange={handleEyeChange}
+            classNamePrefix={styles.dropdown}
+          />
         </div>
         <div className={styles.description}>
           <div className={styles.moveChar}>
