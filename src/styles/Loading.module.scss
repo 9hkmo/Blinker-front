@@ -1,10 +1,27 @@
 // 틀만 생성해놓기
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   .contents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
     .loadingImg {
+      flex: 1;
     }
     .progressBar {
+      min-width: 50vw;
+      width: 100%;
+      border: 1px solid black;
+      height: 20px;
+      padding: 5px;
       .bar {
+        background-color: green;
+        height: 100%;
       }
     }
     .text {
