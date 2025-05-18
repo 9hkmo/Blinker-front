@@ -25,6 +25,7 @@ const tags = [
   "뻑뻑함",
 ];
 
+// 옵션의 value값을 백에 전달해줘야함. 이때 숫자로 전달할 지, 문자로 전달할 지
 const ageOptions = [
   { value: null, label: "나이" },
   { value: "10under", label: "9세 이하" },
@@ -44,6 +45,33 @@ const eyeOptions = [
   { value: 1.0, label: "1.0~1.4" },
   { value: 1.5, label: "1.5~2.0" },
 ];
+
+// react-select에 스타일을 적용하려면 2가지 방법으로 적용해야한다.
+// 1. 아래 방법: 스타일을 객체로 전달(CSS-in-JS 객체)
+// 2. classNamePrefix에 설정한 .클래스이름__control 이런식으로 css에서 적용
+const customStyles = {
+  control: (base, state) => ({
+    ...base,
+    borderRadius: "15px",
+    padding: "6px",
+    border: "1px solid black",
+    backgroundColor: state.isFocused ? "#f0f0f0" : "white",
+    borderColor: state.isFocused ? "white" : "#ccc",
+    width: "200px",
+  }),
+  menu: (base) => ({
+    ...base,
+    borderRadius: "15px",
+    overflow: "hidden",
+  }),
+  option: (base) => ({
+    ...base,
+    textAlign: "cetner",
+    display: "flex",
+    alignItem: "center",
+    justifyContent: "center",
+  }),
+};
 
 export const AddInfoPage = () => {
   const [choiceTags, setChoiceTags] = useState([]);
@@ -80,22 +108,22 @@ export const AddInfoPage = () => {
       <div className={styles.contents}>
         <div className={styles.selectContainer}>
           <Select
-            className={styles.selectBox}
             defaultValue={ageOptions[0]}
             name="나이"
             options={ageOptions}
             placeholder="연령대 선택"
             onChange={handleAgeChange}
-            classNamePrefix={styles.dropdown}
+            styles={customStyles}
+            components={{ IndicatorSeparator: () => null }} // 구분선 삭제
           />
           <Select
-            className={styles.selectBox}
             defaultValue={eyeOptions[0]}
             name="시력"
             options={eyeOptions}
             placeholder="시력 선택"
             onChange={handleEyeChange}
-            classNamePrefix={styles.dropdown}
+            styles={customStyles}
+            components={{ IndicatorSeparator: () => null }} // 구분선 삭제
           />
         </div>
         <div className={styles.description}>
