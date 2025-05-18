@@ -1,0 +1,28 @@
+// 틀만 생성해놓기
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 5px 10px;
+  background-color: gray;
+  &:hover {
+    cursor: pointer;
+  }
+  .img {
+    flex: 1;
+  }
+  .title {
+    color: white;
+  }
+  .isClick { // 클릭되었을 때
+    color: black;
+  }
+}
+
+.isClick { // 클릭되었을 때
+  background-color: white;
+}
