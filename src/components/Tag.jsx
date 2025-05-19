@@ -1,4 +1,4 @@
-import styles from "../styles/Tag.module.scss";
+import styles from "../styles/components/Tag.module.scss";
 
 export const Tag = ({ title, choiceTags, setChoiceTags }) => {
   const isSelected = choiceTags.includes(title);

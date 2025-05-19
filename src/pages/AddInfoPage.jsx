@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Tag } from "../components/Tag";
-import styles from "../styles/AddInfoPage.module.scss";
+import styles from "../styles/pages/AddInfoPage.module.scss";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 
