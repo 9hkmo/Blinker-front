@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/Loading.module.scss";
+import styles from "../styles/components/Loading.module.scss";
 
 // 보여줄 문구들
 const texts = [

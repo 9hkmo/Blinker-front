@@ -1,5 +1,5 @@
 import axios from "axios";
-import styles from "../styles/ResultPage.module.scss";
+import styles from "../styles/pages/ResultPage.module.scss";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Loading } from "../components/Loading";
