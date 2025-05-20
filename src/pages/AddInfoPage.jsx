@@ -4,7 +4,7 @@ import styles from "../styles/pages/AddInfoPage.module.scss";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
-import { arrow_right, logo_title } from "../assets";
+import { arrow_right, logo_title, move_char } from "../assets";
 
 const tags = [
   "두통",
@@ -123,6 +123,7 @@ export const AddInfoPage = () => {
   const [selectedEye, setSelectedEye] = useState({});
   const [isModal, setIsModal] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
+  const [moveIndex, setMoveIndex] = useState(1);
   const navigate = useNavigate();
 
   // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
@@ -172,6 +173,7 @@ export const AddInfoPage = () => {
     console.log(selectedEye.value);
   };
 
+  // 나이와 시력이 선택 되었는지 확인
   useEffect(() => {
     if (selectedAge.value && selectedEye.value) {
       setIsSelected(true);
@@ -180,9 +182,43 @@ export const AddInfoPage = () => {
     }
   }, [selectedAge, selectedEye]);
 
+  useEffect(() => {
+    const moveCharInterval = setInterval(() => {
+      setMoveIndex(Math.floor(Math.random() * 5)+1); // 나오는 주기 설정할 수 있음(1~3만 나옴)
+    }, 3000);
+
+    return () => {
+      clearInterval(moveCharInterval);
+    };
+  }, []);
+  useEffect(() => {
+    console.log(moveIndex);
+  }, [moveIndex]);
+
   return (
     <div className={styles.container}>
       <Header />
+      <div className={`${styles.moveChar} ${styles.char1}`}>
+        <img
+          src={move_char}
+          className={`${moveIndex === 1 ? styles.visible : ""}`}
+          alt="Blinker"
+        />
+      </div>
+      <div className={`${styles.moveChar} ${styles.char2}`}>
+        <img
+          src={move_char}
+          className={`${moveIndex === 2 ? styles.visible : ""}`}
+          alt="Blinker"
+        />
+      </div>
+      <div className={`${styles.moveChar} ${styles.char3}`}>
+        <img
+          src={move_char}
+          className={`${moveIndex === 3 ? styles.visible : ""}`}
+          alt="Blinker"
+        />
+      </div>
       <div
         className={`${styles.modalContainer} ${isModal ? "" : styles.hidden}`}
       >

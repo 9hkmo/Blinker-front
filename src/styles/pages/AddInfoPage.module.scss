@@ -67,8 +67,8 @@
 
   .isSelected {
     background-color: $sub-color;
-    border: 4px solid #1C5F8E;
-    box-shadow: 1.43px 5.71px 14.27px #0485A233;
+    border: 4px solid #1c5f8e;
+    box-shadow: 1.43px 5.71px 14.27px #0485a233;
     transform: translateY(-20%);
   }
 }
@@ -87,4 +87,31 @@
 .hidden {
   opacity: 0;
   transform: translateY(100%);
+}
+
+.moveChar {
+  position: fixed;
+  transition: transform 0.5s ease;
+  img {
+    transition: transform 0.5s ease;
+  }
+}
+
+.char1 {
+  bottom: -20%;
+  left: 74px;
+}
+.char2 {
+  top: 20%;
+  left: -200px;
+  transform: rotate(90deg);
+}
+.char3 {
+  top: -20%;
+  right: 1%;
+  transform: rotate(180deg);
+}
+
+.visible {
+  transform: translateY(-100%);
 }
