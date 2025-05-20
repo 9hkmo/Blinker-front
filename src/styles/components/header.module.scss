@@ -1,0 +1,36 @@
+@use "../variables" as *;
+
+.container {
+  padding: 1.042vw;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $background-color;
+  .contents {
+    position: relative;
+    width: 100%;
+    .logo {
+      flex: 1;
+      position: absolute;
+      left: 1.042vw;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 200px;
+      .nav-item {
+        font-size: 2.188rem;
+        text-decoration: none;
+        color: $text-color-main;
+        font-weight: 700;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      .current {
+        text-decoration: underline;
+      }
+    }
+  }
+}
