@@ -2,5 +2,5 @@
 // Barrel export 패턴 import 관리
 import logo_header from "./blinker-header-logo.svg";
 import logo_title from "./blinker-title.svg";
-
-export { logo_header, logo_title };
+import arrow_right from "./right-arrow.svg";
+export { logo_header, logo_title, arrow_right };
