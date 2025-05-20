@@ -122,7 +122,7 @@ export const AddInfoPage = () => {
   const [selectedAge, setSelectedAge] = useState({});
   const [selectedEye, setSelectedEye] = useState({});
   const [isModal, setIsModal] = useState(false);
-
+  const [isSelected, setIsSelected] = useState(false);
   const navigate = useNavigate();
 
   // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
@@ -131,7 +131,7 @@ export const AddInfoPage = () => {
   // 검사 페이지에서는 state가 있는지 꼭 확인해줘야함(없으면 에러 페이지 또는 추가 정보 페이지로 이동)
   const handleClick = () => {
     // 태그는 아무것도 없을 수 있음
-    if (selectedAge.value && selectedEye.value) {
+    if (isSelected) {
       console.log("전송");
       navigate("/quiz", {
         state: {
@@ -172,6 +172,14 @@ export const AddInfoPage = () => {
     console.log(selectedEye.value);
   };
 
+  useEffect(() => {
+    if (selectedAge.value && selectedEye.value) {
+      setIsSelected(true);
+    } else {
+      setIsSelected(false);
+    }
+  }, [selectedAge, selectedEye]);
+
   return (
     <div className={styles.container}>
       <Header />
@@ -209,7 +217,7 @@ export const AddInfoPage = () => {
           />
         </div>
         <div className={styles.description}>
-          다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요
+          다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요.
         </div>
         <div className={styles.tagContainer}>
           {tags.map((tag, index) => {
@@ -225,7 +233,12 @@ export const AddInfoPage = () => {
         </div>
       </div>
       {/* 링크 버튼도 컴포넌트로 빼도될듯? */}
-      <div className={styles.linkButton} onClick={handleClick}>
+      <div
+        className={`${styles.linkButton} ${
+          isSelected ? styles.isSelected : ""
+        }`}
+        onClick={handleClick}
+      >
         <div className={styles.text}>검사</div>
         <img src={arrow_right} alt="arrow" />
       </div>
