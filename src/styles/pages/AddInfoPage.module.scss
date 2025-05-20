@@ -50,8 +50,9 @@
     background-color: #363636;
 
     border-radius: 15px;
-    padding: 20px 80px;
-    box-shadow: 0 4 4 white;
+    padding: 15px 75px;
+    border: 4px solid #363636;
+    box-shadow: 0 4px 4px #ffffff14;
     .text {
       font-size: 24px;
       font-weight: 700;
@@ -60,16 +61,24 @@
     &:hover {
       cursor: pointer;
     }
+    transition: background-color 0.3s ease, box-shadow 0.3s ease,
+      transform 0.3s ease, border 0.3s ease;
+  }
+
+  .isSelected {
+    background-color: $sub-color;
+    border: 4px solid #1C5F8E;
+    box-shadow: 1.43px 5.71px 14.27px #0485A233;
+    transform: translateY(-20%);
   }
 }
 
 .modalContainer {
-  border: 1px solid black;
-  border-radius: 20px;
   padding: 20px;
   background-color: #363636;
   color: $text-color-main;
   font-size: 24px;
+  font-weight: 700;
   border-radius: 15px;
   transition: transform 0.7s ease-out, opacity 0.5s ease-out;
   position: fixed;
