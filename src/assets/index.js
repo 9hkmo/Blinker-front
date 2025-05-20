@@ -4,4 +4,5 @@ import logo_header from "./blinker-header-logo.svg";
 import logo_title from "./blinker-title.svg";
 import arrow_right from "./right-arrow.svg";
 import move_char from "./move-char.svg";
-export { logo_header, logo_title, arrow_right, move_char };
+import pupil from "./pupil.svg";
+export { logo_header, logo_title, arrow_right, move_char, pupil };
