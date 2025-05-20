@@ -183,10 +183,8 @@ export const AddInfoPage = () => {
       </div>
       {/* 링크 버튼도 컴포넌트로 빼도될듯? */}
       <div className={styles.linkButton} onClick={handleClick}>
-        검사
-        <div className={styles.arrowImg}>
-          <img src={arrow_right} alt="arrow" />
-        </div>
+        <div className={styles.text}>검사</div>
+        <img src={arrow_right} alt="arrow" />
       </div>
     </div>
   );
