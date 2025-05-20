@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/add-info" element={<AddInfoPage />} />
+        <Route path="/report" element={<AddInfoPage />} />
         <Route path="/result/:id" element={<ResultPage />} />
       </Routes>
     </BrowserRouter>
