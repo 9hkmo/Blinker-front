@@ -4,7 +4,8 @@ import styles from "../styles/pages/AddInfoPage.module.scss";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
-import { arrow_right, logo_title, move_char } from "../assets";
+import { arrow_right, move_char } from "../assets";
+import { MoveEyeTitle } from "../components/MoveEyeTitle";
 
 const tags = [
   "두통",
@@ -184,7 +185,7 @@ export const AddInfoPage = () => {
 
   useEffect(() => {
     const moveCharInterval = setInterval(() => {
-      setMoveIndex(Math.floor(Math.random() * 5)+1); // 나오는 주기 설정할 수 있음(1~3만 나옴)
+      setMoveIndex(Math.floor(Math.random() * 5) + 1); // 나오는 주기 설정할 수 있음(1~3만 나옴)
     }, 3000);
 
     return () => {
@@ -224,12 +225,8 @@ export const AddInfoPage = () => {
       >
         {!selectedAge.value ? "나이를 선택해주세요!" : "시력을 선택해주세요!"}
       </div>
-      <div className={styles.header}>
-        <div className={styles.titleImg}>
-          <img src={logo_title} alt="BLINKER" />
-        </div>
-      </div>
       <div className={styles.contents}>
+        <MoveEyeTitle />
         <div className={styles.selectContainer}>
           <Select
             defaultValue={ageOptions[0]}
