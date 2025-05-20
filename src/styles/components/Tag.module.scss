@@ -1,28 +1,22 @@
-// 틀만 생성해놓기
+@use "../variables" as *;
 
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  border: 1px solid black;
-  border-radius: 20px;
-  padding: 5px 10px;
-  background-color: gray;
+  border: 1px solid $sub-color;
+  border-radius: 30px;
+  padding: 25px 42px;
   &:hover {
     cursor: pointer;
   }
-  .img {
-    flex: 1;
-  }
   .title {
-    color: white;
-  }
-  .isClick { // 클릭되었을 때
-    color: black;
+    line-height: 20px;
+    color: $text-color-main;
+    font-size: 30px;
   }
 }
 
 .isClick { // 클릭되었을 때
-  background-color: white;
+  background-color: $sub-color;
 }
