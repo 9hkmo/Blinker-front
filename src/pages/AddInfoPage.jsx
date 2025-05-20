@@ -4,6 +4,7 @@ import styles from "../styles/pages/AddInfoPage.module.scss";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
+import { arrow_right, logo_title } from "../assets";
 
 const tags = [
   "두통",
@@ -140,7 +141,7 @@ export const AddInfoPage = () => {
       </div>
       <div className={styles.header}>
         <div className={styles.titleImg}>
-          <img src="" alt="BLINKER" />
+          <img src={logo_title} alt="BLINKER" />
         </div>
       </div>
       <div className={styles.contents}>
@@ -165,12 +166,7 @@ export const AddInfoPage = () => {
           />
         </div>
         <div className={styles.description}>
-          <div className={styles.moveChar}>
-            <img src="" alt="moveChar" />
-          </div>
-          <div className={styles.text}>
-            다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요
-          </div>
+          다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요
         </div>
         <div className={styles.tagContainer}>
           {tags.map((tag, index) => {
@@ -187,7 +183,10 @@ export const AddInfoPage = () => {
       </div>
       {/* 링크 버튼도 컴포넌트로 빼도될듯? */}
       <div className={styles.linkButton} onClick={handleClick}>
-        결과 보러가기
+        검사
+        <div className={styles.arrowImg}>
+          <img src={arrow_right} alt="arrow" />
+        </div>
       </div>
     </div>
   );
