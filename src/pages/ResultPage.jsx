@@ -3,6 +3,7 @@ import styles from "../styles/pages/ResultPage.module.scss";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Loading } from "../components/Loading";
+import { Header } from "../components/Header";
 
 export const ResultPage = () => {
   const [result, setResult] = useState(null); // result는 통신 이후에 명세서보고 변경
@@ -34,6 +35,7 @@ export const ResultPage = () => {
     <>
       {!loading ? (
         <div className={styles.container}>
+          <Header />
           <div className={styles.header}>
             <div className={styles.logo}>
               <img src="" alt="logo" />

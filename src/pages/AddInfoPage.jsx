@@ -3,6 +3,7 @@ import { Tag } from "../components/Tag";
 import styles from "../styles/pages/AddInfoPage.module.scss";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
+import { Header } from "../components/Header";
 
 const tags = [
   "두통",
@@ -133,6 +134,7 @@ export const AddInfoPage = () => {
 
   return (
     <div className={styles.container}>
+      <Header />
       <div
         className={`${styles.modalContainer} ${isModal ? "" : styles.hidden}`}
       >
