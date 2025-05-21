@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/components/Loading.module.scss";
+import { loading_char } from "../assets";
 
 // 보여줄 문구들
 const texts = [
@@ -18,14 +19,14 @@ const texts = [
   "남몰래 눈물 훔치는중...",
 ];
 
-// 결과 페이지에서 api를 다 받지 않았거나 5초간 로딩을 보여줌. 따라서 컴포넌트로 위치함
+// 결과 페이지에서 api를 다 받지 않았거나 15초간(오래걸리면 변경) 로딩을 보여줌. 따라서 컴포넌트로 위치함
 export const Loading = () => {
   const [text, setText] = useState(texts[0]);
 
   useEffect(() => {
     const textRandomInterval = setInterval(() => {
       setText(texts[Math.floor(Math.random() * texts.length)]);
-    }, 2000);
+    }, 3000);
     return () => { // 언마운트 시 타이머 종료
       clearInterval(textRandomInterval);
     };
@@ -35,12 +36,12 @@ export const Loading = () => {
     <div className={styles.container}>
       <div className={styles.contents}>
         <div className={styles.loadingImg}>
-          <img src="" alt="gif" />
+          <img src={loading_char} alt="logo" />
         </div>
         <div className={styles.progressBar}>
           <div className={styles.bar}></div>
         </div>
-        <div className={styles.text}>{text}</div>
+        <span className={styles.text}>{text}</span>
       </div>
     </div>
   );
