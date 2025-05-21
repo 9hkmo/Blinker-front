@@ -53,7 +53,9 @@ export const ResultPage = () => {
                   <div className={styles.description}>
                     <div className={styles.title}>적절한 눈 깜빡임 주기</div>
                     <span className={styles.text}>
-                      권장 깜빡임 주기: {result.duration}4초에 한 번씩 눈을
+                      권장 깜빡임 주기: 
+                      {/* {result.duration} */}
+                      4초에 한 번씩 눈을
                       천천히 깜빡여 주세요.
                     </span>
                   </div>
@@ -66,7 +68,9 @@ export const ResultPage = () => {
                       <div className={styles.scoreContent}>
                         <span>AI 평가 점수</span>
                         <div className={styles.score}>
-                          <span>{result.score}50점</span> / 100점
+                          <span>
+                            {/* {result.score} */}
+                            50점</span> / 100점
                         </div>
                       </div>
                       <div className={styles.scoreContent}>
