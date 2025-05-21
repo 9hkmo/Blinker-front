@@ -16,10 +16,7 @@ export const Tag = ({ title, choiceTags, setChoiceTags }) => {
       className={`${styles.container} ${isSelected ? styles.isClick : ""}`}
       onClick={handleClick}
     >
-      <div className={styles.img}>
-        <img src={isSelected ? "" : ""} alt="+/-" />
-      </div>
-      <div className={`${styles.title} ${isSelected ? styles.isClick : ""}`}>{title}</div>
+      <div className={`${styles.title}`}>{title}</div>
     </div>
   );
 };

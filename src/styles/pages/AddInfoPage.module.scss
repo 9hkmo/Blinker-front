@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 @mixin flex(
   $direction: row,
   $align-items: center,
@@ -15,55 +17,96 @@
 .container {
   @include flex(column);
   width: 100%;
-  height: 1080px;
-
-  .header {
-    .titleImg {
-      flex: 1;
-    }
-  }
+  min-height: 1080px;
+  height: 100vh;
+  background-color: $background-color;
   .contents {
-    @include flex(column, $gap: 20px);
+    @include flex(column, $gap: 40px);
     .selectContainer {
       @include flex($gap: 20px);
     }
     .description {
-      .moveChar {
-        flex: 1;
-      }
-      .text {
-      }
+      color: $text-color-main;
+      font-size: 1.75rem;
     }
     .tagContainer {
       @include flex($gap: 10px);
-      max-width: 700px;
+      max-width: 1250px;
       flex-wrap: wrap;
+      row-gap: 20px;
     }
   }
 
   .linkButton {
+    @include flex($gap: 7px);
     position: fixed;
     bottom: 20px;
     right: 20px;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 5px 10px;
-    font-size: 25px;
+    background-color: #363636;
+
+    border-radius: 15px;
+    padding: 15px 75px;
+    border: 4px solid #363636;
+    box-shadow: 0 4px 4px #ffffff14;
+    .text {
+      font-size: 24px;
+      font-weight: 700;
+      color: $text-color-main;
+    }
     &:hover {
       cursor: pointer;
     }
+    transition: background-color 0.3s ease, box-shadow 0.3s ease,
+      transform 0.3s ease, border 0.3s ease;
+  }
+
+  .isSelected {
+    background-color: $sub-color;
+    border: 4px solid #1c5f8e;
+    box-shadow: 1.43px 5.71px 14.27px #0485a233;
+    transform: translateY(-20%);
   }
 }
 
 .modalContainer {
-  border: 1px solid black;
-  border-radius: 20px;
   padding: 20px;
+  background-color: #363636;
+  color: $text-color-main;
+  font-size: 24px;
+  font-weight: 700;
+  border-radius: 15px;
   transition: transform 0.7s ease-out, opacity 0.5s ease-out;
   position: fixed;
-  bottom: 10px;
+  bottom: 20px;
 }
 .hidden {
   opacity: 0;
   transform: translateY(100%);
+}
+
+.moveChar {
+  position: fixed;
+  transition: transform 0.5s ease;
+  img {
+    transition: transform 0.5s ease;
+  }
+}
+
+.char1 {
+  bottom: -20%;
+  left: 74px;
+}
+.char2 {
+  top: 20%;
+  left: -200px;
+  transform: rotate(90deg);
+}
+.char3 {
+  top: -20%;
+  right: 1%;
+  transform: rotate(180deg);
+}
+
+.visible {
+  transform: translateY(-100%);
 }

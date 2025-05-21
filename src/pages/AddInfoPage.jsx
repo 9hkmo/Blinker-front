@@ -4,49 +4,56 @@ import styles from "../styles/pages/AddInfoPage.module.scss";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
+import { arrow_right, move_char } from "../assets";
+import { MoveEyeTitle } from "../components/MoveEyeTitle";
 
 const tags = [
   "두통",
-  "시야흐림",
-  "초점 문제",
-  "눈뜨기 어려움",
+  "흐림시야",
+  "초점",
   "가려움",
-  "건조감",
-  "부음",
-  "내부 통증",
-  "눈동자 움직임 통증",
-  "압박감",
-  "따가움",
+  "안구건조",
+  "붓기",
+  "내부통증",
   "충혈",
-  "눈꺼풀 떨림",
+  "따가움",
+  "떨림",
   "빛 번짐",
+  "근육마비",
+  "피로",
+  "당김",
+  "어려운 눈뜨기",
   "눈물 과다 분비",
-  "근육 마비",
-  "피로감",
-  "이물감",
-  "뻑뻑함",
+  "동공",
 ];
 
 // 옵션의 value값을 백에 전달해줘야함. 이때 숫자로 전달할 지, 문자로 전달할 지
+// 7세~80세까지만 일단 받고 백엔에 전달
 const ageOptions = [
-  { value: null, label: "나이" },
-  { value: "10under", label: "9세 이하" },
-  { value: "10s", label: "10~19세" },
-  { value: "20s", label: "20~29세" },
-  { value: "30s", label: "30~39세" },
-  { value: "40s", label: "40~49세" },
-  { value: "50s", label: "50~59세" },
-  { value: "60s", label: "60~69세" },
-  { value: "70plus", label: "70세 이상" },
+  { value: null, label: "나이", isDisabled: true },
+  ...Array.from({ length: 74 }, (_, i) => {
+    const age = i + 7;
+    return {
+      value: `${age}`,
+      label: `${age}세`,
+    };
+  }),
 ];
-
+// 시력. 안경착용한 시력과 미착용 시력을 하나로 묶음
 const eyeOptions = [
-  { value: null, label: "시력" },
-  { value: "idk", label: "잘 모르겠다" },
-  { value: "0.0", label: "0.0~0.4" },
-  { value: "0.5", label: "0.5~0.9" },
-  { value: "1.0", label: "1.0~1.4" },
-  { value: "1.5", label: "1.5~2.0" },
+  { value: null, label: "시력", isDisabled: true },
+  {
+    value: "notice",
+    label: "안경을 착용하셨으면 안경 쓴 시력을 선택하세요!",
+    isDisabled: true, // 못 고르게
+  },
+  ...Array.from({ length: 21 }, (_, i) => {
+    const age = i * (0.1).toFixed(1); // 1.0으로 자릿수 설정
+    return {
+      value: `${age.toFixed(1)}`,
+      label: `${age.toFixed(1)}`,
+    };
+  }),
 ];
 
 // react-select에 스타일을 적용하려면 2가지 방법으로 적용해야한다.
@@ -54,25 +61,59 @@ const eyeOptions = [
 // 2. classNamePrefix에 설정한 .클래스이름__control 이런식으로 css에서 적용
 const customStyles = {
   control: (base, state) => ({
+    // 맨위 컨트롤러 스타일
     ...base,
     borderRadius: "15px",
-    padding: "6px",
-    border: "1px solid black",
-    backgroundColor: state.isFocused ? "#f0f0f0" : "white",
-    borderColor: state.isFocused ? "white" : "#ccc",
-    width: "200px",
+    border: "none",
+    boxShadow: "0 0 0 4px #1C5F8E",
+    backgroundColor:
+      (state.hasValue || state.isFocused) &&
+      state.selectProps.value?.value !== null
+        ? "#0485A2"
+        : "none", // null이 아닌 값을 가졌을 때
+    minWidth: "276px",
+    minHeight: "83px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }),
+  singleValue: (base) => ({
+    // 맨위(선택된) 옵션의 스타일일
+    ...base,
+    color: "white",
+    fontSize: "24px",
+    fontWeight: "700",
+    textAlign: "center",
   }),
   menu: (base) => ({
+    // 옵션 컨테이너의 스타일
     ...base,
     borderRadius: "15px",
     overflow: "hidden",
+    minHeight: "289px",
+    backgroundColor: "#E8F8EE",
+    padding: "18px",
+    gap: "18px",
   }),
   option: (base) => ({
+    // 옵션 하나하나의 스타일
     ...base,
     textAlign: "cetner",
     display: "flex",
-    alignItem: "center",
     justifyContent: "center",
+    backgroundColor: "white",
+    padding: "10px",
+    marginBottom: "18px",
+    color: "black",
+    fontSize: "24px",
+    fontWeight: "500",
+  }),
+  dropdownIndicator: (base) => ({
+    // 드롭다운 화살표 스타일
+    ...base,
+    position: "absolute",
+    left: "30%",
+    color: "white",
   }),
 };
 
@@ -82,7 +123,8 @@ export const AddInfoPage = () => {
   const [selectedAge, setSelectedAge] = useState({});
   const [selectedEye, setSelectedEye] = useState({});
   const [isModal, setIsModal] = useState(false);
-
+  const [isSelected, setIsSelected] = useState(false);
+  const [moveIndex, setMoveIndex] = useState(1);
   const navigate = useNavigate();
 
   // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
@@ -91,7 +133,7 @@ export const AddInfoPage = () => {
   // 검사 페이지에서는 state가 있는지 꼭 확인해줘야함(없으면 에러 페이지 또는 추가 정보 페이지로 이동)
   const handleClick = () => {
     // 태그는 아무것도 없을 수 있음
-    if (selectedAge.value && selectedEye.value) {
+    if (isSelected) {
       console.log("전송");
       navigate("/quiz", {
         state: {
@@ -132,20 +174,59 @@ export const AddInfoPage = () => {
     console.log(selectedEye.value);
   };
 
+  // 나이와 시력이 선택 되었는지 확인
+  useEffect(() => {
+    if (selectedAge.value && selectedEye.value) {
+      setIsSelected(true);
+    } else {
+      setIsSelected(false);
+    }
+  }, [selectedAge, selectedEye]);
+
+  useEffect(() => {
+    const moveCharInterval = setInterval(() => {
+      setMoveIndex(Math.floor(Math.random() * 5) + 1); // 나오는 주기 설정할 수 있음(1~3만 나옴)
+    }, 3000);
+
+    return () => {
+      clearInterval(moveCharInterval);
+    };
+  }, []);
+  useEffect(() => {
+    console.log(moveIndex);
+  }, [moveIndex]);
+
   return (
     <div className={styles.container}>
       <Header />
+      <div className={`${styles.moveChar} ${styles.char1}`}>
+        <img
+          src={move_char}
+          className={`${moveIndex === 1 ? styles.visible : ""}`}
+          alt="Blinker"
+        />
+      </div>
+      <div className={`${styles.moveChar} ${styles.char2}`}>
+        <img
+          src={move_char}
+          className={`${moveIndex === 2 ? styles.visible : ""}`}
+          alt="Blinker"
+        />
+      </div>
+      <div className={`${styles.moveChar} ${styles.char3}`}>
+        <img
+          src={move_char}
+          className={`${moveIndex === 3 ? styles.visible : ""}`}
+          alt="Blinker"
+        />
+      </div>
       <div
         className={`${styles.modalContainer} ${isModal ? "" : styles.hidden}`}
       >
         {!selectedAge.value ? "나이를 선택해주세요!" : "시력을 선택해주세요!"}
       </div>
-      <div className={styles.header}>
-        <div className={styles.titleImg}>
-          <img src="" alt="BLINKER" />
-        </div>
-      </div>
       <div className={styles.contents}>
+        <MoveEyeTitle />
         <div className={styles.selectContainer}>
           <Select
             defaultValue={ageOptions[0]}
@@ -155,6 +236,7 @@ export const AddInfoPage = () => {
             onChange={handleAgeChange}
             styles={customStyles}
             components={{ IndicatorSeparator: () => null }} // 구분선 삭제
+            isSearchable={false} // 입력 불가하게 설정
           />
           <Select
             defaultValue={eyeOptions[0]}
@@ -164,15 +246,11 @@ export const AddInfoPage = () => {
             onChange={handleEyeChange}
             styles={customStyles}
             components={{ IndicatorSeparator: () => null }} // 구분선 삭제
+            isSearchable={false} // 입력 불가하게 설정
           />
         </div>
         <div className={styles.description}>
-          <div className={styles.moveChar}>
-            <img src="" alt="moveChar" />
-          </div>
-          <div className={styles.text}>
-            다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요
-          </div>
+          다음 중 본인에게 해당되는 증상과 일치하는 것을 골라주세요.
         </div>
         <div className={styles.tagContainer}>
           {tags.map((tag, index) => {
@@ -188,8 +266,14 @@ export const AddInfoPage = () => {
         </div>
       </div>
       {/* 링크 버튼도 컴포넌트로 빼도될듯? */}
-      <div className={styles.linkButton} onClick={handleClick}>
-        결과 보러가기
+      <div
+        className={`${styles.linkButton} ${
+          isSelected ? styles.isSelected : ""
+        }`}
+        onClick={handleClick}
+      >
+        <div className={styles.text}>검사</div>
+        <img src={arrow_right} alt="arrow" />
       </div>
     </div>
   );

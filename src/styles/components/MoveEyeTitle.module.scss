@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .contents {
+    display: flex;
+    position: absolute;
+    top: 35%;
+    left: 46.5%;
+    gap: 10px;
+  }
+}
+
+.eye {
+  width: 66px;
+  height: 130px;
+  // background-color: white; 눈위치 체크용
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden; 
+}
+
+.pupil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out;
+}
