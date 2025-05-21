@@ -5,4 +5,22 @@ import logo_title from "./blinker-title.svg";
 import arrow_right from "./right-arrow.svg";
 import move_char from "./move-char.svg";
 import pupil from "./pupil.svg";
-export { logo_header, logo_title, arrow_right, move_char, pupil };
+import mini_char from "./mini-char.svg";
+import result1 from "./result1.svg";
+import result2 from "./result2.svg";
+import result3 from "./result3.svg";
+import result4 from "./result4.svg";
+import logo_result_game from "./result-game.svg";
+export {
+  logo_header,
+  logo_title,
+  arrow_right,
+  move_char,
+  pupil,
+  mini_char,
+  result1,
+  result2,
+  result3,
+  result4,
+  logo_result_game,
+};
