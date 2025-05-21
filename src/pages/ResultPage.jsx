@@ -53,20 +53,20 @@ export const ResultPage = () => {
                   <div className={styles.description}>
                     <div className={styles.title}>적절한 눈 깜빡임 주기</div>
                     <span className={styles.text}>
-                      권장 깜빡임 주기: {result.duration}초에 한 번씩 눈을
+                      권장 깜빡임 주기: {result.duration}4초에 한 번씩 눈을
                       천천히 깜빡여 주세요.
                     </span>
                   </div>
                 </div>
 
                 <div className={styles.eyeBox}>
-                  <div className={styles.description}>
+                  <div className={styles.scoreDescription}>
                     <div className={styles.scoreTitle}>나의 눈 건강 점수</div>
                     <div className={styles.scoreBox}>
                       <div className={styles.scoreContent}>
                         <span>AI 평가 점수</span>
                         <div className={styles.score}>
-                          <span>{result.score}점</span>/100점
+                          <span>{result.score}50점</span> / 100점
                         </div>
                       </div>
                       <div className={styles.scoreContent}>
@@ -105,7 +105,7 @@ export const ResultPage = () => {
                     <img src={result3} />
                   </div>
                 </div>
-                <div className={styles.adivce}>
+                <div className={styles.advice}>
                   {/* {result.food} */}
                   남성분의 시력과 노안 문제를 고려할 때, 눈 건강에 도움이 되는
                   몇 가지 음식을 추천해드릴 수 있습니다:\n\n1. **연어**: 연어와
