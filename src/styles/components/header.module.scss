@@ -1,4 +1,4 @@
-@use "../variables" as *;
+@use '../variables' as *;
 
 .container {
   padding: 1.042vw;
@@ -6,6 +6,7 @@
   top: 0;
   width: 100%;
   background-color: $background-color;
+  z-index: 1000;
   .contents {
     position: relative;
     width: 100%;
@@ -33,4 +34,8 @@
       }
     }
   }
+}
+
+.isHome {
+  background-color: transparent;
 }

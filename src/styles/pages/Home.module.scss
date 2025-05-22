@@ -1,8 +1,199 @@
-.homeBackground {
-  background-image: url("../../assets/home.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-height: 1080px;
+  height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .homeImg {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.contents1 {
+  display: flex;
+  position: absolute;
+  top: 350px;
+  left: 120px;
+  transform: rotate(-22deg);
+  gap: 10px;
+  .eye {
+    width: 70px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.contents2 {
+  display: flex;
+  position: absolute;
+  bottom: 50px;
+  left: 565px;
+  transform: rotate(-38.83deg);
+  gap: 10px;
+  .eye {
+    width: 100px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .pupil {
+    position: absolute;
+    width: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.contents3 {
+  display: flex;
+  position: absolute;
+  top: 32%;
+  left: 6%;
+  transform: rotate(-27deg);
+  gap: 10px;
+  .eye {
+    width: 70px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.contents4 {
+  display: flex;
+  position: absolute;
+  top: 32%;
+  left: 6%;
+  transform: rotate(-27deg);
+  gap: 10px;
+  .eye {
+    width: 70px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.contents5 {
+  display: flex;
+  position: absolute;
+  top: 32%;
+  left: 6%;
+  transform: rotate(-27deg);
+  gap: 10px;
+  .eye {
+    width: 70px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.contents6 {
+  display: flex;
+  position: absolute;
+  top: 32%;
+  left: 6%;
+  transform: rotate(-27deg);
+  gap: 10px;
+  .eye {
+    width: 70px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.contents7 {
+  display: flex;
+  position: absolute;
+  top: 32%;
+  left: 6%;
+  transform: rotate(-27deg);
+  gap: 10px;
+  .eye {
+    width: 70px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+  }
+
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
 }

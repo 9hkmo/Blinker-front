@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { logo_header } from "../assets";
 import styles from "../styles/components/header.module.scss";
 
-export const Header = () => {
+export const Header = ({isHome=false}) => {
   const location = useLocation();
 
   const getNavClass = (path) => {
@@ -12,13 +12,13 @@ export const Header = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isHome && styles.isHome}`}>
       <div className={styles.contents}>
         <Link to="/home" className={styles.logo}>
           <img src={logo_header} />
         </Link>
         <div className={styles.nav}>
-          <Link to="/home" className={getNavClass("/home")}>
+          <Link to="/" className={getNavClass("/")}>
             Home
           </Link>
           <Link to="/report" className={getNavClass("/report")}>
