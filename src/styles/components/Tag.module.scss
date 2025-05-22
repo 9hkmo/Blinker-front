@@ -11,6 +11,7 @@
     cursor: pointer;
     background-color: #0485a233;
     transform: translateY(-10%);
+    box-shadow: 0 2px 4px rgba(78, 78, 78, 0.402);
   }
   .title {
     line-height: 20px;
@@ -18,7 +19,8 @@
     font-size: 30px;
     transition: background-color 0.3s ease;
   }
-  transition: background-color 0.3s ease, transform 0.3s ease, border 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, border 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .isClick {

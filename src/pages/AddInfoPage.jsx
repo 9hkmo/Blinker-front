@@ -78,7 +78,7 @@ const customStyles = {
     justifyContent: "center",
     transition: "background-color 0.3s ease",
     "&:hover": {
-      backgroundColor: "#0485A2",
+      backgroundColor: "#0485a233",
       cursor: "pointer",
     },
   }),
