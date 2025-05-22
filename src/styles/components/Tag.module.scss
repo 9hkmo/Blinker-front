@@ -18,7 +18,7 @@
     font-size: 30px;
     transition: background-color 0.3s ease;
   }
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, border 0.3s ease;
 }
 
 .isClick {
@@ -26,6 +26,7 @@
   background-color: $sub-color;
   &:hover {
     cursor: pointer;
-    background-color: rgba(163, 0, 0, 0.232);
+    background-color: rgba(145, 54, 54, 0.232);
+    border: 1px solid rgb(157, 58, 58);
   }
 }

@@ -76,6 +76,11 @@ const customStyles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    transition: "background-color 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#0485A2",
+      cursor: "pointer",
+    },
   }),
   singleValue: (base) => ({
     // 맨위(선택된) 옵션의 스타일일
@@ -94,6 +99,7 @@ const customStyles = {
     backgroundColor: "#E8F8EE",
     padding: "18px",
     gap: "18px",
+    transition: "all 0.3s ease",
   }),
   option: (base) => ({
     // 옵션 하나하나의 스타일
@@ -107,6 +113,12 @@ const customStyles = {
     color: "black",
     fontSize: "24px",
     fontWeight: "500",
+    transition: "background-color 0.3s ease, color 0.3s ease",
+    "&:hover": {
+      backgroundColor: "#0E6F3A",
+      color: "white",
+      cursor: "pointer",
+    },
   }),
   dropdownIndicator: (base) => ({
     // 드롭다운 화살표 스타일
