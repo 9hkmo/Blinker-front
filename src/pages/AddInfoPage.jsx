@@ -8,23 +8,23 @@ import { arrow_right, move_char } from "../assets";
 import { MoveEyeTitle } from "../components/MoveEyeTitle";
 
 const tags = [
-  "두통",
-  "흐림시야",
-  "초점",
-  "가려움",
-  "안구건조",
-  "붓기",
-  "내부통증",
-  "충혈",
-  "따가움",
-  "떨림",
-  "빛 번짐",
-  "근육마비",
-  "피로",
-  "당김",
-  "어려운 눈뜨기",
-  "눈물 과다 분비",
-  "동공",
+  { title: "두통", value: "headache" },
+  { title: "흐림시야", value: "blurred_vision" },
+  { title: "초점", value: "accommodation_disorder" },
+  { title: "가려움", value: "pruritus" },
+  { title: "안구건조", value: "xerophthalmia" },
+  { title: "붓기", value: "tumefy" },
+  { title: "내부통증", value: "internal_pain" },
+  { title: "충혈", value: "hyperemia" },
+  { title: "따가움", value: "stinging" },
+  { title: "떨림", value: "quiver" },
+  { title: "빛 번짐", value: "Photopsia" },
+  { title: "근육마비", value: "paralysis" },
+  { title: "피로", value: "fatigue" },
+  { title: "당김", value: "pulling" },
+  { title: "어려운 눈뜨기", value: "blepharospasm" },
+  { title: "눈물 과다 분비", value: "epipphora" },
+  { title: "동공", value: "pupil" },
 ];
 
 // 옵션의 value값을 백에 전달해줘야함. 이때 숫자로 전달할 지, 문자로 전달할 지
@@ -257,7 +257,7 @@ export const AddInfoPage = () => {
             return (
               <Tag
                 key={index}
-                title={tag}
+                tag={tag}
                 choiceTags={choiceTags}
                 setChoiceTags={setChoiceTags}
               />
