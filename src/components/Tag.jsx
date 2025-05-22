@@ -5,7 +5,7 @@ export const Tag = ({ tag, choiceTags, setChoiceTags }) => {
 
   const handleClick = () => {
     if (isSelected) {
-      setChoiceTags(choiceTags.filter((tag) => tag !== tag.value));
+      setChoiceTags(choiceTags.filter((el) => el !== tag.value));
     } else {
       setChoiceTags([...choiceTags, tag.value]);
     }
@@ -13,7 +13,7 @@ export const Tag = ({ tag, choiceTags, setChoiceTags }) => {
 
   return (
     <div
-      className={`${styles.container} ${isSelected ? styles.isClick : ""}`}
+      className={`${styles.container} ${isSelected && styles.isClick}`}
       onClick={handleClick}
     >
       <div className={`${styles.title}`}>{tag.title}</div>
