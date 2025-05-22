@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddInfoPage } from "./pages/AddInfoPage";
 import "./styles/global.scss";
 import { ResultPage } from "./pages/ResultPage";
+import { useEffect } from "react";
 
+const API_KEY_KAKAO = import.meta.env.VITE_KAKAO_API_KEY;
 // /: 홈페이지
 // game: 게임 페이지
 // test: 태그 페이지
@@ -11,6 +13,13 @@ import { ResultPage } from "./pages/ResultPage";
 // quiz/:id : 퀴즈 페이지(get 방식으로 api 가져오기?)
 // result: 결과 페이지(post 방식으로 데이터를 보내고 결과를 반환 받을거임. 여기서 데이터 백엔으로 보낼꺼)
 function App() {
+  useEffect(() => {
+    // 이미 초기화됐다면 다시 하지 않음
+    if (!window.Kakao.isInitialized()) {
+      console.log(API_KEY_KAKAO);
+      window.Kakao.init(API_KEY_KAKAO);
+    }
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
