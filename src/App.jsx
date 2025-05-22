@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddInfoPage } from "./pages/AddInfoPage";
 import "./styles/global.scss";
 import { ResultPage } from "./pages/ResultPage";
+import { HomePage } from "./pages/HomePage";
 
 // home: 홈페이지
 // game: 게임 페이지
@@ -14,7 +15,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/home" element={<HomePage />} /> */}
+        {<Route path="/home" element={<HomePage />} /> }
         <Route path="/report" element={<AddInfoPage />} />
         {/* <Route path="/permission" element={<PermissionPage />} />
         <Route path="/quiz" element={<QuizHomePage />} />
