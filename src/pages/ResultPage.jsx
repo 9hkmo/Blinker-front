@@ -55,6 +55,20 @@ export const ResultPage = () => {
   //   return <Loading />;
   // }
 
+
+  const handleShareKakao = () => {
+    window.Kakao.Share.sendCustom({
+      templateId: 120920,
+      templateArgs: {
+        // tip: `${result.tip}`
+        tip: `시력 1.0은 정상이나, 질병이 우려됩니다. 같은 연령대에서는 드문 상태입니다.`,
+        term: `4`,
+        score: `70`,
+        stretchTips: `고정 응시 운동(2분), 손바닥 온찜질(1분), 눈 굴리기(5회씩)`,
+      },
+    });
+  };
+
   return (
     <div className={styles.container}>
       <Header />
@@ -168,6 +182,16 @@ export const ResultPage = () => {
               <img src={arrow_right} />
             </Link>
           </div>
+        </div>
+      </div>
+      <div className={styles.shareContainer}>
+        <div className={styles.shareText}>
+          요약된 결과를 공유해보세요!
+          <br />
+          <span>(아래 버튼 클릭 시 카카오톡으로 공유할 수 있습니다!)</span>
+        </div>
+        <div className={styles.shareButton} onClick={handleShareKakao}>
+          공유하기
         </div>
       </div>
     </div>
