@@ -14,15 +14,15 @@ export const Header = () => {
   return (
     <div className={styles.container}>
       <div className={styles.contents}>
-        <Link to="/home" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           <img src={logo_header} />
         </Link>
         <div className={styles.nav}>
-          <Link to="/home" className={getNavClass("/home")}>
+          <Link to="/" className={getNavClass("/")}>
             Home
           </Link>
-          <Link to="/report" className={getNavClass("/report")}>
-            Report
+          <Link to="/test" className={getNavClass("/test")}>
+            Test
           </Link>
           <Link to="/quiz" className={getNavClass("/quiz")}>
             Quiz

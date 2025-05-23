@@ -2,20 +2,29 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AddInfoPage } from "./pages/AddInfoPage";
 import "./styles/global.scss";
 import { ResultPage } from "./pages/ResultPage";
+import { useEffect } from "react";
 
-// home: 홈페이지
+const API_KEY_KAKAO = import.meta.env.VITE_KAKAO_API_KEY;
+// /: 홈페이지
 // game: 게임 페이지
-// report: 태그 페이지
+// test: 태그 페이지
 // permission: 권한 페이지
 // quiz: 퀴즈 들어가기전 페이지
 // quiz/:id : 퀴즈 페이지(get 방식으로 api 가져오기?)
 // result: 결과 페이지(post 방식으로 데이터를 보내고 결과를 반환 받을거임. 여기서 데이터 백엔으로 보낼꺼)
 function App() {
+  useEffect(() => {
+    // 이미 초기화됐다면 다시 하지 않음
+    if (!window.Kakao.isInitialized()) {
+      console.log(API_KEY_KAKAO);
+      window.Kakao.init(API_KEY_KAKAO);
+    }
+  }, []);
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/home" element={<HomePage />} /> */}
-        <Route path="/report" element={<AddInfoPage />} />
+        {/* <Route path="/" element={<HomePage />} /> */}
+        <Route path="/test" element={<AddInfoPage />} />
         {/* <Route path="/permission" element={<PermissionPage />} />
         <Route path="/quiz" element={<QuizHomePage />} />
         <Route path="/quiz/:id" element={<QuizPage />} /> */}

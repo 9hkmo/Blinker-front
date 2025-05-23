@@ -1,22 +1,22 @@
 import styles from "../styles/components/Tag.module.scss";
 
-export const Tag = ({ title, choiceTags, setChoiceTags }) => {
-  const isSelected = choiceTags.includes(title);
+export const Tag = ({ tag, choiceTags, setChoiceTags }) => {
+  const isSelected = choiceTags.includes(tag.value);
 
   const handleClick = () => {
     if (isSelected) {
-      setChoiceTags(choiceTags.filter((tag) => tag !== title));
+      setChoiceTags(choiceTags.filter((el) => el !== tag.value));
     } else {
-      setChoiceTags([...choiceTags, title]);
+      setChoiceTags([...choiceTags, tag.value]);
     }
   };
 
   return (
     <div
-      className={`${styles.container} ${isSelected ? styles.isClick : ""}`}
+      className={`${styles.container} ${isSelected && styles.isClick}`}
       onClick={handleClick}
     >
-      <div className={`${styles.title}`}>{title}</div>
+      <div className={`${styles.title}`}>{tag.title}</div>
     </div>
   );
 };
