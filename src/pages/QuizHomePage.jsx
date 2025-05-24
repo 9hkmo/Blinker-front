@@ -1,8 +1,9 @@
 import { Header } from '../components/Header';
 import styles from '../styles/pages/QuizHome.module.scss';
 import { MoveEyeTitle } from '../components/MoveEyeTitle';
-import { home, pupil } from '../assets';
+import { quiz, home, pupil } from '../assets';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const QuizHomePage = () => {
   useEffect(() => {
@@ -115,6 +116,16 @@ export const QuizHomePage = () => {
         <div className={`${styles.eye}`}>
           <img className={styles.pupil} src={pupil} />
         </div>
+      </div>
+      <div className={styles.quizIntroBox}>
+        <p className={styles.quizLine1}>
+          화면을 보고 간단한 퀴즈를 풀고 있어주세요.
+        </p>
+        <p className={styles.quizLine2}>깜빡이가 눈 분석을 하고있어요!</p>
+        <Link to="/quiz" className={styles.quizButton}>
+          <img src={quiz} alt="퀴즈 아이콘" />
+          퀴즈
+        </Link>
       </div>
     </div>
   );

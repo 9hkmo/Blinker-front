@@ -15,7 +15,9 @@ import loading_char from "./loading-char.svg";
 import home from "./home.svg";
 import test from "./test.svg";
 import minigame from "./minigame.svg";
+import quiz from "./quiz.svg";
 export {
+  quiz,
   minigame,
   test,
   home,
