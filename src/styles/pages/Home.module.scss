@@ -8,6 +8,7 @@
   max-height: 1080px;
   height: 100%;
   width: 100%;
+  min-width: 1920px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +36,6 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    background-color: white;
   }
 
   .pupil {
@@ -60,12 +60,11 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    background-color: white;
   }
 
   .pupil {
     position: absolute;
-    width: 40px;
+    width: 35px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -86,7 +85,6 @@
     border-radius: 50%;
     position: relative;
     overflow: hidden;
-    background-color: white;
   }
 
   .pupil {
