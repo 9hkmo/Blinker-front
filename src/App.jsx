@@ -16,7 +16,6 @@ function App() {
   useEffect(() => {
     // 이미 초기화됐다면 다시 하지 않음
     if (!window.Kakao.isInitialized()) {
-      console.log(API_KEY_KAKAO);
       window.Kakao.init(API_KEY_KAKAO);
     }
   }, []);
