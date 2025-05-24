@@ -1,9 +1,9 @@
-import axios from "axios";
-import styles from "../styles/pages/ResultPage.module.scss";
-import { useEffect, useState } from "react";
-import { Loading } from "../components/Loading";
-import { Header } from "../components/Header";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import axios from 'axios';
+import styles from '../styles/pages/ResultPage.module.scss';
+import { useEffect, useState } from 'react';
+import { Loading } from '../components/Loading';
+import { Header } from '../components/Header';
+import { Link, Navigate, useLocation } from 'react-router-dom';
 import {
   arrow_right,
   logo_result_game,
@@ -12,7 +12,7 @@ import {
   result2,
   result3,
   result4,
-} from "../assets";
+} from '../assets';
 
 export const ResultPage = () => {
   const location = useLocation();
@@ -25,7 +25,7 @@ export const ResultPage = () => {
     const getResult = async () => {
       if (!age || !vision || !tags || !images) return;
       try {
-        const res = await axios.post("http://localhost:5173/result/api", {
+        const res = await axios.post('http://localhost:5173/result/api', {
           age: age, // POST 바디에 담아서 전송
           vision: vision,
           tags: tags,
@@ -33,11 +33,11 @@ export const ResultPage = () => {
         });
 
         if (!res.data) {
-          throw new Error("결과 데이터가 존재하지 않습니다.");
+          throw new Error('결과 데이터가 존재하지 않습니다.');
         }
         setResult(res.data);
       } catch (err) {
-        console.error("결과 불러오기 실패:", err);
+        console.error('결과 불러오기 실패:', err);
       } finally {
         setLoading(false);
       }
@@ -91,7 +91,7 @@ export const ResultPage = () => {
                       <span>
                         {/* {result.score} */}
                         50점
-                      </span>{" "}
+                      </span>{' '}
                       / 100점
                     </div>
                   </div>

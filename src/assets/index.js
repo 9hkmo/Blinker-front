@@ -13,7 +13,11 @@ import result4 from "./result4.svg";
 import logo_result_game from "./result-game.svg";
 import loading_char from "./loading-char.svg";
 import home from "./home.svg";
+import test from "./test.svg";
+import minigame from "./minigame.svg";
 export {
+  minigame,
+  test,
   home,
   logo_header,
   logo_title,

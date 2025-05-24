@@ -1,8 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AddInfoPage } from "./pages/AddInfoPage";
-import "./styles/global.scss";
-import { ResultPage } from "./pages/ResultPage";
-import { HomePage } from "./pages/HomePage";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AddInfoPage } from './pages/AddInfoPage';
+import './styles/global.scss';
+import { ResultPage } from './pages/ResultPage';
+import { HomePage } from './pages/HomePage';
+import { GamePage } from './pages/GamePage';
+import { QuizHomePage } from './pages/QuizHomePage';
+// import { QuizPage } from './pages/QuizPage';
 
 // home: 홈페이지
 // game: 게임 페이지
@@ -15,13 +18,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} /> 
+        <Route path="/" element={<HomePage />} />
         <Route path="/report" element={<AddInfoPage />} />
-        {/* <Route path="/permission" element={<PermissionPage />} />
+        {/* <Route path="/permission" element={<PermissionPage />} /> */}
         <Route path="/quiz" element={<QuizHomePage />} />
-        <Route path="/quiz/:id" element={<QuizPage />} /> */}
+        {/* <Route path="/quiz/:id" element={<QuizPage />} /> */}
         <Route path="/result" element={<ResultPage />} />
-        {/* <Route path="/game" element={<GamePage />} /> */}
+        <Route path="/game" element={<GamePage />} />
       </Routes>
     </BrowserRouter>
   );

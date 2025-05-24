@@ -1,11 +1,10 @@
 import { Header } from '../components/Header';
-import styles from '../styles/pages/Home.module.scss';
+import styles from '../styles/pages/QuizHome.module.scss';
 import { MoveEyeTitle } from '../components/MoveEyeTitle';
-import { test, minigame, home, pupil } from '../assets';
+import { home, pupil } from '../assets';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
-export const HomePage = () => {
+export const QuizHomePage = () => {
   useEffect(() => {
     // 전체 눈과 눈동자를 가져옴
     const eyes = document.querySelectorAll(`.${styles.eye}`);
@@ -116,16 +115,6 @@ export const HomePage = () => {
         <div className={`${styles.eye}`}>
           <img className={styles.pupil} src={pupil} />
         </div>
-      </div>
-      <div className={styles.buttonWrapper}>
-        <Link to="/report" className={styles.startButton}>
-          <img src={test} alt="검사 시작 아이콘" />
-          검사 시작
-        </Link>
-        <Link to="/game" className={styles.gameButton}>
-          <img src={minigame} alt="미니게임 아이콘" />
-          미니 게임
-        </Link>
       </div>
     </div>
   );
