@@ -16,7 +16,9 @@ import home from "./home.svg";
 import test from "./test.svg";
 import minigame from "./minigame.svg";
 import quiz from "./quiz.svg";
+import logo_title_eye from "./blinker-title-eye.svg";
 export {
+  logo_title_eye,
   quiz,
   minigame,
   test,

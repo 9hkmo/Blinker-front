@@ -4,6 +4,7 @@ import './styles/global.scss';
 import { ResultPage } from './pages/ResultPage';
 import { HomePage } from './pages/HomePage';
 import { GamePage } from './pages/GamePage';
+// import { PermissionPage } from './pages/PermissionPage';
 import { QuizHomePage } from './pages/QuizHomePage';
 // import { QuizPage } from './pages/QuizPage';
 
