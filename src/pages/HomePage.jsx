@@ -62,6 +62,60 @@ export const HomePage = () => {
           <img className={styles.pupil} src={pupil} />
         </div>
       </div>
+      <div className={styles.contents3}>
+        {/* 캐릭터3 눈 */}
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+      </div>
+      <div className={styles.contents4}>
+        {/* 캐릭터4 눈 */}
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+      </div>
+      <div className={styles.contents5}>
+        {/* 캐릭터6 눈 */}
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+      </div>
+      <div className={styles.contents6}>
+        {/* 캐릭터6 눈 */}
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+      </div>
+      <div className={styles.contents7}>
+        {/* 캐릭터7 눈 */}
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+      </div>
+      <div className={styles.contents8}>
+        {/* 캐릭터8 눈 */}
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+        <div className={`${styles.eye}`}>
+          <img className={styles.pupil} src={pupil} />
+        </div>
+      </div>
     </div>
   );
 };
