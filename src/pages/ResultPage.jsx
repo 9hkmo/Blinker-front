@@ -3,7 +3,7 @@ import styles from "../styles/pages/ResultPage.module.scss";
 import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   arrow_right,
   logo_result_game,
@@ -13,24 +13,31 @@ import {
   result3,
   result4,
 } from "../assets";
+import { usePostStore } from "../store/usePostStore";
 
 export const ResultPage = () => {
-  const location = useLocation();
-  const { age, vision, tags, images } = location.state || {}; // 전달받은 데이터 꺼내기
+  const { age, vision, tags, images } = usePostStore(); // 전역 데이터 꺼내기
   const [result, setResult] = useState(null); // result는 통신 이후에 명세서보고 변경
   const [loading, setLoading] = useState(true); // 로딩 상태
+  const navigate = useNavigate();
 
   // 데이터 가져오기(post 방식으로 보내고 반환값으로 데이터 받기(우리는 db에 결과 데이터를 저장하지 않기 때문))
   useEffect(() => {
     const getResult = async () => {
-      if (!age || !vision || !tags || !images) return;
+      if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동
       try {
-        const res = await axios.post("http://localhost:5173/result/api", {
-          age: age, // POST 바디에 담아서 전송
-          vision: vision,
-          tags: tags,
-          images: images,
+        const formData = new FormData();
+        formData.append("age", age);
+        formData.append("vision", vision);
+        formData.append("tags", JSON.stringify(tags));
+        images.forEach((image) => {
+          formData.append("images", image);
         });
+
+        const res = await axios.post(
+          "http://localhost:5173/result/api",
+          formData
+        );
 
         if (!res.data) {
           throw new Error("결과 데이터가 존재하지 않습니다.");
@@ -45,16 +52,10 @@ export const ResultPage = () => {
     getResult();
   }, []);
 
-  // 바로 결과 페이지 링크로 접근하는 경우(전달되는 데이터가 없으므로 홈으로)
-  // if (!location.state) {
-  //   return <Navigate to="/home" replace />;
-  // }
-
   // 통신 연결하고 로딩 기능 구현
   // if (loading) {
   //   return <Loading />;
   // }
-
 
   const handleShareKakao = () => {
     window.Kakao.Share.sendCustom({
