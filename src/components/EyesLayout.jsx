@@ -66,7 +66,7 @@ export const EyeLayout = ({ children }) => {
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
         </div>
-      </div>{" "}
+      </div>
       <div className={styles.contents4}>
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
@@ -74,7 +74,7 @@ export const EyeLayout = ({ children }) => {
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
         </div>
-      </div>{" "}
+      </div>
       <div className={styles.contents5}>
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
@@ -82,7 +82,7 @@ export const EyeLayout = ({ children }) => {
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
         </div>
-      </div>{" "}
+      </div>
       <div className={styles.contents6}>
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
@@ -90,7 +90,7 @@ export const EyeLayout = ({ children }) => {
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
         </div>
-      </div>{" "}
+      </div>
       <div className={styles.contents7}>
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
@@ -98,7 +98,7 @@ export const EyeLayout = ({ children }) => {
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
         </div>
-      </div>{" "}
+      </div>
       <div className={styles.contents8}>
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
