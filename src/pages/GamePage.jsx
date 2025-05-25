@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import styles from "../styles/pages/GamePage.module.scss";
-import { game_char } from "../assets";
+import { game_char, game_loading } from "../assets";
 
 const pathW = [
   { top: "20%", left: "10%" },
@@ -36,6 +36,8 @@ export const GamePage = () => {
   const [currentPathKey, setCurrentPathKey] = useState(null);
   const [path, setPath] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [home, setHome] = useState(true);
 
   // 경로 선택 함수 (현재 경로 제외하고 랜덤)
   const selectRandomPathKey = (excludeKey) => {
@@ -71,19 +73,40 @@ export const GamePage = () => {
 
   // 현재 위치 계산
   const position = path[currentIndex];
+  const enterGame = () => {
+    setHome(false);
+    const loadingTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 1500); // 1.5초 후에 게임 시작
+    return () => {
+      clearTimeout(loadingTimeout); // 컴포넌트 언마운트 시 타이머 제거
+    };
+  };
 
   return (
     <div className={styles.container}>
       <Header />
-      <div
-        className={styles.circle}
-        onClick={handleClick}
-        style={{
-          ...position,
-        }}
-      >
-        <img src={game_char} alt="circle" />
-      </div>
+      {home ? (
+        <></>
+      ) : (
+        <>
+          <div className={`${styles.home} ${!loading && styles.hidden}`}>
+            <div className={styles.homeImg}>
+              <img src={game_loading} />
+            </div>
+            <span>깜빡이를 잡아라!</span>
+          </div>
+          <div
+            className={`${styles.circle} ${loading && styles.hidden}`}
+            onClick={handleClick}
+            style={{
+              ...position,
+            }}
+          >
+            <img src={game_char} alt="circle" />
+          </div>
+        </>
+      )}
     </div>
   );
 };

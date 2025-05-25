@@ -18,6 +18,15 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  .home {
+    @include flex(column, $gap: 60px);
+    height: 100%;
+    span {
+      font-size: 38px;
+      color: white;
+      font-weight: bold;
+    }
+  }
   .circle {
     position: absolute;
     transition: top 0.5s ease, left 0.5s ease;
@@ -33,5 +42,9 @@
 
     img {
     }
+  }
+
+  .hidden {
+    display: none;
   }
 }
