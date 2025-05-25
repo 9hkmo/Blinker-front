@@ -1,4 +1,3 @@
-import axios from "axios";
 import styles from "../styles/pages/ResultPage.module.scss";
 import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
@@ -14,8 +13,7 @@ import {
   result4,
 } from "../assets";
 import { usePostStore } from "../store/usePostStore";
-
-const API_URL = import.meta.env.VITE_API_URL; // 백엔드 API URL
+import { postResult } from "../api/post";
 
 export const ResultPage = () => {
   const { age, vision, tags, images } = usePostStore(); // 전역 데이터 꺼내기
@@ -30,20 +28,9 @@ export const ResultPage = () => {
     const getResult = async () => {
       if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동
       try {
-        const formData = new FormData();
-        formData.append("age", age);
-        formData.append("vision", vision);
-        formData.append("tags", JSON.stringify(tags));
-        images.forEach((image) => {
-          formData.append("images", image);
-        });
-
-        const res = await axios.post(`${API_URL}/api/chat`, formData);
-
-        if (!res.data) {
-          throw new Error("결과 데이터가 존재하지 않습니다.");
-        }
-        setResult(res.data);
+        const data = await postResult({ age, vision, tags, images });
+        if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
+        setResult(data);
       } catch (err) {
         console.error("결과 불러오기 실패:", err);
       } finally {
