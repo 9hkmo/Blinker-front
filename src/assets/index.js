@@ -12,9 +12,19 @@ import result3 from "./result3.svg";
 import result4 from "./result4.svg";
 import logo_result_game from "./result-game.svg";
 import loading_char from "./loading-char.svg";
+import home from "./home.svg";
+import test from "./test.svg";
+import minigame from "./minigame.svg";
+import quiz from "./quiz.svg";
+import logo_title_eye from "./blinker-title-eye.svg";
 import game_char from "./game-char.svg";
 import game_loading from "./game-loading.svg";
 export {
+  logo_title_eye,
+  quiz,
+  minigame,
+  test,
+  home,
   logo_header,
   logo_title,
   arrow_right,

@@ -85,7 +85,7 @@ export const GamePage = () => {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header isHome={true} />
       {home ? (
         <></>
       ) : (

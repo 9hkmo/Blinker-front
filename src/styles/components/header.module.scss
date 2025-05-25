@@ -1,4 +1,4 @@
-@use "../variables" as *;
+@use '../variables' as *;
 
 .container {
   padding: 1.042vw 0;
@@ -35,4 +35,8 @@
       }
     }
   }
+}
+
+.isHome {
+  background-color: transparent;
 }

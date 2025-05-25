@@ -32,7 +32,7 @@ export const ResultPage = () => {
         if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
         setResult(data);
       } catch (err) {
-        console.error("결과 불러오기 실패:", err);
+        console.error('결과 불러오기 실패:', err);
       } finally {
         setLoading(false);
       }
@@ -98,7 +98,7 @@ export const ResultPage = () => {
                       <span>
                         {/* {result.score} */}
                         50점
-                      </span>{" "}
+                      </span>{' '}
                       / 100점
                     </div>
                   </div>
