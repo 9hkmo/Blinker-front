@@ -24,7 +24,7 @@ export const ResultPage = () => {
   // 데이터 가져오기(post 방식으로 보내고 반환값으로 데이터 받기(우리는 db에 결과 데이터를 저장하지 않기 때문))
   useEffect(() => {
     const getResult = async () => {
-      if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동
+      // if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동 (테스트를 위한 주석설정)
       try {
         const formData = new FormData();
         formData.append("age", age);
@@ -34,10 +34,7 @@ export const ResultPage = () => {
           formData.append("images", image);
         });
 
-        const res = await axios.post(
-          "http://localhost:5173/result/api",
-          formData
-        );
+        const res = await axios.post("/api/chat", formData);
 
         if (!res.data) {
           throw new Error("결과 데이터가 존재하지 않습니다.");
@@ -146,16 +143,43 @@ export const ResultPage = () => {
             </div>
             <div className={styles.advice}>
               {/* {result.food} */}
-              남성분의 시력과 노안 문제를 고려할 때, 눈 건강에 도움이 되는 몇
-              가지 음식을 추천해드릴 수 있습니다:\n\n1. **연어**: 연어와 같은
-              지방이 풍부한 생선에는 오메가-3 지방산이 많이 함유되어 있어 눈
-              건강 유지에 도움을 줄 수 있습니다. 오메가-3는 망막의 기능을
-              지원하고, 건조한 눈 증상을 완화하는 데에도 효과적입니다.\n\n2.
-              **시금치**: 시금치와 같은 녹색 잎채소에는 루테인과 제아잔틴이
-              풍부하게 들어있습니다. 이 두 가지 항산화제는 눈의 황반 부위를
-              보호하고, 노화로 인한 시력 손실을 예방하는 데 도움을 줄 수
-              있습니다.\n\n이러한 음식들을 규칙적으로 섭취하면 눈 건강을
-              유지하는 데 도움이 될 수 있습니다.
+              <span className={styles.title}>
+                눈에 좋은 음식 추천해드릴게요!
+              </span>
+              <div className={styles.foodContainer}>
+                <div className={styles.foodRow}>
+                  <div className={styles.foodName}>이름</div>
+                  <div className={styles.foodIngredient}>성분</div>
+                  <div className={styles.foodEffect}>효과</div>
+                </div>
+                {[
+                  {
+                    name: "시금치",
+                    ingredient: ["루테인"],
+                    effect: ["눈 피로 완화", "항산화 작용"],
+                  },
+                  {
+                    name: "당근",
+                    ingredient: ["비타민A"],
+                    effect: ["눈 점막 보호", "야맹증 예방"],
+                  },
+                  {
+                    name: "계란노른자",
+                    ingredient: ["비타민A"],
+                    effect: ["눈 점막 보호", "야맹증 예방"],
+                  },
+                ].map((food, index) => (
+                  <div key={index} className={styles.foodRow}>
+                    <div className={styles.foodName}>{food.name}</div>
+                    <div className={styles.foodIngredient}>
+                      <div>{food.ingredient.join(", ")}</div>
+                    </div>
+                    <div className={styles.foodEffect}>
+                      {food.effect.join(", ")}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -168,9 +192,11 @@ export const ResultPage = () => {
               <div className={styles.title}>스트레칭 가이드라인</div>
               <span className={styles.text}>
                 {/* {result.stretch} */}
-                권장 깜빡임 주기: 4초에 한 번씩 눈을 천천히 깜빡여 주세요. 권장
-                깜빡임 주기: 4초에 한 번씩 눈을 천천히 깜빡여 주세요. 권장
-                깜빡임 주기: 4초에 한 번씩 눈을 천천히 깜빡여 주세요.
+                {[
+                  "고정 응시 운동(2분)",
+                  "손바닥 온찜질(1분)",
+                  "눈 굴리기(5회씩)",
+                ].join(", ")}
               </span>
             </div>
           </div>
