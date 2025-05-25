@@ -1,0 +1,37 @@
+@use "../variables" as *;
+
+@mixin flex(
+  $direction: row,
+  $align-items: center,
+  $justify-content: center,
+  $gap: null
+) {
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+  flex-direction: $direction;
+  gap: $gap;
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  .circle {
+    position: absolute;
+    transition: top 0.5s ease, left 0.5s ease;
+    background-color: $text-color-main;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 233px;
+    height: 233px;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    @include flex();
+
+    img {
+    }
+  }
+}
