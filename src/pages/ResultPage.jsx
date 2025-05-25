@@ -15,16 +15,20 @@ import {
 } from "../assets";
 import { usePostStore } from "../store/usePostStore";
 
+const API_URL = import.meta.env.VITE_API_URL; // 백엔드 API URL
+
 export const ResultPage = () => {
   const { age, vision, tags, images } = usePostStore(); // 전역 데이터 꺼내기
   const [result, setResult] = useState(null); // result는 통신 이후에 명세서보고 변경
   const [loading, setLoading] = useState(true); // 로딩 상태
   const navigate = useNavigate();
 
-  // 데이터 가져오기(post 방식으로 보내고 반환값으로 데이터 받기(우리는 db에 결과 데이터를 저장하지 않기 때문))
+  // 데이터 가져오기
+  // post 방식으로 보내고 반환값으로 데이터 받기(우리는 db에 결과 데이터를 저장하지 않기 때문)
   useEffect(() => {
+    console.log(age, vision, tags, images);
     const getResult = async () => {
-      // if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동 (테스트를 위한 주석설정)
+      if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동
       try {
         const formData = new FormData();
         formData.append("age", age);
@@ -34,7 +38,7 @@ export const ResultPage = () => {
           formData.append("images", image);
         });
 
-        const res = await axios.post("/api/chat", formData);
+        const res = await axios.post(`${API_URL}/api/chat`, formData);
 
         if (!res.data) {
           throw new Error("결과 데이터가 존재하지 않습니다.");
@@ -49,16 +53,15 @@ export const ResultPage = () => {
     getResult();
   }, []);
 
-  // 통신 연결하고 로딩 기능 구현
-  // if (loading) {
-  //   return <Loading />;
-  // }
-
+  // 카카오톡 공유하기 기능
   const handleShareKakao = () => {
     window.Kakao.Share.sendCustom({
       templateId: 120920,
       templateArgs: {
-        // tip: `${result.tip}`
+        // tip: `${result.tip}`,
+        // term: `${result.term}`,
+        // score: `${result.score}`,
+        // stretchTips: `${result.stretchTips.join(", ")}`,
         tip: `시력 1.0은 정상이나, 질병이 우려됩니다. 같은 연령대에서는 드문 상태입니다.`,
         term: `4`,
         score: `70`,
@@ -66,6 +69,11 @@ export const ResultPage = () => {
       },
     });
   };
+
+  // 로딩 띄우기
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={styles.container}>
@@ -142,7 +150,6 @@ export const ResultPage = () => {
               </div>
             </div>
             <div className={styles.advice}>
-              {/* {result.food} */}
               <span className={styles.title}>
                 눈에 좋은 음식 추천해드릴게요!
               </span>
@@ -152,6 +159,7 @@ export const ResultPage = () => {
                   <div className={styles.foodIngredient}>성분</div>
                   <div className={styles.foodEffect}>효과</div>
                 </div>
+                {/* {result.food} */}
                 {[
                   {
                     name: "시금치",
@@ -191,7 +199,7 @@ export const ResultPage = () => {
             <div className={styles.description}>
               <div className={styles.title}>스트레칭 가이드라인</div>
               <span className={styles.text}>
-                {/* {result.stretch} */}
+                {/* {result.stretchTips.join(", ")} */}
                 {[
                   "고정 응시 운동(2분)",
                   "손바닥 온찜질(1분)",
