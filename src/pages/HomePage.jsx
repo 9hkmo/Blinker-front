@@ -1,11 +1,11 @@
 import styles from "../styles/pages/Home.module.scss";
 import { test, minigame } from "../assets";
 import { Link } from "react-router-dom";
-import { EyeLayout } from "../components/EyesLayout";
+import { EyesLayout } from "../components/EyesLayout";
 
 export const HomePage = () => {
   return (
-    <EyeLayout>
+    <EyesLayout>
       <div className={styles.buttonWrapper}>
         <Link to="/test" className={styles.startButton}>
           <img src={test} alt="검사 시작 아이콘" />
@@ -16,6 +16,6 @@ export const HomePage = () => {
           미니 게임
         </Link>
       </div>
-    </EyeLayout>
+    </EyesLayout>
   );
 };

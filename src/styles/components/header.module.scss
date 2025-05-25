@@ -1,4 +1,4 @@
-@use '../variables' as *;
+@use "../variables" as *;
 
 .container {
   padding: 1.042vw 0;
@@ -41,5 +41,5 @@
 }
 
 .isHome {
-  background-color: transparent;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.649) 0%, transparent 100%);
 }

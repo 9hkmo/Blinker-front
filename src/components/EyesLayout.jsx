@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { Header } from "./Header";
 import { home, pupil } from "../assets";
 
-export const EyeLayout = ({ children }) => {
+export const EyesLayout = ({ children }) => {
   useEffect(() => {
     // 전체 눈과 눈동자를 가져옴
     const eyes = document.querySelectorAll(`.${styles.eye}`);

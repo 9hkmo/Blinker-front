@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import styles from "../styles/pages/GamePage.module.scss";
-import { game_char, game_loading } from "../assets";
+import { game_char, game_loading, minigame } from "../assets";
+import { EyesLayout } from "../components/EyesLayout";
+import { Link } from "react-router-dom";
 
 const pathW = [
   { top: "20%", left: "10%" },
@@ -84,12 +86,18 @@ export const GamePage = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <Header isHome={true} />
+    <>
       {home ? (
-        <></>
+        <EyesLayout>
+          <div className={styles.gameButton} onClick={enterGame}>
+            <img src={minigame} alt="미니게임 아이콘" />
+            미니 게임
+          </div>
+        </EyesLayout>
       ) : (
-        <>
+        <div className={styles.container}>
+          <Header isHome={true} />
+
           <div className={`${styles.home} ${!loading && styles.hidden}`}>
             <div className={styles.homeImg}>
               <img src={game_loading} />
@@ -105,8 +113,8 @@ export const GamePage = () => {
           >
             <img src={game_char} alt="circle" />
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };

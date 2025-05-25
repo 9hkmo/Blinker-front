@@ -39,12 +39,41 @@
     top: 50%;
     left: 50%;
     @include flex();
-
-    img {
-    }
   }
 
   .hidden {
     display: none;
   }
+}
+
+.gameButton {
+  width: 280px;
+  height: 82px;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  @include flex($gap: 10px);
+  position: absolute;
+  top: 50%;
+  img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    opacity: 80%;
+    box-shadow: 1.43px 5.71px 14.27px #79797948;
+    cursor: pointer;
+  }
+
+  background-color: #f8dfc3;
+  color: black;
 }

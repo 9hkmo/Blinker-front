@@ -207,7 +207,7 @@ export const AddInfoPage = () => {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header isHome={true} />
       <div className={`${styles.moveChar} ${styles.char1}`}>
         <img
           src={move_char}

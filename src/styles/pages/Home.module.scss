@@ -32,8 +32,10 @@
     object-fit: contain;
   }
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-10px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    opacity: 80%;
+    box-shadow: 1.43px 5.71px 14.27px #79797948;
   }
 }
 
