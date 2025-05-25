@@ -26,7 +26,7 @@ export const ResultPage = () => {
   useEffect(() => {
     console.log(age, vision, tags, images);
     const getResult = async () => {
-      if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동
+      if (!age || !vision || !tags || !images) navigate("/"); // 데이터가 없으면 홈으로 이동
       try {
         const data = await postResult({ age, vision, tags, images });
         if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
