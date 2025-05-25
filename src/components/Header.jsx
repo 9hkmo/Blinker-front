@@ -18,11 +18,11 @@ export const Header = ({ isHome = false }) => {
           <img src={logo_header} />
         </Link>
         <div className={styles.nav}>
-          <Link to="/" className={getNavClass('/')}>
+          <Link to="/" className={getNavClass("/")}>
             Home
           </Link>
-          <Link to="/report" className={getNavClass('/report')}>
-            Report
+          <Link to="/test" className={getNavClass("/test")}>
+            Test
           </Link>
           <Link to="/quiz" className={getNavClass('/quiz')}>
             Quiz

@@ -17,6 +17,8 @@ import test from "./test.svg";
 import minigame from "./minigame.svg";
 import quiz from "./quiz.svg";
 import logo_title_eye from "./blinker-title-eye.svg";
+import game_char from "./game-char.svg";
+import game_loading from "./game-loading.svg";
 export {
   logo_title_eye,
   quiz,
@@ -35,4 +37,6 @@ export {
   result4,
   logo_result_game,
   loading_char,
+  game_char,
+  game_loading,
 };
