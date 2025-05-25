@@ -3,7 +3,6 @@ import { Header } from "../components/Header";
 import styles from "../styles/pages/GamePage.module.scss";
 import { game_char, game_loading, minigame } from "../assets";
 import { EyesLayout } from "../components/EyesLayout";
-import { Link } from "react-router-dom";
 
 const pathW = [
   { top: "20%", left: "10%" },
