@@ -4,9 +4,12 @@
   padding: 1.042vw 0;
   position: fixed;
   top: 0;
+  max-width: 1920px;
   width: 100%;
   background-color: $background-color;
+  overflow: hidden;
   z-index: 1000;
+
   .contents {
     position: relative;
     width: 100%;

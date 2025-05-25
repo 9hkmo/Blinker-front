@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-height: 1080px;
+  height: 100%;
+  width: 100%;
+  min-width: 1920px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  .homeImg {
+    width: 100%;
+    display: flex;
+    flex: 1;
+  }
+}
+
+.contents {
+  display: flex;
+  position: absolute;
+  gap: 10px;
+  .eye {
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+  }
+}
+
+.contents1 {
+  @extend .contents;
+  top: 350px;
+  left: 120px;
+  transform: rotate(-22deg);
+  .eye {
+    width: 70px;
+    height: 140px;
+  }
+  .pupil {
+    width: 20px;
+  }
+}
+
+.contents2 {
+  @extend .contents;
+  bottom: 50px;
+  left: 565px;
+  gap: 14px;
+  transform: rotate(-38.83deg);
+  .eye {
+    width: 100px;
+    height: 210px;
+  }
+  .pupil {
+    width: 35px;
+  }
+}
+
+.contents3 {
+  @extend .contents;
+  bottom: 40px;
+  left: 60px;
+  transform: rotate(58.12deg);
+  .eye {
+    width: 55px;
+    height: 100px;
+  }
+  .pupil {
+    width: 15px;
+  }
+}
+
+.contents4 {
+  @extend .contents;
+  top: 90px;
+  left: 442px;
+  transform: rotate(28.03deg);
+  .eye {
+    width: 25px;
+    height: 60px;
+  }
+  .pupil {
+    width: 10px;
+  }
+}
+
+.contents5 {
+  @extend .contents;
+  top: 40px;
+  left: 1230px;
+  transform: rotate(330deg);
+  .eye {
+    width: 80px;
+    height: 160px;
+  }
+  .pupil {
+    width: 30px;
+  }
+}
+
+.contents6 {
+  @extend .contents;
+  bottom: 440px;
+  left: 1475px;
+  transform: rotate(14deg);
+  .eye {
+    width: 60px;
+    height: 120px;
+  }
+  .pupil {
+    width: 20px;
+  }
+}
+
+.contents7 {
+  @extend .contents;
+  top: 95px;
+  left: 1807px;
+  transform: rotate(370deg);
+  .eye {
+    width: 60px;
+    height: 120px;
+  }
+  .pupil {
+    width: 25px;
+  }
+}
+
+.contents8 {
+  @extend .contents;
+  bottom: 145px;
+  left: 1875px;
+  transform: rotate(-27.52deg);
+  gap: 5px;
+  .eye {
+    width: 40px;
+    height: 80px;
+  }
+  .pupil {
+    width: 10px;
+  }
+}

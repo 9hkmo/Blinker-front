@@ -3,7 +3,7 @@ import styles from '../styles/pages/Permission.module.scss';
 import { useEffect, useRef } from 'react';
 import { logo_title_eye } from '../assets';
 
-export const GamePage = () => {
+export const PermissionPage = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
