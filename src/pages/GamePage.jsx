@@ -3,6 +3,7 @@ import { Header } from "../components/Header";
 import styles from "../styles/pages/GamePage.module.scss";
 import { game_char, game_loading, minigame } from "../assets";
 import { EyesLayout } from "../components/EyesLayout";
+import { useLocation } from "react-router-dom";
 
 const pathW = [
   { top: "20%", left: "10%" },
@@ -39,6 +40,7 @@ export const GamePage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [home, setHome] = useState(true);
+  const state = useLocation().state;
 
   // 경로 선택 함수 (현재 경로 제외하고 랜덤)
   const selectRandomPathKey = (excludeKey) => {
@@ -83,6 +85,12 @@ export const GamePage = () => {
       clearTimeout(loadingTimeout); // 컴포넌트 언마운트 시 타이머 제거
     };
   };
+
+  useEffect(() => {
+    if (state && state.home === false) {
+      enterGame();
+    }
+  }, [state]);
 
   return (
     <>
