@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { arrow_right, move_char } from "../assets";
 import { MoveEyeTitle } from "../components/MoveEyeTitle";
+import { usePostStore } from "../store/usePostStore";
 
 const tags = [
   { title: "두통", value: "headache" },
@@ -139,21 +140,17 @@ export const AddInfoPage = () => {
   const [moveIndex, setMoveIndex] = useState(1);
   const navigate = useNavigate();
 
-  // 결과 보러 가기(와프 기준, 추후에 검사하러가기로 변경될 듯)
-  // 주소 값은 임의로 설정. 전달해줄 값은 나이, 시력, 선택한 태그들
-  // 검사 페이지에서 백엔드에 전송해줄 때 이 값들을 같이 넘겨주면 될듯하다.
-  // 검사 페이지에서는 state가 있는지 꼭 확인해줘야함(없으면 에러 페이지 또는 추가 정보 페이지로 이동)
+  const { setAge, setVision, setTags} = usePostStore();
+
   const handleClick = () => {
     // 태그는 아무것도 없을 수 있음
     if (isSelected) {
-      console.log("전송");
-      navigate("/quiz", {
-        state: {
-          tags: choiceTags,
-          age: selectedAge.value,
-          eye: selectedEye.value,
-        },
-      });
+      // 전역으로 상태 저장
+      setAge(selectedAge.value);
+      setVision(selectedEye.value);
+      setTags(choiceTags);
+      // 퀴즈 페이지로 이동
+      navigate("/quiz");
     } else {
       console.log("오류");
       setIsModal(true);
@@ -178,12 +175,10 @@ export const AddInfoPage = () => {
   // 나이 선택 함수
   const handleAgeChange = (option) => {
     setSelectedAge(option);
-    console.log(selectedAge.value);
   };
   // 시력 선택 함수
   const handleEyeChange = (option) => {
     setSelectedEye(option);
-    console.log(selectedEye.value);
   };
 
   // 나이와 시력이 선택 되었는지 확인
@@ -200,13 +195,15 @@ export const AddInfoPage = () => {
       setMoveIndex(Math.floor(Math.random() * 5) + 1); // 나오는 주기 설정할 수 있음(1~3만 나옴)
     }, 3000);
 
+    // 초기화
+    setSelectedAge({});
+    setSelectedEye({});
+    setChoiceTags([]);
+
     return () => {
       clearInterval(moveCharInterval);
     };
   }, []);
-  useEffect(() => {
-    console.log(moveIndex);
-  }, [moveIndex]);
 
   return (
     <div className={styles.container}>
@@ -277,7 +274,6 @@ export const AddInfoPage = () => {
           })}
         </div>
       </div>
-      {/* 링크 버튼도 컴포넌트로 빼도될듯? */}
       <div
         className={`${styles.linkButton} ${
           isSelected ? styles.isSelected : ""

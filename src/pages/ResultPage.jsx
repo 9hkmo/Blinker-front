@@ -1,9 +1,8 @@
-import axios from "axios";
 import styles from "../styles/pages/ResultPage.module.scss";
 import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   arrow_right,
   logo_result_game,
@@ -13,29 +12,25 @@ import {
   result3,
   result4,
 } from "../assets";
+import { usePostStore } from "../store/usePostStore";
+import { postResult } from "../api/post";
 
 export const ResultPage = () => {
-  const location = useLocation();
-  const { age, vision, tags, images } = location.state || {}; // 전달받은 데이터 꺼내기
+  const { age, vision, tags, images } = usePostStore(); // 전역 데이터 꺼내기
   const [result, setResult] = useState(null); // result는 통신 이후에 명세서보고 변경
   const [loading, setLoading] = useState(true); // 로딩 상태
+  const navigate = useNavigate();
 
-  // 데이터 가져오기(post 방식으로 보내고 반환값으로 데이터 받기(우리는 db에 결과 데이터를 저장하지 않기 때문))
+  // 데이터 가져오기
+  // post 방식으로 보내고 반환값으로 데이터 받기(우리는 db에 결과 데이터를 저장하지 않기 때문)
   useEffect(() => {
+    console.log(age, vision, tags, images);
     const getResult = async () => {
-      if (!age || !vision || !tags || !images) return;
+      if (!age || !vision || !tags || !images) navigate("/home"); // 데이터가 없으면 홈으로 이동
       try {
-        const res = await axios.post("http://localhost:5173/result/api", {
-          age: age, // POST 바디에 담아서 전송
-          vision: vision,
-          tags: tags,
-          images: images,
-        });
-
-        if (!res.data) {
-          throw new Error("결과 데이터가 존재하지 않습니다.");
-        }
-        setResult(res.data);
+        const data = await postResult({ age, vision, tags, images });
+        if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
+        setResult(data);
       } catch (err) {
         console.error("결과 불러오기 실패:", err);
       } finally {
@@ -45,22 +40,15 @@ export const ResultPage = () => {
     getResult();
   }, []);
 
-  // 바로 결과 페이지 링크로 접근하는 경우(전달되는 데이터가 없으므로 홈으로)
-  // if (!location.state) {
-  //   return <Navigate to="/home" replace />;
-  // }
-
-  // 통신 연결하고 로딩 기능 구현
-  // if (loading) {
-  //   return <Loading />;
-  // }
-
-
+  // 카카오톡 공유하기 기능
   const handleShareKakao = () => {
     window.Kakao.Share.sendCustom({
       templateId: 120920,
       templateArgs: {
-        // tip: `${result.tip}`
+        // tip: `${result.tip}`,
+        // term: `${result.term}`,
+        // score: `${result.score}`,
+        // stretchTips: `${result.stretchTips.join(", ")}`,
         tip: `시력 1.0은 정상이나, 질병이 우려됩니다. 같은 연령대에서는 드문 상태입니다.`,
         term: `4`,
         score: `70`,
@@ -68,6 +56,11 @@ export const ResultPage = () => {
       },
     });
   };
+
+  // 로딩 띄우기
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={styles.container}>
@@ -144,17 +137,44 @@ export const ResultPage = () => {
               </div>
             </div>
             <div className={styles.advice}>
-              {/* {result.food} */}
-              남성분의 시력과 노안 문제를 고려할 때, 눈 건강에 도움이 되는 몇
-              가지 음식을 추천해드릴 수 있습니다:\n\n1. **연어**: 연어와 같은
-              지방이 풍부한 생선에는 오메가-3 지방산이 많이 함유되어 있어 눈
-              건강 유지에 도움을 줄 수 있습니다. 오메가-3는 망막의 기능을
-              지원하고, 건조한 눈 증상을 완화하는 데에도 효과적입니다.\n\n2.
-              **시금치**: 시금치와 같은 녹색 잎채소에는 루테인과 제아잔틴이
-              풍부하게 들어있습니다. 이 두 가지 항산화제는 눈의 황반 부위를
-              보호하고, 노화로 인한 시력 손실을 예방하는 데 도움을 줄 수
-              있습니다.\n\n이러한 음식들을 규칙적으로 섭취하면 눈 건강을
-              유지하는 데 도움이 될 수 있습니다.
+              <span className={styles.title}>
+                눈에 좋은 음식 추천해드릴게요!
+              </span>
+              <div className={styles.foodContainer}>
+                <div className={styles.foodRow}>
+                  <div className={styles.foodName}>이름</div>
+                  <div className={styles.foodIngredient}>성분</div>
+                  <div className={styles.foodEffect}>효과</div>
+                </div>
+                {/* {result.food} */}
+                {[
+                  {
+                    name: "시금치",
+                    ingredient: ["루테인"],
+                    effect: ["눈 피로 완화", "항산화 작용"],
+                  },
+                  {
+                    name: "당근",
+                    ingredient: ["비타민A"],
+                    effect: ["눈 점막 보호", "야맹증 예방"],
+                  },
+                  {
+                    name: "계란노른자",
+                    ingredient: ["비타민A"],
+                    effect: ["눈 점막 보호", "야맹증 예방"],
+                  },
+                ].map((food, index) => (
+                  <div key={index} className={styles.foodRow}>
+                    <div className={styles.foodName}>{food.name}</div>
+                    <div className={styles.foodIngredient}>
+                      <div>{food.ingredient.join(", ")}</div>
+                    </div>
+                    <div className={styles.foodEffect}>
+                      {food.effect.join(", ")}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -166,10 +186,12 @@ export const ResultPage = () => {
             <div className={styles.description}>
               <div className={styles.title}>스트레칭 가이드라인</div>
               <span className={styles.text}>
-                {/* {result.stretch} */}
-                권장 깜빡임 주기: 4초에 한 번씩 눈을 천천히 깜빡여 주세요. 권장
-                깜빡임 주기: 4초에 한 번씩 눈을 천천히 깜빡여 주세요. 권장
-                깜빡임 주기: 4초에 한 번씩 눈을 천천히 깜빡여 주세요.
+                {/* {result.stretchTips.join(", ")} */}
+                {[
+                  "고정 응시 운동(2분)",
+                  "손바닥 온찜질(1분)",
+                  "눈 굴리기(5회씩)",
+                ].join(", ")}
               </span>
             </div>
           </div>

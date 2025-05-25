@@ -3,6 +3,7 @@ import { AddInfoPage } from "./pages/AddInfoPage";
 import "./styles/global.scss";
 import { ResultPage } from "./pages/ResultPage";
 import { useEffect } from "react";
+import { GamePage } from "./pages/GamePage";
 
 const API_KEY_KAKAO = import.meta.env.VITE_KAKAO_API_KEY;
 // /: 홈페이지
@@ -28,7 +29,7 @@ function App() {
         <Route path="/quiz" element={<QuizHomePage />} />
         <Route path="/quiz/:id" element={<QuizPage />} /> */}
         <Route path="/result" element={<ResultPage />} />
-        {/* <Route path="/game" element={<GamePage />} /> */}
+        <Route path="/game" element={<GamePage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -12,6 +12,8 @@ import result3 from "./result3.svg";
 import result4 from "./result4.svg";
 import logo_result_game from "./result-game.svg";
 import loading_char from "./loading-char.svg";
+import game_char from "./game-char.svg";
+import game_loading from "./game-loading.svg";
 export {
   logo_header,
   logo_title,
@@ -25,4 +27,6 @@ export {
   result4,
   logo_result_game,
   loading_char,
+  game_char,
+  game_loading,
 };
