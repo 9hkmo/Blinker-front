@@ -57,11 +57,14 @@
   @extend .contents;
   bottom: 2.6vw;
   left: 29.43vw;
-  gap: 0.73vw;
+  gap: 0.63vw;
   transform: rotate(-38.83deg);
   .eye {
     width: 5.21vw;
     height: 10.94vw;
+    &:last-child {
+      width: 5.3vw;
+    }
   }
   .pupil {
     width: 1.82vw;
@@ -98,12 +101,16 @@
 
 .contents5 {
   @extend .contents;
-  top: 2.08vw;
-  left: 64.06vw;
-  transform: rotate(330deg);
+  top: 1.78vw;
+  left: 61.76vw;
+  transform: rotate(325deg);
+  gap:0.35vw;
   .eye {
-    width: 4.17vw;
-    height: 8.33vw;
+    width: 4.57vw;
+    height: 8.63vw;
+    &:last-child {
+      width: 4.37vw;
+    }
   }
   .pupil {
     width: 1.56vw;

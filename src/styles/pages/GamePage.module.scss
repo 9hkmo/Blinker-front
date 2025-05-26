@@ -100,7 +100,8 @@
   transition: all 0.3s ease-in-out;
   @include flex($gap: 10px);
   position: absolute;
-  top: 50%;
+  top: 60%;
+
   img {
     width: 28px;
     height: 28px;

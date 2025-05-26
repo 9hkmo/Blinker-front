@@ -1,9 +1,19 @@
 import styles from "../styles/components/EyesLayout.module.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "./Header";
-import { home, pupil } from "../assets";
+import { home, home_quiz, pupil } from "../assets";
+import { useLocation } from "react-router-dom";
 
 export const EyesLayout = ({ children }) => {
+  const location = useLocation();
+  const [isImg, setIsImg] = useState(true);
+
+  useEffect(() => {
+    if (location.pathname === "/quiz") {
+      setIsImg(false);
+    }
+  }, [location]);
+
   useEffect(() => {
     // 전체 눈과 눈동자를 가져옴
     const eyes = document.querySelectorAll(`.${styles.eye}`);
@@ -40,7 +50,7 @@ export const EyesLayout = ({ children }) => {
   return (
     <div className={styles.container}>
       <div className={styles.homeImg}>
-        <img src={home} />
+        <img src={isImg ? home : home_quiz} />
       </div>
       <Header isHome={true} />
       <div className={styles.contents1}>
