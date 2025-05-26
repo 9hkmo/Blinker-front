@@ -6,7 +6,7 @@ import { HomePage } from './pages/HomePage';
 import { GamePage } from './pages/GamePage';
 import { QuizHomePage } from './pages/QuizHomePage';
 // import { QuizPage } from './pages/QuizPage';
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const API_KEY_KAKAO = import.meta.env.VITE_KAKAO_API_KEY;
 // /: 홈페이지

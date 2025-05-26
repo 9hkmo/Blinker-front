@@ -1,10 +1,115 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Header } from '../components/Header';
 import styles from '../styles/pages/Quiz.module.scss';
 
-export const QuizPage = () => {
+export const QuizHomePage = () => {
+  const [quizzes, setQuizzes] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [shuffledChoices, setShuffledChoices] = useState([]);
+  const [selectedChoice, setSelectedChoice] = useState(null);
+  const [showResult, setShowResult] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get('http://43.202.207.171:8080/api/quiz'); // 우회 없이 직접 호출
+        console.log('퀴즈 데이터:', response.data);
+
+        const data = response.data;
+        if (!data || !data.data || !data.data.all) {
+          throw new Error('퀴즈 데이터 없음');
+        }
+
+        const formattedQuizzes = data.data.all.map((quizItem) => {
+          const question = quizItem.Question;
+          const choices = quizItem.AnswerSet.map((a) => a.content);
+          const answer =
+            quizItem.AnswerSet.find((a) => a.isCorrect === 1)?.content || '';
+          return { question, choices, answer };
+        });
+
+        setQuizzes(formattedQuizzes);
+        setShuffledChoices(shuffleArray(formattedQuizzes[0].choices));
+      } catch (error) {
+        console.error('퀴즈 데이터를 가져오는데 실패함:', error);
+      }
+    };
+
+    getData();
+  }, []);
+
+  const shuffleArray = (array) => {
+    return [...array].sort(() => Math.random() - 0.5);
+  };
+
+  const handleSubmit = () => {
+    if (!selectedChoice) return;
+    const currentQuiz = quizzes[currentIndex];
+    setIsCorrect(selectedChoice === currentQuiz.answer);
+    setShowResult(true);
+  };
+
+  const handleNext = () => {
+    const nextIndex = currentIndex + 1;
+    if (nextIndex < quizzes.length) {
+      setCurrentIndex(nextIndex);
+      setShuffledChoices(shuffleArray(quizzes[nextIndex].choices));
+      setSelectedChoice(null);
+      setShowResult(false);
+    } else {
+      alert('퀴즈를 모두 완료했습니다.');
+    }
+  };
+
+  if (quizzes.length === 0) {
+    return <div className={styles.loading}>로딩 중...</div>;
+  }
+
+  const currentQuiz = quizzes[currentIndex];
+
   return (
     <div className={styles.container}>
       <Header isHome={true} />
+      <div className={styles.quizBox}>
+        <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
+        <ul className={styles.choiceList}>
+          {shuffledChoices.map((choice, index) => (
+            <li key={index} className={styles.choiceItem}>
+              <label>
+                <input
+                  type="radio"
+                  name="quiz"
+                  value={choice}
+                  checked={selectedChoice === choice}
+                  onChange={() => setSelectedChoice(choice)}
+                />
+                {choice}
+              </label>
+            </li>
+          ))}
+        </ul>
+        <button className={styles.nextButton} onClick={handleSubmit}>
+          제출
+        </button>
+      </div>
+
+      {showResult && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalBox}>
+            <div className={styles.icon}>{isCorrect ? '✅' : '❌'}</div>
+            <p className={styles.resultText}>
+              {isCorrect
+                ? '정답이에요!'
+                : `오답이에요. 정답은 ${currentQuiz.answer}입니다.`}
+            </p>
+            <button className={styles.modalButton} onClick={handleNext}>
+              다음 ⏩
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

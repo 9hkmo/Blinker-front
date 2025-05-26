@@ -19,7 +19,10 @@ import quiz from "./quiz.svg";
 import logo_title_eye from "./blinker-title-eye.svg";
 import game_char from "./game-char.svg";
 import game_loading from "./game-loading.svg";
+import quizbackground from "./quizbackground.svg";
+
 export {
+  quizbackground,
   logo_title_eye,
   quiz,
   minigame,
