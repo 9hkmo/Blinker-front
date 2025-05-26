@@ -40,11 +40,11 @@ export const MoveEyeTitle = () => {
     <div className={styles.container}>
       <img src={logo_title} className={styles.back} />
       <div className={styles.contents}>
-        <div class={styles.eye}>
-          <img class={styles.pupil} src={pupil} />
+        <div className={styles.eye}>
+          <img className={styles.pupil} src={pupil} />
         </div>
-        <div class={styles.eye}>
-          <img class={styles.pupil} src={pupil} />
+        <div className={styles.eye}>
+          <img className={styles.pupil} src={pupil} />
         </div>
       </div>
     </div>
