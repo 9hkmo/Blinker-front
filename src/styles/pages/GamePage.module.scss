@@ -16,7 +16,7 @@
   }
   .circle {
     position: absolute;
-    transition: top 0.5s ease, left 0.5s ease;
+    transition: all 1s ease, transform 0.5s ease;
     background-color: $text-color-main;
     border-radius: 50%;
     cursor: pointer;
@@ -29,10 +29,60 @@
     img {
       width: 5.625vw;
     }
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.5px;
+      left: -0.5px;
+      right: -0.5px;
+      bottom: -0.5px;
+      z-index: -1;
+      border-radius: 50%;
+      animation: rainbow 3s infinite linear;
+      background-color: white;
+      filter: blur(50px);
+      opacity: 0.5;
+    }
   }
 
   .hidden {
     display: none;
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    box-shadow: 0 0 40px white;
+  }
+  10% {
+    box-shadow: 0 0 40px red;
+  }
+  20% {
+    box-shadow: 0 0 40px orange;
+  }
+  30% {
+    box-shadow: 0 0 40px yellow;
+  }
+  40% {
+    box-shadow: 0 0 40px greenyellow;
+  }
+  50% {
+    box-shadow: 0 0 40px green;
+  }
+  60% {
+    box-shadow: 0 0 40px darkgreen;
+  }
+  70% {
+    box-shadow: 0 0 40px blue;
+  }
+  80% {
+    box-shadow: 0 0 40px darkblue;
+  }
+  90% {
+    box-shadow: 0 0 40px purple;
+  }
+  100% {
+    box-shadow: 0 0 40px cyan;
   }
 }
 
