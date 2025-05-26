@@ -19,6 +19,8 @@ import quiz from "./quiz.svg";
 import logo_title_eye from "./blinker-title-eye.svg";
 import game_char from "./game-char.svg";
 import game_loading from "./game-loading.svg";
+import home_quiz from "./home-quiz.svg";
+
 export {
   logo_title_eye,
   quiz,
@@ -39,4 +41,5 @@ export {
   loading_char,
   game_char,
   game_loading,
+  home_quiz,
 };
