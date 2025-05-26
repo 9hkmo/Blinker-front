@@ -22,16 +22,29 @@ const pathZ = [
 
 const pathD = [
   { top: "20%", left: "50%" },
-  { top: "50%", left: "20%" },
-  { top: "90%", left: "40%" },
-  { top: "90%", left: "60%" },
-  { top: "50%", left: "80%" },
+  { top: "80%", left: "10%" },
+  { top: "40%", left: "90%" },
+  { top: "40%", left: "10%" },
+  { top: "80%", left: "90%" },
+  { top: "20%", left: "50%" },
+];
+
+const pathB = [
+  { top: "20%", left: "10%" },
+  { top: "80%", left: "10%" },
+  { top: "80%", left: "90%" },
+  { top: "20%", left: "90%" },
+  { top: "20%", left: "10%" },
+  { top: "80%", left: "90%" },
+  { top: "20%", left: "90%" },
+  { top: "80%", left: "10%" },
 ];
 
 const paths = {
   W: pathW,
   Z: pathZ,
   D: pathD,
+  B: pathB,
 };
 
 export const GamePage = () => {
