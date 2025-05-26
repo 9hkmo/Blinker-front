@@ -6,6 +6,7 @@ import { EyesLayout } from "../components/EyesLayout";
 export const HomePage = () => {
   return (
     <EyesLayout>
+      <div className={styles.text}>내 눈 건강 지킴이, 블링커</div>
       <div className={styles.buttonWrapper}>
         <Link to="/test" className={styles.startButton}>
           <img src={test} alt="검사 시작 아이콘" />
