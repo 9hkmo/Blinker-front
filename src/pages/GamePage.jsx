@@ -53,6 +53,7 @@ export const GamePage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [home, setHome] = useState(true);
+  const [charClicked, setCharClicked] = useState(false);
   const state = useLocation().state;
 
   // 경로 선택 함수 (현재 경로 제외하고 랜덤)
@@ -73,6 +74,7 @@ export const GamePage = () => {
   const handleClick = () => {
     if (path.length === 0) return;
 
+    setCharClicked(true);
     setTimeout(() => {
       const nextIndex = (currentIndex + 1) % path.length;
       // 경로 끝에 도달 → 다른 경로 선택
@@ -89,6 +91,12 @@ export const GamePage = () => {
 
   // 현재 위치 계산
   const position = path[currentIndex];
+  useEffect(() => {
+    setTimeout(() => {
+      setCharClicked(false); // 클릭 상태 초기화
+    }, 800);
+  }, [position]);
+
   const enterGame = () => {
     setHome(false);
     const loadingTimeout = setTimeout(() => {
@@ -99,6 +107,7 @@ export const GamePage = () => {
     };
   };
 
+  // 홈에서 들어오면 게임 바로 시작(미니게임 홈 화면 안보여줌)
   useEffect(() => {
     if (state && state.home === false) {
       enterGame();
@@ -129,6 +138,9 @@ export const GamePage = () => {
             onClick={handleClick}
             style={{
               ...position,
+              ...(charClicked && {
+                transform: "translate(-50%, -50%) scale(0.5)",
+              }),
             }}
           >
             <img src={game_char} alt="circle" />
