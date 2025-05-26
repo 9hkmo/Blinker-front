@@ -5,15 +5,12 @@ import { game_char, game_loading, minigame } from "../assets";
 import { EyesLayout } from "../components/EyesLayout";
 import { useLocation } from "react-router-dom";
 
-const pathW = [
+const pathWZ = [
   { top: "20%", left: "10%" },
   { top: "80%", left: "30%" },
   { top: "20%", left: "50%" },
   { top: "80%", left: "70%" },
   { top: "20%", left: "90%" },
-];
-
-const pathZ = [
   { top: "20%", left: "10%" },
   { top: "20%", left: "90%" },
   { top: "80%", left: "10%" },
@@ -41,8 +38,7 @@ const pathB = [
 ];
 
 const paths = {
-  W: pathW,
-  Z: pathZ,
+  WZ: pathWZ,
   D: pathD,
   B: pathB,
 };
