@@ -1,18 +1,5 @@
 @use "../variables" as *;
 
-@mixin flex(
-  $direction: row,
-  $align-items: center,
-  $justify-content: center,
-  $gap: null
-) {
-  display: flex;
-  align-items: $align-items;
-  justify-content: $justify-content;
-  flex-direction: $direction;
-  gap: $gap;
-}
-
 .container {
   position: relative;
   width: 100vw;
@@ -33,12 +20,15 @@
     background-color: $text-color-main;
     border-radius: 50%;
     cursor: pointer;
-    width: 233px;
-    height: 233px;
+    width: 12.14vw;
+    height: 12.14vw;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     @include flex();
+    img {
+      width: 5.625vw;
+    }
   }
 
   .hidden {

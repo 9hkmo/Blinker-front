@@ -1,18 +1,5 @@
 @use "../variables" as *;
 
-@mixin flex(
-  $direction: row,
-  $align-items: center,
-  $justify-content: center,
-  $gap: null
-) {
-  display: flex;
-  align-items: $align-items;
-  justify-content: $justify-content;
-  flex-direction: $direction;
-  gap: $gap;
-}
-
 // 틀만 생성해놓기
 .container {
   @include flex(column);
@@ -28,6 +15,7 @@
     .description {
       color: $text-color-main;
       font-size: 1.75rem;
+      text-align: center;
     }
     .tagContainer {
       @include flex($gap: 10px);
@@ -114,4 +102,15 @@
 
 .visible {
   transform: translateY(-100%);
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 200px 0;
+    .contents {
+      .selectContainer {
+        @include flex(column);
+      }
+    }
+  }
 }

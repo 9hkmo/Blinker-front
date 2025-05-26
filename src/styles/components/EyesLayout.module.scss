@@ -5,26 +5,26 @@
 }
 
 .container {
-  max-height: 1080px;
   height: 100%;
-  width: 100%;
-  max-width: 1920px;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
   .homeImg {
-    width: 100%;
     display: flex;
     flex: 1;
+    img {
+      width: 100vw;
+    }
   }
 }
 
 .contents {
   display: flex;
   position: absolute;
-  gap: 10px;
+  gap: 0.52vw;
   .eye {
     border-radius: 50%;
     position: relative;
@@ -41,114 +41,114 @@
 
 .contents1 {
   @extend .contents;
-  top: 350px;
-  left: 120px;
+  top: 18.23vw;
+  left: 6.25vw;
   transform: rotate(-22deg);
   .eye {
-    width: 70px;
-    height: 140px;
+    width: 3.65vw;
+    height: 7.29vw;
   }
   .pupil {
-    width: 20px;
+    width: 1.04vw;
   }
 }
 
 .contents2 {
   @extend .contents;
-  bottom: 50px;
-  left: 565px;
-  gap: 14px;
+  bottom: 2.6vw;
+  left: 29.43vw;
+  gap: 0.73vw;
   transform: rotate(-38.83deg);
   .eye {
-    width: 100px;
-    height: 210px;
+    width: 5.21vw;
+    height: 10.94vw;
   }
   .pupil {
-    width: 35px;
+    width: 1.82vw;
   }
 }
 
 .contents3 {
   @extend .contents;
-  bottom: 40px;
-  left: 60px;
+  bottom: 2.08vw;
+  left: 3.13vw;
   transform: rotate(58.12deg);
   .eye {
-    width: 55px;
-    height: 100px;
+    width: 2.86vw;
+    height: 5.21vw;
   }
   .pupil {
-    width: 15px;
+    width: 0.78vw;
   }
 }
 
 .contents4 {
   @extend .contents;
-  top: 90px;
-  left: 442px;
+  top: 4.69vw;
+  left: 23.02vw;
   transform: rotate(28.03deg);
   .eye {
-    width: 25px;
-    height: 60px;
+    width: 1.3vw;
+    height: 3.13vw;
   }
   .pupil {
-    width: 10px;
+    width: 0.52vw;
   }
 }
 
 .contents5 {
   @extend .contents;
-  top: 40px;
-  left: 1230px;
+  top: 2.08vw;
+  left: 64.06vw;
   transform: rotate(330deg);
   .eye {
-    width: 80px;
-    height: 160px;
+    width: 4.17vw;
+    height: 8.33vw;
   }
   .pupil {
-    width: 30px;
+    width: 1.56vw;
   }
 }
 
 .contents6 {
   @extend .contents;
-  bottom: 440px;
-  left: 1475px;
+  bottom: 22.92vw;
+  left: 76.82vw;
   transform: rotate(14deg);
   .eye {
-    width: 60px;
-    height: 120px;
+    width: 3.13vw;
+    height: 6.25vw;
   }
   .pupil {
-    width: 20px;
+    width: 1.04vw;
   }
 }
 
 .contents7 {
   @extend .contents;
-  top: 95px;
-  left: 1807px;
+  top: 4.95vw;
+  left: 94.11vw;
   transform: rotate(370deg);
   .eye {
-    width: 60px;
-    height: 120px;
+    width: 3.13vw;
+    height: 6.25vw;
   }
   .pupil {
-    width: 25px;
+    width: 1.3vw;
   }
 }
 
 .contents8 {
   @extend .contents;
-  bottom: 145px;
-  left: 1875px;
+  bottom: 7.55vw;
+  left: 97.66vw;
   transform: rotate(-27.52deg);
-  gap: 5px;
+  gap: 0.26vw;
   .eye {
-    width: 40px;
-    height: 80px;
+    width: 2.08vw;
+    height: 4.17vw;
   }
   .pupil {
-    width: 10px;
+    width: 0.52vw;
   }
 }
