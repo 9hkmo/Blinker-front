@@ -1,15 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { usePostStore } from '../store/usePostStore'; // 경로는 프로젝트에 따라 조정
+import React, { useEffect, useRef } from 'react';
+import { usePostStore } from '../store/usePostStore';
 
-const CameraCapture = () => {
+const CameraCapture = ({ startCaptureTrigger }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const imageBlobsRef = useRef([]);
-  const [capturing, setCapturing] = useState(false);
-
-  // ✅ Zustand 전역 상태 업데이트 함수 가져오기
   const setImages = usePostStore((state) => state.setImages);
 
+  // 카메라 시작
   useEffect(() => {
     const startCamera = async () => {
       try {
@@ -26,11 +24,17 @@ const CameraCapture = () => {
     startCamera();
   }, []);
 
+  // 촬영 트리거 발생 시 캡처 시작
+  useEffect(() => {
+    if (startCaptureTrigger) {
+      startCapturing();
+    }
+  }, [startCaptureTrigger]);
+
   const startCapturing = () => {
-    setCapturing(true);
     let count = 0;
-    const totalFrames = 300; // 몇장
-    const interval = 100; // 0.1초마다 찍음
+    const totalFrames = 300;
+    const interval = 100;
 
     const intervalId = setInterval(() => {
       if (!canvasRef.current || !videoRef.current) return;
@@ -56,28 +60,17 @@ const CameraCapture = () => {
       count += 1;
       if (count >= totalFrames) {
         clearInterval(intervalId);
-        setCapturing(false);
-
-        // ✅ Zustand에 이미지 배열 저장
         setImages(imageBlobsRef.current);
-        console.log('300장 저장 완료 ✅');
+        console.log('✅ 300장 캡처 완료');
       }
     }, interval);
   };
 
-  useEffect(() => {
-    console.log(imageBlobsRef.current);
-  }, [imageBlobsRef]);
-
   return (
-    <div>
-      <h2>카메라 캡처 (300장)</h2>
-      <video ref={videoRef} autoPlay playsInline style={{ width: '300px' }} />
+    <>
+      <video ref={videoRef} autoPlay playsInline style={{ display: 'none' }} />
       <canvas ref={canvasRef} style={{ display: 'none' }} />
-      <button onClick={startCapturing} disabled={capturing}>
-        {capturing ? '촬영 중...' : '30초 촬영 시작'}
-      </button>
-    </div>
+    </>
   );
 };
 
