@@ -31,10 +31,9 @@ export const ResultPage = () => {
         const data = await postResult({ age, vision, tags, images });
         if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
         setResult(data);
+        setLoading(false);
       } catch (err) {
         console.error("결과 불러오기 실패:", err);
-      } finally {
-        setLoading(false);
       }
     };
     getResult();
@@ -45,17 +44,21 @@ export const ResultPage = () => {
     window.Kakao.Share.sendCustom({
       templateId: 120920,
       templateArgs: {
-        // tip: `${result.tip}`,
-        // term: `${result.term}`,
-        // score: `${result.score}`,
-        // stretchTips: `${result.stretchTips.join(", ")}`,
-        tip: `시력 1.0은 정상이나, 질병이 우려됩니다. 같은 연령대에서는 드문 상태입니다.`,
-        term: `4`,
-        score: `70`,
-        stretchTips: `고정 응시 운동(2분), 손바닥 온찜질(1분), 눈 굴리기(5회씩)`,
+        tip: `${result.tip}`,
+        term: `${result.term}`,
+        score: `${result.score}`,
+        stretchTips: `${result.stretchTips.join(", ")}`,
+        // tip: `시력 1.0은 정상이나, 질병이 우려됩니다. 같은 연령대에서는 드문 상태입니다.`,
+        // term: `4`,
+        // score: `70`,
+        // stretchTips: `고정 응시 운동(2분), 손바닥 온찜질(1분), 눈 굴리기(5회씩)`,
       },
     });
   };
+
+  useEffect(() => {
+    console.log(result);
+  }, [result]);
 
   // 로딩 띄우기
   if (loading) {
@@ -82,8 +85,8 @@ export const ResultPage = () => {
                 <div className={styles.title}>적절한 눈 깜빡임 주기</div>
                 <span className={styles.text}>
                   권장 깜빡임 주기:
-                  {/* {result.duration} */}
-                  4초에 한 번씩 눈을 천천히 깜빡여 주세요.
+                  {result.duration}
+                  초에 한 번씩 눈을 천천히 깜빡여 주세요.
                 </span>
               </div>
             </div>
@@ -95,11 +98,7 @@ export const ResultPage = () => {
                   <div className={styles.scoreContent}>
                     <span>AI 평가 점수</span>
                     <div className={styles.score}>
-                      <span>
-                        {/* {result.score} */}
-                        50점
-                      </span>{" "}
-                      / 100점
+                      <span>{result.score}점</span> / 100점
                     </div>
                   </div>
                   <div className={styles.scoreContent}>
@@ -115,11 +114,7 @@ export const ResultPage = () => {
                 <div className={styles.title}>
                   동연령자에 비해 나의 눈 건강은?
                 </div>
-                <span className={styles.text}>
-                  {/* {result.tip} */}만 40세 남성의 경우, 시력 0.1과 안경 착용
-                  시 0.5는 동일 연령대에 비해 다소 낮은 편입니다. 노안도 보통 이
-                  나이에 자주 나타날 수 있습니다.
-                </span>
+                <span className={styles.text}>{result.tip}</span>
               </div>
               <div className={styles.img}>
                 <img src={result2} />
@@ -143,34 +138,7 @@ export const ResultPage = () => {
                   눈에 좋은 음식 추천해드릴게요!
                 </span>
                 <div className={styles.foodContainer}>
-                  {/* {result.food} */}
-                  {[
-                    {
-                      name: "시금치",
-                      ingredient: ["루테인"],
-                      effect: ["눈 피로 완화", "항산화 작용"],
-                    },
-                    {
-                      name: "시금치",
-                      ingredient: ["루테인"],
-                      effect: ["눈 피로 완화", "항산화 작용"],
-                    },
-                    {
-                      name: "시금치",
-                      ingredient: ["루테인"],
-                      effect: ["눈 피로 완화", "항산화 작용"],
-                    },
-                    {
-                      name: "당근",
-                      ingredient: ["비타민A"],
-                      effect: ["눈 점막 보호", "야맹증 예방"],
-                    },
-                    {
-                      name: "계란노른자",
-                      ingredient: ["비타민A"],
-                      effect: ["눈 점막 보호", "야맹증 예방"],
-                    },
-                  ].map((food, index) => (
+                  {result.food.map((food, index) => (
                     <div key={index} className={styles.foodRow}>
                       {index + 1}. {food.name}: {food.ingredient.join(", ")} -{" "}
                       {food.effect.join(", ")}.
@@ -186,12 +154,7 @@ export const ResultPage = () => {
               <div className={styles.description}>
                 <div className={styles.title}>스트레칭 가이드라인</div>
                 <span className={styles.text}>
-                  {/* {result.stretchTips.join(", ")} */}
-                  {[
-                    "고정 응시 운동(2분)",
-                    "손바닥 온찜질(1분)",
-                    "눈 굴리기(5회씩)",
-                  ].join(", ")}
+                  {result.stretchTips.join(", ")}
                 </span>
               </div>
             </div>
