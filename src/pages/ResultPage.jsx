@@ -32,7 +32,7 @@ export const ResultPage = () => {
         if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
         setResult(data);
       } catch (err) {
-        console.error('결과 불러오기 실패:', err);
+        console.error("결과 불러오기 실패:", err);
       } finally {
         setLoading(false);
       }
@@ -98,7 +98,7 @@ export const ResultPage = () => {
                       <span>
                         {/* {result.score} */}
                         50점
-                      </span>{' '}
+                      </span>{" "}
                       / 100점
                     </div>
                   </div>
@@ -126,83 +126,75 @@ export const ResultPage = () => {
               </div>
             </div>
           </div>
-          <div className={styles.adviceContainer}>
-            <div className={styles.adviceHeader}>
-              <div className={styles.advicetextBox}>
-                <div className={styles.title}>깜빡이의 한마디💬</div>
-                <span>* AI 분석을 바탕으로 작성된 깜빡이의 조언이에요.</span>
-              </div>
-              <div className={styles.img}>
-                <img src={result3} />
-              </div>
-            </div>
-            <div className={styles.advice}>
-              <span className={styles.title}>
-                눈에 좋은 음식 추천해드릴게요!
-              </span>
-              <div className={styles.foodContainer}>
-                <div className={styles.foodRow}>
-                  <div className={styles.foodName}>이름</div>
-                  <div className={styles.foodIngredient}>성분</div>
-                  <div className={styles.foodEffect}>효과</div>
+
+          <div className={styles.rightContainer}>
+            <div className={styles.adviceContainer}>
+              <div className={styles.adviceHeader}>
+                <div className={styles.advicetextBox}>
+                  <div className={styles.title}>깜빡이의 한마디💬</div>
+                  <span>* AI 분석을 바탕으로 작성된 깜빡이의 조언이에요.</span>
                 </div>
-                {/* {result.food} */}
-                {[
-                  {
-                    name: "시금치",
-                    ingredient: ["루테인"],
-                    effect: ["눈 피로 완화", "항산화 작용"],
-                  },
-                  {
-                    name: "당근",
-                    ingredient: ["비타민A"],
-                    effect: ["눈 점막 보호", "야맹증 예방"],
-                  },
-                  {
-                    name: "계란노른자",
-                    ingredient: ["비타민A"],
-                    effect: ["눈 점막 보호", "야맹증 예방"],
-                  },
-                ].map((food, index) => (
-                  <div key={index} className={styles.foodRow}>
-                    <div className={styles.foodName}>{food.name}</div>
-                    <div className={styles.foodIngredient}>
-                      <div>{food.ingredient.join(", ")}</div>
+                <div className={styles.img}>
+                  <img src={result3} />
+                </div>
+              </div>
+              <div className={styles.advice}>
+                <span className={styles.title}>
+                  눈에 좋은 음식 추천해드릴게요!
+                </span>
+                <div className={styles.foodContainer}>
+                  {/* {result.food} */}
+                  {[
+                    {
+                      name: "시금치",
+                      ingredient: ["루테인"],
+                      effect: ["눈 피로 완화", "항산화 작용"],
+                    },
+                    {
+                      name: "시금치",
+                      ingredient: ["루테인"],
+                      effect: ["눈 피로 완화", "항산화 작용"],
+                    },
+                    {
+                      name: "시금치",
+                      ingredient: ["루테인"],
+                      effect: ["눈 피로 완화", "항산화 작용"],
+                    },
+                    {
+                      name: "당근",
+                      ingredient: ["비타민A"],
+                      effect: ["눈 점막 보호", "야맹증 예방"],
+                    },
+                    {
+                      name: "계란노른자",
+                      ingredient: ["비타민A"],
+                      effect: ["눈 점막 보호", "야맹증 예방"],
+                    },
+                  ].map((food, index) => (
+                    <div key={index} className={styles.foodRow}>
+                      {index + 1}. {food.name}: {food.ingredient.join(", ")} -{" "}
+                      {food.effect.join(", ")}.
                     </div>
-                    <div className={styles.foodEffect}>
-                      {food.effect.join(", ")}
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className={styles.content}>
-          <div className={styles.stretchBox}>
-            <div className={styles.img}>
-              <img src={result4} />
+            <div className={styles.stretchBox}>
+              <div className={styles.img}>
+                <img src={result4} />
+              </div>
+              <div className={styles.description}>
+                <div className={styles.title}>스트레칭 가이드라인</div>
+                <span className={styles.text}>
+                  {/* {result.stretchTips.join(", ")} */}
+                  {[
+                    "고정 응시 운동(2분)",
+                    "손바닥 온찜질(1분)",
+                    "눈 굴리기(5회씩)",
+                  ].join(", ")}
+                </span>
+              </div>
             </div>
-            <div className={styles.description}>
-              <div className={styles.title}>스트레칭 가이드라인</div>
-              <span className={styles.text}>
-                {/* {result.stretchTips.join(", ")} */}
-                {[
-                  "고정 응시 운동(2분)",
-                  "손바닥 온찜질(1분)",
-                  "눈 굴리기(5회씩)",
-                ].join(", ")}
-              </span>
-            </div>
-          </div>
-          <div className={styles.gameBox}>
-            <div className={styles.gameImg}>
-              <img src={logo_result_game} />
-            </div>
-            <Link to="/game" className={styles.gameBtn}>
-              <span>미니게임 하러가기</span>
-              <img src={arrow_right} />
-            </Link>
           </div>
         </div>
       </div>
