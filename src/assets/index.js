@@ -23,8 +23,16 @@ import quizbackground from "./quizbackground.svg";
 import correct from "./correct.svg";
 import uncorrect from "./uncorrect.svg";
 import quiz_end from "./quiz-end.svg";
+import quiz_great from './quiz-great.svg';
+import quiz_okay from './quiz-okay.svg';
+import quiz_bad from './quiz-bad.svg';
+import nextbutton from './nextbutton.svg';
 
 export {
+  nextbutton,
+  quiz_bad,
+  quiz_okay,
+  quiz_great,
   quiz_end,
   correct,
   uncorrect,
