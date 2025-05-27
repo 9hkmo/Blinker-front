@@ -48,7 +48,7 @@ const CameraCapture = ({ allow, setAllow, quizStart, setCameraStatus }) => {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
 
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(video, 0, 0, canvas.width*0.5, canvas.height*0.5);
 
       canvas.toBlob((blob) => {
         if (blob) {
@@ -57,7 +57,7 @@ const CameraCapture = ({ allow, setAllow, quizStart, setCameraStatus }) => {
           });
           imageBlobsRef.current.push(file);
         }
-      }, "image/jpeg");
+      }, "image/jpeg", 0.5);
 
       count += 1;
       if (count >= totalFrames) {

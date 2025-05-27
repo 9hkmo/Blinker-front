@@ -4,8 +4,6 @@ import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  arrow_right,
-  logo_result_game,
   mini_char,
   result1,
   result2,
@@ -85,7 +83,7 @@ export const ResultPage = () => {
                 <div className={styles.title}>적절한 눈 깜빡임 주기</div>
                 <span className={styles.text}>
                   권장 깜빡임 주기:
-                  {result.duration}
+                  {result.term}
                   초에 한 번씩 눈을 천천히 깜빡여 주세요.
                 </span>
               </div>
