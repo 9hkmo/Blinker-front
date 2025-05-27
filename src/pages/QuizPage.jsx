@@ -11,6 +11,8 @@ export const QuizHomePage = () => {
   const [selectedChoice, setSelectedChoice] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const [timerMs, setTimerMs] = useState(0);
+  const [isAnswerPhase, setIsAnswerPhase] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -27,8 +29,11 @@ export const QuizHomePage = () => {
           return { question, choices, answer };
         });
 
-        setQuizzes(formattedQuizzes);
-        setShuffledChoices(shuffleArray(formattedQuizzes[0].choices));
+        const selected = formattedQuizzes
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 5);
+        setQuizzes(selected);
+        setShuffledChoices(shuffleArray(selected[0].choices));
       } catch (error) {
         console.error('퀴즈 데이터를 가져오는데 실패함:', error);
       }
@@ -37,13 +42,37 @@ export const QuizHomePage = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    if (!quizzes.length || showResult) return;
+
+    if (timerMs < 5000 && !isAnswerPhase) {
+      const interval = setInterval(() => {
+        setTimerMs((ms) => ms + 100);
+      }, 100);
+      return () => clearInterval(interval);
+    }
+
+    if (timerMs >= 5000 && !isAnswerPhase) {
+      handleAutoSubmit();
+    }
+  }, [timerMs, showResult, isAnswerPhase, quizzes, currentIndex]);
+
   const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
-  const handleSubmit = () => {
-    if (!selectedChoice) return;
+  const handleAutoSubmit = () => {
     const currentQuiz = quizzes[currentIndex];
-    setIsCorrect(selectedChoice === currentQuiz.answer);
+
+    const autoSelected = selectedChoice ?? currentQuiz.choices[0]; // 기본 선택
+    const isCorrectAnswer = autoSelected === currentQuiz.answer;
+
+    setSelectedChoice(autoSelected); // 선택 표시용
+    setIsCorrect(isCorrectAnswer);
     setShowResult(true);
+    setIsAnswerPhase(true);
+
+    setTimeout(() => {
+      handleNext();
+    }, 1000);
   };
 
   const handleNext = () => {
@@ -53,7 +82,10 @@ export const QuizHomePage = () => {
       setShuffledChoices(shuffleArray(quizzes[nextIndex].choices));
       setSelectedChoice(null);
       setShowResult(false);
+      setIsAnswerPhase(false);
+      setTimerMs(0);
     } else {
+      setShowResult(false); // ✅ 마지막 문제 후에도 모달 닫기
       alert('퀴즈를 모두 완료했습니다.');
     }
   };
@@ -63,53 +95,65 @@ export const QuizHomePage = () => {
   }
 
   const currentQuiz = quizzes[currentIndex];
+  const remainingMs = Math.max(0, 5000 - timerMs);
+  const timeLabel = (remainingMs / 1000).toFixed(1);
 
   return (
-    <div
-      className={styles.container}
-      style={{
-        backgroundImage: `url(${quizbackground})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      <div className={styles.overlay} />
-      <Header isHome={true} />
-      <div className={styles.quizBox}>
-        <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
-        <ul className={styles.choiceList}>
-          {shuffledChoices.map((choice, index) => (
-            <li key={index} className={styles.choiceItem}>
-              <label className={styles.choiceLabel}>
-                <input
-                  type="radio"
-                  name="quiz"
-                  value={choice}
-                  checked={selectedChoice === choice}
-                  onChange={() => setSelectedChoice(choice)}
-                  className={styles.hiddenRadio}
+    <>
+      <div
+        className={styles.container}
+        style={{
+          backgroundImage: `url(${quizbackground})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className={styles.overlay} />
+        <Header isHome={true} />
+
+        <div className={styles.quizBox}>
+          <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
+          <ul className={styles.choiceList}>
+            {shuffledChoices.map((choice, index) => (
+              <li key={index} className={styles.choiceItem}>
+                <label className={styles.choiceLabel}>
+                  <input
+                    type="radio"
+                    name="quiz"
+                    value={choice}
+                    checked={selectedChoice === choice}
+                    onChange={() => setSelectedChoice(choice)}
+                    className={styles.hiddenRadio}
+                    disabled={showResult}
+                  />
+                  <span className={styles.labelContent}>
+                    <span className={styles.numberPrefix}>{index + 1}</span>
+                    {choice}
+                  </span>
+                </label>
+              </li>
+            ))}
+          </ul>
+
+          <div className={styles.progressWrapper}>
+            <div className={styles.timeTopLeft}>{timeLabel}</div>
+            {timerMs < 5000 && (
+              <div className={styles.progressBarContainer}>
+                <div
+                  className={styles.progressBar}
+                  style={{ width: `${((5000 - timerMs) / 5000) * 100}%` }}
                 />
-                <span className={styles.labelContent}>
-                  <span className={styles.numberPrefix}>{index + 1}</span>
-                  {choice}
-                </span>
-              </label>
-            </li>
-          ))}
-        </ul>
-        <button className={styles.nextButton} onClick={handleSubmit}>
-          제출
-        </button>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* ✅ 전체화면 가리는 모달 */}
+      {/* ✅ 모달은 container 밖에서 렌더링 */}
       {showResult && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalBox}>
-            <button className={styles.modalButton} onClick={handleNext}>
-              다음 ⏩
-            </button>
             <div className={styles.icon}>{isCorrect ? '✅' : '❌'}</div>
             <p className={styles.resultText}>
               {isCorrect
@@ -119,6 +163,6 @@ export const QuizHomePage = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
