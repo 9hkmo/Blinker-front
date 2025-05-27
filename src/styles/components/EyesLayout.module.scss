@@ -41,12 +41,13 @@
 
 .contents1 {
   @extend .contents;
-  top: 18.23vw;
-  left: 6.25vw;
-  transform: rotate(-22deg);
+  top: 18vw;
+  left: 5.9vw;
+  gap: 0.46vw;
+  transform: rotate(-25deg);
   .eye {
-    width: 3.65vw;
-    height: 7.29vw;
+    width: 4vw;
+    height: 7.7vw;
   }
   .pupil {
     width: 1.04vw;
@@ -56,14 +57,15 @@
 .contents2 {
   @extend .contents;
   bottom: 2.6vw;
-  left: 29.43vw;
+  left: 29.53vw;
   gap: 0.63vw;
   transform: rotate(-38.83deg);
   .eye {
-    width: 5.21vw;
+    width: 5.1vw;
     height: 10.94vw;
     &:last-child {
-      width: 5.3vw;
+      width: 5.4vw;
+      transform: rotate(-5deg);
     }
   }
   .pupil {
@@ -90,9 +92,13 @@
   top: 4.69vw;
   left: 23.02vw;
   transform: rotate(28.03deg);
+  gap: 0.2vw;
   .eye {
-    width: 1.3vw;
+    width: 1.5vw;
     height: 3.13vw;
+    &:last-child {
+      width: 1.6vw;
+    }
   }
   .pupil {
     width: 0.52vw;
@@ -104,7 +110,7 @@
   top: 1.78vw;
   left: 61.76vw;
   transform: rotate(325deg);
-  gap:0.35vw;
+  gap: 0.35vw;
   .eye {
     width: 4.57vw;
     height: 8.63vw;
