@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { usePostStore } from '../store/usePostStore';
 
-const CameraCapture = ({ startCaptureTrigger }) => {
+const CameraCapture = ({ allow, setAllow, quizStart }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const imageBlobsRef = useRef([]);
   const setImages = usePostStore((state) => state.setImages);
-
   // 카메라 시작
   useEffect(() => {
     const startCamera = async () => {
@@ -16,6 +15,7 @@ const CameraCapture = ({ startCaptureTrigger }) => {
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
+          setAllow(true); // 부모의 상태 변경경
         }
       } catch (err) {
         console.error('카메라 접근 실패', err);
@@ -26,10 +26,11 @@ const CameraCapture = ({ startCaptureTrigger }) => {
 
   // 촬영 트리거 발생 시 캡처 시작
   useEffect(() => {
-    if (startCaptureTrigger) {
+    console.log(allow, quizStart);
+    if (allow && quizStart) {
       startCapturing();
     }
-  }, [startCaptureTrigger]);
+  }, [allow, quizStart]);
 
   const startCapturing = () => {
     let count = 0;

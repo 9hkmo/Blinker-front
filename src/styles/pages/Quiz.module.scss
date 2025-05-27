@@ -208,7 +208,7 @@
 }
 
 .progressTime {
-  font-size: 12px;
+  font-size: 18.5px;
   font-weight: bold;
   color: #fff;
   margin-right: 12px;
@@ -240,14 +240,129 @@
 }
 
 .quizEndImage {
-  width: 204px;
-  height: 306px;
-  margin-top: 200px;
-  margin-bottom: -60px;
+  width: 160px;
+  margin-bottom: -20px;
 }
 
 .quizEndText {
-  font-size: 32px;
+  font-size: 20px;
   color: white;
   font-weight: bold;
+}
+
+.resultWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+  text-align: center;
+  height: 100vh; // ✅ 전체 높이 확보
+  padding-bottom: 60px; // 버튼이 덮이지 않도록 여백 확보
+}
+
+.resultImage {
+  width: 321px;
+  height: 485px;
+  margin-bottom: 49px;
+}
+
+.resultScore {
+  font-size: 36px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 26px;
+}
+
+.resultMessage {
+  font-size: 28px;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 180px;
+}
+
+.resultFixedNextButton {
+  width: 220px;
+  height: 68px;
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  background-color: #0288d1;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: 3px solid #1565c0;
+  border-radius: 14px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.resultFixedNextButton:hover {
+  background-color: #0277bd;
+}
+
+.nextIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.quizIntroBox {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  color: white;
+}
+
+.quizLine1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.quizLine2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 47px;
+}
+
+.quizButton {
+  width: 226px;
+  height: 68px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #0098d8;
+  color: white;
+  border-radius: 24px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease-in-out;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  }
 }
