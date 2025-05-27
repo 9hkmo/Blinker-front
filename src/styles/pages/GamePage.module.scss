@@ -114,3 +114,63 @@
   background-color: #f8dfc3;
   color: black;
 }
+
+.modalContainer {
+  @include flex();
+  visibility: hidden;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px); // 배경 흐리게
+  z-index: 10000;
+  transition: all 2s ease;
+  .leftBox {
+    @include flex(column, $align-items: flex-start, $gap: 1vw);
+    color: $text-color-main;
+    img {
+      width: 40.31vw;
+    }
+    .modalTitle {
+      font-weight: bold;
+      font-size: 1.88vw;
+    }
+    .modalText {
+      font-size: 1.25vw;
+      line-height: 2.6vw;
+    }
+  }
+  .rightBox {
+    @include flex(column, $gap: 2vw);
+    img {
+      width: 22.81vw;
+    }
+  }
+  .closeButton {
+    @include flex();
+    border-radius: 0.78vw; 
+    padding: 0.99vw 5.83vw; 
+    border: 0.21vw solid #1c5f8e; 
+    box-shadow: 0 0.21vw 0.21vw #ffffff14; 
+    font-size: 1.25vw; 
+    font-weight: 700;
+    color: $text-color-main;
+    background-color: #0485a2;
+    &:hover {
+      background-color: #0485a233;
+      cursor: pointer;
+      box-shadow: 1.43px 5.71px 14.27px #0485a233;
+      transform: translateY(-20%);
+    }
+    transition: background-color 0.3s ease, box-shadow 0.3s ease,
+      transform 0.3s ease, border 0.3s ease;
+  }
+}
+
+.isOpen {
+  visibility: visible;
+  opacity: 1;
+}
