@@ -3,6 +3,8 @@ import { Header } from "../components/Header";
 import styles from "../styles/pages/GamePage.module.scss";
 import {
   eye1,
+  eye2,
+  eye3,
   game_char,
   game_char_modal,
   game_loading,
@@ -49,6 +51,41 @@ const paths = {
   B: pathB,
 };
 
+const gameData = [
+  {
+    path: "WZ",
+    img: eye1,
+    text: (
+      <>
+        '안구 운동이 대학생의 눈 건강과 동체시력에 미치는 영향'
+        <br />- 김주현 (원광보건대학교) 참조.
+      </>
+    ),
+  },
+  {
+    path: "D",
+    img: eye2,
+    text: (
+      <>
+        '율동적 시력강화 운동이 초등학교 저학년생의 시력, 굴절이상, 눈의
+        피로감에 미치는 효과'
+        <br />- 백혜원 (계명대학교 교육대학원 간호교육전공 국내석사) 참조.
+      </>
+    ),
+  },
+  {
+    path: "B",
+    img: eye3,
+    text: (
+      <>
+        '율동적 시력강화 운동이 초등학교 저학년생의 시력, 굴절이상, 눈의
+        피로감에 미치는 효과'
+        <br />- 백혜원 (계명대학교 교육대학원 간호교육전공 국내석사) 참조.
+      </>
+    ),
+  },
+];
+
 export const GamePage = () => {
   const [currentPathKey, setCurrentPathKey] = useState(null);
   const [path, setPath] = useState([]);
@@ -57,6 +94,7 @@ export const GamePage = () => {
   const [home, setHome] = useState(true);
   const [charClicked, setCharClicked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // 게임 운동 효과 설명 모달
+  const [gameDataIndex, setGameDataIndex] = useState(0);
   const state = useLocation().state;
 
   // 경로 선택 함수 (현재 경로 제외하고 랜덤)
@@ -65,12 +103,20 @@ export const GamePage = () => {
     return keys[Math.floor(Math.random() * keys.length)];
   };
 
+  const selectGameData = (pathKey) => {
+    const data = gameData.find((item) => item.path === pathKey);
+    if (data) {
+      setGameDataIndex(gameData.indexOf(data));
+    }
+  };
+
   // 초기 경로 세팅 (랜덤)
   useEffect(() => {
     const initialKey = selectRandomPathKey(null); // exclude 없으니까 그냥 랜덤
     setCurrentPathKey(initialKey);
     setPath(paths[initialKey]);
     setCurrentIndex(0);
+    selectGameData(initialKey);
   }, []);
 
   // 클릭 이벤트: 다음 위치로 이동 또는 경로 변경
@@ -82,6 +128,7 @@ export const GamePage = () => {
       const nextIndex = (currentIndex + 1) % path.length;
       // 경로 끝에 도달 → 다른 경로 선택
       if (nextIndex === 0) {
+        selectGameData(currentPathKey);
         const newPathKey = selectRandomPathKey(currentPathKey);
         setCurrentPathKey(newPathKey);
         setPath(paths[newPathKey]);
@@ -146,10 +193,9 @@ export const GamePage = () => {
               <span className={styles.modalTitle}>
                 이 게임은 사실 너의 눈 건강에 도움이 되도록 설계한 게임이야!
               </span>
-              <img src={eye1} />
+              <img src={gameData[gameDataIndex].img} />
               <span className={styles.modalText}>
-                '안구 운동이 대학생의 눈 건강과 동체시력에 미치는 영향'
-                <br />- 김주현 (원광보건대학교) 참조.
+                {gameData[gameDataIndex].text}
               </span>
             </div>
             <div className={styles.rightBox}>
