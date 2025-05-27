@@ -29,7 +29,7 @@
 }
 
 .quizBox {
-  margin-top: 120px;
+  margin-top: 200px;
   padding: 40px 60px;
   border-radius: 16px;
   text-align: center;
@@ -104,7 +104,7 @@
 }
 
 .nextButton {
-  background-color: #4caf50;
+  background-color: #0e6f3a;
   color: white;
   padding: 12px 32px;
   border: none;
@@ -133,8 +133,8 @@
 
 .modalBox {
   background-color: white;
-  width: 400px;
-  height: 250px;
+  width: 874px;
+  height: 537px;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
@@ -152,11 +152,11 @@
   top: 16px;
   right: 16px;
   background-color: #333;
-  color: white;
+  color: #356549;
   padding: 12px 28px;
   border: none;
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
@@ -173,11 +173,17 @@
 }
 
 .resultText {
-  font-size: 20px;
+  font-size: 35px;
   font-weight: 500;
   color: #333;
   white-space: pre-wrap;
   text-align: center;
+}
+
+.resultImage {
+  width: 128px;
+  height: 128px;
+  margin-bottom: 95px;
 }
 
 .loading {
@@ -220,6 +226,28 @@
 
 .progressBar {
   height: 100%;
-  background-color: #4caf50;
+  background-color: #0e6f3a;
   transition: width 0.1s linear;
+}
+
+.quizEndWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+  text-align: center;
+}
+
+.quizEndImage {
+  width: 204px;
+  height: 306px;
+  margin-top: 200px;
+  margin-bottom: -60px;
+}
+
+.quizEndText {
+  font-size: 32px;
+  color: white;
+  font-weight: bold;
 }

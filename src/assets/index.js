@@ -20,8 +20,14 @@ import logo_title_eye from "./blinker-title-eye.svg";
 import game_char from "./game-char.svg";
 import game_loading from "./game-loading.svg";
 import quizbackground from "./quizbackground.svg";
+import correct from "./correct.svg";
+import uncorrect from "./uncorrect.svg";
+import quiz_end from "./quiz-end.svg";
 
 export {
+  quiz_end,
+  correct,
+  uncorrect,
   quizbackground,
   logo_title_eye,
   quiz,

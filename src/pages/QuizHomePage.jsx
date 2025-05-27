@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Header } from '../components/Header';
 import styles from '../styles/pages/Quiz.module.scss';
-import { quizbackground } from '../assets';
+import { quiz_end, correct, uncorrect, quizbackground } from '../assets';
 
 export const QuizHomePage = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -13,6 +13,7 @@ export const QuizHomePage = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [timerMs, setTimerMs] = useState(0);
   const [isAnswerPhase, setIsAnswerPhase] = useState(false);
+  const [isQuizFinished, setIsQuizFinished] = useState(false); // ✅ 퀴즈 종료 상태
 
   useEffect(() => {
     const getData = async () => {
@@ -85,7 +86,7 @@ export const QuizHomePage = () => {
       setTimerMs(0);
     } else {
       setShowResult(false);
-      alert('퀴즈를 모두 완료했습니다.');
+      setIsQuizFinished(true); // ✅ 퀴즈 완료 화면으로 전환
     }
   };
 
@@ -102,7 +103,7 @@ export const QuizHomePage = () => {
       <div
         className={styles.container}
         style={{
-          backgroundImage: `url(${quizbackground})`,
+          backgroundImage: isQuizFinished ? 'none' : `url(${quizbackground})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -111,47 +112,63 @@ export const QuizHomePage = () => {
         <div className={styles.overlay} />
         <Header isHome={true} />
 
-        <div className={styles.quizBox}>
-          <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
-          <ul className={styles.choiceList}>
-            {shuffledChoices.map((choice, index) => (
-              <li key={index} className={styles.choiceItem}>
-                <label className={styles.choiceLabel}>
-                  <input
-                    type="radio"
-                    name="quiz"
-                    value={choice}
-                    checked={selectedChoice === choice}
-                    onChange={() => setSelectedChoice(choice)}
-                    className={styles.hiddenRadio}
-                    disabled={showResult}
-                  />
-                  <span className={styles.labelContent}>
-                    <span className={styles.numberPrefix}>{index + 1}</span>
-                    {choice}
-                  </span>
-                </label>
-              </li>
-            ))}
-          </ul>
-        </div>
+        {isQuizFinished ? (
+          <div className={styles.quizEndWrapper}>
+            <img
+              src={quiz_end}
+              alt="퀴즈 종료"
+              className={styles.quizEndImage}
+            />
+            <p className={styles.quizEndText}>퀴즈가 끝났어요.</p>
+          </div>
+        ) : (
+          <div className={styles.quizBox}>
+            <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
+            <ul className={styles.choiceList}>
+              {shuffledChoices.map((choice, index) => (
+                <li key={index} className={styles.choiceItem}>
+                  <label className={styles.choiceLabel}>
+                    <input
+                      type="radio"
+                      name="quiz"
+                      value={choice}
+                      checked={selectedChoice === choice}
+                      onChange={() => setSelectedChoice(choice)}
+                      className={styles.hiddenRadio}
+                      disabled={showResult}
+                    />
+                    <span className={styles.labelContent}>
+                      <span className={styles.numberPrefix}>{index + 1}</span>
+                      {choice}
+                    </span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
-      {/* ✅ 프로그레스바: 하단 고정, 시간 왼쪽 + 바 오른쪽 */}
-      <div className={styles.progressWrapper}>
-        <div className={styles.progressTime}>{timeLabel}</div>
-        <div className={styles.progressBarContainer}>
-          <div
-            className={styles.progressBar}
-            style={{ width: `${((5000 - timerMs) / 5000) * 100}%` }}
-          />
+      {!isQuizFinished && (
+        <div className={styles.progressWrapper}>
+          <div className={styles.progressTime}>{timeLabel}</div>
+          <div className={styles.progressBarContainer}>
+            <div
+              className={styles.progressBar}
+              style={{ width: `${((5000 - timerMs) / 5000) * 100}%` }}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {showResult && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalBox}>
-            <div className={styles.icon}>{isCorrect ? '✅' : '❌'}</div>
+            <img
+              src={isCorrect ? correct : uncorrect}
+              alt={isCorrect ? '정답' : '오답'}
+              className={styles.resultImage}
+            />
             <p className={styles.resultText}>
               {isCorrect
                 ? '정답이에요!'
