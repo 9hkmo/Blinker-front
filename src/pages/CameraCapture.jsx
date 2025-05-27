@@ -29,7 +29,7 @@ const CameraCapture = () => {
   const startCapturing = () => {
     setCapturing(true);
     let count = 0;
-    const totalFrames = 10; // 몇장
+    const totalFrames = 300; // 몇장
     const interval = 100; // 0.1초마다 찍음
 
     const intervalId = setInterval(() => {
@@ -60,7 +60,7 @@ const CameraCapture = () => {
 
         // ✅ Zustand에 이미지 배열 저장
         setImages(imageBlobsRef.current);
-        console.log('600장 저장 완료 ✅');
+        console.log('300장 저장 완료 ✅');
       }
     }, interval);
   };
@@ -71,11 +71,11 @@ const CameraCapture = () => {
 
   return (
     <div>
-      <h2>카메라 캡처 (600장)</h2>
+      <h2>카메라 캡처 (300장)</h2>
       <video ref={videoRef} autoPlay playsInline style={{ width: '300px' }} />
       <canvas ref={canvasRef} style={{ display: 'none' }} />
       <button onClick={startCapturing} disabled={capturing}>
-        {capturing ? '촬영 중...' : '1분 촬영 시작'}
+        {capturing ? '촬영 중...' : '30초 촬영 시작'}
       </button>
     </div>
   );

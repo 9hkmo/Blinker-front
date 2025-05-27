@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Header } from '../components/Header';
 import styles from '../styles/pages/Quiz.module.scss';
+import { quizbackground } from '../assets';
 
 export const QuizHomePage = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -14,13 +15,9 @@ export const QuizHomePage = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get('http://43.202.207.171:8080/api/quiz'); // 우회 없이 직접 호출
-        console.log('퀴즈 데이터:', response.data);
-
+        const response = await axios.get('http://43.202.207.171:8080/api/quiz');
         const data = response.data;
-        if (!data || !data.data || !data.data.all) {
-          throw new Error('퀴즈 데이터 없음');
-        }
+        if (!data?.data?.all) throw new Error('퀴즈 데이터 없음');
 
         const formattedQuizzes = data.data.all.map((quizItem) => {
           const question = quizItem.Question;
@@ -40,9 +37,7 @@ export const QuizHomePage = () => {
     getData();
   }, []);
 
-  const shuffleArray = (array) => {
-    return [...array].sort(() => Math.random() - 0.5);
-  };
+  const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
   const handleSubmit = () => {
     if (!selectedChoice) return;
@@ -70,22 +65,35 @@ export const QuizHomePage = () => {
   const currentQuiz = quizzes[currentIndex];
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={{
+        backgroundImage: `url(${quizbackground})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className={styles.overlay} />
       <Header isHome={true} />
       <div className={styles.quizBox}>
         <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
         <ul className={styles.choiceList}>
           {shuffledChoices.map((choice, index) => (
             <li key={index} className={styles.choiceItem}>
-              <label>
+              <label className={styles.choiceLabel}>
                 <input
                   type="radio"
                   name="quiz"
                   value={choice}
                   checked={selectedChoice === choice}
                   onChange={() => setSelectedChoice(choice)}
+                  className={styles.hiddenRadio}
                 />
-                {choice}
+                <span className={styles.labelContent}>
+                  <span className={styles.numberPrefix}>{index + 1}</span>
+                  {choice}
+                </span>
               </label>
             </li>
           ))}
@@ -95,18 +103,19 @@ export const QuizHomePage = () => {
         </button>
       </div>
 
+      {/* ✅ 전체화면 가리는 모달 */}
       {showResult && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalBox}>
+            <button className={styles.modalButton} onClick={handleNext}>
+              다음 ⏩
+            </button>
             <div className={styles.icon}>{isCorrect ? '✅' : '❌'}</div>
             <p className={styles.resultText}>
               {isCorrect
                 ? '정답이에요!'
                 : `오답이에요. 정답은 ${currentQuiz.answer}입니다.`}
             </p>
-            <button className={styles.modalButton} onClick={handleNext}>
-              다음 ⏩
-            </button>
           </div>
         </div>
       )}

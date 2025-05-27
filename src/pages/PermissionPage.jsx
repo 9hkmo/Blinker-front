@@ -6,34 +6,14 @@ import quizStyles from '../styles/pages/QuizHome.module.scss';
 import { quiz } from '../assets';
 import { usePostStore } from '../store/usePostStore';
 import CameraCapture from './CameraCapture';
-import JSZip from 'jszip';
-import { saveAs } from 'file-saver';
 
 export const QuizHomePage = () => {
   const [isCaptureDone, setIsCaptureDone] = useState(false);
-  const images = usePostStore((state) => state.images);
   const setImages = usePostStore((state) => state.setImages);
 
-  // ✅ 최초 접속 시 이미지 초기화
   useEffect(() => {
     setImages([]);
   }, []);
-
-  // ✅ ZIP 다운로드 핸들러
-  const handleDownload = async () => {
-    if (!images || images.length === 0) {
-      alert('저장된 이미지가 없습니다.');
-      return;
-    }
-
-    const zip = new JSZip();
-    images.forEach((blob, index) => {
-      zip.file(`image_${index + 1}.png`, blob);
-    });
-
-    const content = await zip.generateAsync({ type: 'blob' });
-    saveAs(content, 'captured_images.zip');
-  };
 
   if (isCaptureDone) {
     return (
@@ -59,13 +39,6 @@ export const QuizHomePage = () => {
     <div className={styles.container}>
       <Header isHome={true} />
       <CameraCapture setIsCaptureDone={setIsCaptureDone} />
-      {/* ✅ asd 버튼 클릭 시 이미지 저장 */}
-      <div
-        style={{ color: 'white', cursor: 'pointer', marginTop: '20px' }}
-        onClick={handleDownload}
-      >
-        asd
-      </div>
     </div>
   );
 };
