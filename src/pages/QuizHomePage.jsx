@@ -158,50 +158,28 @@ export const QuizHomePage = () => {
       />
 
       {!quizStart && cameraStatus !== 'granted' && (
-        <div
-          style={{
-            width: '100vw',
-            height: '100vh',
-            backgroundColor: '#000',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <Header isHome={true} />
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              flexGrow: 1,
-            }}
-          >
+        <div className={styles.permissionWrapper}>
+          <div className={styles.headerWrapper}>
+            <Header isHome={true} />
+          </div>
+          <div className={styles.permissionContent}>
             <img
               src={cameraStatus === 'denied' ? quiz_game : ready}
               alt="카메라 상태 안내 이미지"
-              style={{
-                width: cameraStatus === 'ready' ? '1280px' : '300px',
-                height: cameraStatus === 'ready' ? '493px' : 'auto',
-                marginBottom: '20px',
-              }}
+              className={
+                cameraStatus === 'ready'
+                  ? styles.permissionImageLarge
+                  : styles.permissionImageSmall
+              }
             />
-            <p
-              style={{ color: 'white', textAlign: 'center', fontSize: '18px' }}
-            >
+            <p className={styles.permissionText}>
               {cameraStatus === 'denied' ? (
                 <>
-                  카메라 허용을 해주지 않으시면
+                  카메라 허용을 해주지 않으시면,
                   <br />눈 깜빡임을 측정할 수가 없어요!
                 </>
               ) : (
-                <>
-                  카메라 권한을 요청 중입니다.
-                  <br />
-                  상단의 팝업에서 허용을 눌러주세요!
-                </>
+                <>눈 깜빡임 분석을 위해 상단 팝업에서 허용을 눌러주세요!</>
               )}
             </p>
           </div>
@@ -240,7 +218,18 @@ export const QuizHomePage = () => {
           }}
         >
           <div className={styles.overlay} />
-          <Header isHome={true} />
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 2,
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Header isHome={true} />
+          </div>
+
           {isQuizFinished && !isResultShown ? (
             <div className={styles.quizEndWrapper}>
               <img

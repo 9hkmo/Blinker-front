@@ -28,6 +28,52 @@
   z-index: 1;
 }
 
+.permissionWrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerWrapper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.permissionContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.permissionImageLarge {
+  width: 1280px;
+  height: 493px;
+  margin-bottom: 20px;
+}
+
+.permissionImageSmall {
+  width: 300px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.permissionText {
+  color: white;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 50px;
+}
+
 .quizBox {
   margin-top: 100px;
   padding: 40px 60px;
