@@ -20,6 +20,10 @@ import logo_title_eye from "./blinker-title-eye.svg";
 import game_char from "./game-char.svg";
 import game_loading from "./game-loading.svg";
 import home_quiz from "./home-quiz.svg";
+import eye1 from "./eye1.svg";
+import eye2 from "./eye2.svg";
+import eye3 from "./eye3.svg";
+import game_char_modal from "./game-char-modal.svg";
 
 export {
   logo_title_eye,
@@ -42,4 +46,8 @@ export {
   game_char,
   game_loading,
   home_quiz,
+  eye1,
+  eye2,
+  eye3,
+  game_char_modal,
 };
