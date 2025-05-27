@@ -3,28 +3,34 @@
   align-items: center;
   justify-content: center;
   position: relative;
+
+  .back {
+    width: 66.98vw;
+  }
+
   .contents {
     display: flex;
     position: absolute;
     top: 32%;
     left: 46%;
-    gap: 10px;
+    gap: 0.52vw;
   }
 }
 
 .eye {
-  width: 66px;
-  height: 130px;
-  // background-color: white; 눈위치 체크용
+  width: 3.44vw;
+  height: 6.77vw;
+  // background-color: white; // 눈위치 체크용
   border-radius: 50%;
   position: relative;
-  overflow: hidden; 
-}
+  overflow: hidden;
 
-.pupil {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease-out;
+  .pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    width: 1vw;
+  }
 }

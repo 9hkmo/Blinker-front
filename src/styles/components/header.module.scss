@@ -4,7 +4,6 @@
   padding: 1.042vw 0;
   position: fixed;
   top: 0;
-  max-width: 1920px;
   width: 100%;
   background-color: $background-color;
   overflow: hidden;
@@ -19,10 +18,7 @@
       left: 1.042vw;
     }
     .nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10.417vw;
+      @include flex($gap: 10.417vw);
       .nav-item {
         font-size: 2rem;
         text-decoration: none;
@@ -37,9 +33,19 @@
         text-decoration: underline;
       }
     }
+    @media (max-width: 768px) {
+      @include flex(column);
+      .logo {
+        position: relative;
+      }
+    }
   }
 }
 
 .isHome {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.649) 0%, transparent 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.649) 0%,
+    transparent 100%
+  );
 }

@@ -35,6 +35,12 @@ import id13 from './id13.svg';
 import id14 from './id14.svg'; 
 import id15 from './id15.svg'; 
 
+import home_quiz from "./home-quiz.svg";
+import eye1 from "./eye1.svg";
+import eye2 from "./eye2.svg";
+import eye3 from "./eye3.svg";
+import game_char_modal from "./game-char-modal.svg";
+
 export {
   id11,
   id12,
@@ -70,4 +76,9 @@ export {
   loading_char,
   game_char,
   game_loading,
+  home_quiz,
+  eye1,
+  eye2,
+  eye3,
+  game_char_modal,
 };
