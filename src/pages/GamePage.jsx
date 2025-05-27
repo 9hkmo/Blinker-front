@@ -132,11 +132,11 @@ export const GamePage = () => {
       // 경로 끝에 도달 → 다른 경로 선택
       if (nextIndex === 0) {
         selectGameData(currentPathKey);
+        setIsModalOpen(true);
         const newPathKey = selectRandomPathKey(currentPathKey);
         setCurrentPathKey(newPathKey);
         setPath(paths[newPathKey]);
         setCurrentIndex(0);
-        setIsModalOpen(true);
       } else {
         setCurrentIndex(nextIndex);
       }
@@ -212,7 +212,7 @@ export const GamePage = () => {
               </div>
             </div>
           </div>
-          {gameDataIndex === 2 ? (
+          {currentPathKey === "B" ? (
             <div className={styles.orbitContainer}>
               <div className={styles.orbit}>
                 <div

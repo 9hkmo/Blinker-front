@@ -125,10 +125,12 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px); // 배경 흐리게
+  backdrop-filter: blur(3px); // 배경 흐리게
   z-index: 10000;
-  transition: all 2s ease;
+  transition: all 1s ease;
   .leftBox {
+    transition: all 1s ease;
+    transform: translateY(20%);
     @include flex(column, $align-items: flex-start, $gap: 1vw);
     color: $text-color-main;
     img {
@@ -144,6 +146,9 @@
     }
   }
   .rightBox {
+    transform: translateY(20%);
+    transition: all 1s ease;
+
     @include flex(column, $gap: 2vw);
     img {
       width: 22.81vw;
@@ -173,6 +178,10 @@
 .isOpen {
   visibility: visible;
   opacity: 1;
+  .leftBox,
+  .rightBox {
+    transform: translateY(0%);
+  }
 }
 
 .orbitContainer {
