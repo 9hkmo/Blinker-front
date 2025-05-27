@@ -32,17 +32,20 @@ const pathD = [
   { top: "40%", left: "10%" },
   { top: "80%", left: "90%" },
   { top: "20%", left: "50%" },
+
+  { top: "80%", left: "10%" },
+  { top: "80%", left: "90%" },
+  { top: "20%", left: "50%" },
+  { top: "80%", left: "10%" },
+  { top: "80%", left: "90%" },
+  { top: "20%", left: "50%" },
 ];
 
 const pathB = [
-  { top: "20%", left: "10%" },
-  { top: "80%", left: "10%" },
-  { top: "80%", left: "90%" },
-  { top: "20%", left: "90%" },
-  { top: "20%", left: "10%" },
-  { top: "80%", left: "90%" },
-  { top: "20%", left: "90%" },
-  { top: "80%", left: "10%" },
+  { top: "50%", left: "50%" },
+  { top: "50%", left: "50%" },
+  { top: "50%", left: "50%" },
+  { top: "50%", left: "50%" },
 ];
 
 const paths = {
@@ -53,7 +56,7 @@ const paths = {
 
 const gameData = [
   {
-    path: "WZ",
+    path: "D",
     img: eye1,
     text: (
       <>
@@ -63,7 +66,7 @@ const gameData = [
     ),
   },
   {
-    path: "D",
+    path: "WZ",
     img: eye2,
     text: (
       <>
@@ -142,6 +145,7 @@ export const GamePage = () => {
 
   // 현재 위치 계산
   const position = path[currentIndex];
+
   useEffect(() => {
     setTimeout(() => {
       setCharClicked(false); // 클릭 상태 초기화
@@ -208,18 +212,36 @@ export const GamePage = () => {
               </div>
             </div>
           </div>
-          <div
-            className={`${styles.circle} ${loading && styles.hidden}`}
-            onClick={handleClick}
-            style={{
-              ...position,
-              ...(charClicked && {
-                transform: "translate(-50%, -50%) scale(0.5)",
-              }),
-            }}
-          >
-            <img src={game_char} alt="circle" />
-          </div>
+          {gameDataIndex === 2 ? (
+            <div className={styles.orbitContainer}>
+              <div className={styles.orbit}>
+                <div
+                  className={`${styles.planet} ${loading && styles.hidden}`}
+                  onClick={handleClick}
+                  style={{
+                    ...(charClicked && {
+                      transform: "translate(-50%, -50%) scale(0.5)",
+                    }),
+                  }}
+                >
+                  <img src={game_char} alt="circle" />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={`${styles.circle} ${loading && styles.hidden}`}
+              onClick={handleClick}
+              style={{
+                ...position,
+                ...(charClicked && {
+                  transform: "translate(-50%, -50%) scale(0.5)",
+                }),
+              }}
+            >
+              <img src={game_char} alt="circle" />
+            </div>
+          )}
         </div>
       )}
     </>
