@@ -15,6 +15,11 @@ import {
   quiz,
   quiz_game,
   ready,
+  id11,
+  id12,
+  id13,
+  id14,
+  id15,
 } from '../assets';
 import CameraCapture from './CameraCapture';
 import { EyesLayout } from '../components/EyesLayout';
@@ -42,12 +47,22 @@ export const QuizHomePage = () => {
         const data = response.data;
         if (!data?.data?.all) throw new Error('퀴즈 데이터 없음');
 
+        const imageMap = {
+          11: id11,
+          12: id12,
+          13: id13,
+          14: id14,
+          15: id15,
+        };
+
         const formattedQuizzes = data.data.all.map((quizItem) => {
+          const id = Number(quizItem.id); // id 추가
           const question = quizItem.Question;
           const choices = quizItem.AnswerSet.map((a) => a.content);
           const answer =
             quizItem.AnswerSet.find((a) => a.isCorrect === 1)?.content || '';
-          return { question, choices, answer };
+          const image = imageMap[id]; // id에 해당하는 이미지
+          return { id, question, choices, answer, image }; // image 포함
         });
 
         const selected = formattedQuizzes
@@ -262,28 +277,42 @@ export const QuizHomePage = () => {
           )}
           {allow && !isQuizFinished && (
             <div className={styles.quizBox}>
-              <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
-              <ul className={styles.choiceList}>
-                {shuffledChoices.map((choice, index) => (
-                  <li key={index} className={styles.choiceItem}>
-                    <label className={styles.choiceLabel}>
-                      <input
-                        type="radio"
-                        name="quiz"
-                        value={choice}
-                        checked={selectedChoice === choice}
-                        onChange={() => setSelectedChoice(choice)}
-                        className={styles.hiddenRadio}
-                        disabled={showResult}
-                      />
-                      <span className={styles.labelContent}>
-                        <span className={styles.numberPrefix}>{index + 1}</span>
-                        {choice}
-                      </span>
-                    </label>
-                  </li>
-                ))}
-              </ul>
+              <div className={styles.quizBoxContent}>
+                <div className={styles.quizContent}>
+                  <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
+                  <ul className={styles.choiceList}>
+                    {shuffledChoices.map((choice, index) => (
+                      <li key={index} className={styles.choiceItem}>
+                        <label className={styles.choiceLabel}>
+                          <input
+                            type="radio"
+                            name="quiz"
+                            value={choice}
+                            checked={selectedChoice === choice}
+                            onChange={() => setSelectedChoice(choice)}
+                            className={styles.hiddenRadio}
+                            disabled={showResult}
+                          />
+                          <span className={styles.labelContent}>
+                            <span className={styles.numberPrefix}>
+                              {index + 1}
+                            </span>
+                            {choice}
+                          </span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {currentQuiz.image && (
+                  <img
+                    src={currentQuiz.image}
+                    alt={`퀴즈 이미지 ${currentQuiz.id}`}
+                    className={styles.quizImage}
+                  />
+                )}
+              </div>
             </div>
           )}
         </div>

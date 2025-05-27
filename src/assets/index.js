@@ -29,8 +29,18 @@ import quiz_bad from './quiz-bad.svg';
 import nextbutton from './nextbutton.svg';
 import quiz_game from './quiz-game.svg';
 import ready from './ready.svg';
+import id11 from './id11.svg'; 
+import id12 from './id12.svg'; 
+import id13 from './id13.svg'; 
+import id14 from './id14.svg'; 
+import id15 from './id15.svg'; 
 
 export {
+  id11,
+  id12,
+  id13,
+  id14,
+  id15,
   ready,
   quiz_game,
   nextbutton,
