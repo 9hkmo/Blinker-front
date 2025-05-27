@@ -1,8 +1,20 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { all } from 'axios';
 import { Header } from '../components/Header';
 import styles from '../styles/pages/Quiz.module.scss';
-import { quizbackground } from '../assets';
+import { Link } from 'react-router-dom';
+import {
+  quiz_end,
+  correct,
+  uncorrect,
+  quizbackground,
+  quiz_bad,
+  quiz_great,
+  quiz_okay,
+  nextbutton,
+  quiz,
+} from '../assets';
+import CameraCapture from './CameraCapture';
 
 export const QuizHomePage = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -13,6 +25,11 @@ export const QuizHomePage = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [timerMs, setTimerMs] = useState(0);
   const [isAnswerPhase, setIsAnswerPhase] = useState(false);
+  const [isQuizFinished, setIsQuizFinished] = useState(false);
+  const [isResultShown, setIsResultShown] = useState(false); // ✅ 결과 화면 전환
+  const [correctCount, setCorrectCount] = useState(0); // ✅ 정답 수
+  const [isCaptureDone, setIsCaptureDone] = useState(false);
+  const [allow, setAllow] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -61,14 +78,16 @@ export const QuizHomePage = () => {
 
   const handleAutoSubmit = () => {
     const currentQuiz = quizzes[currentIndex];
+    const isCorrectAnswer =
+      selectedChoice !== null && selectedChoice === currentQuiz.answer;
 
-    const autoSelected = selectedChoice ?? currentQuiz.choices[0]; // 기본 선택
-    const isCorrectAnswer = autoSelected === currentQuiz.answer;
-
-    setSelectedChoice(autoSelected); // 선택 표시용
     setIsCorrect(isCorrectAnswer);
     setShowResult(true);
     setIsAnswerPhase(true);
+
+    if (isCorrectAnswer) {
+      setCorrectCount((prev) => prev + 1);
+    }
 
     setTimeout(() => {
       handleNext();
@@ -85,8 +104,11 @@ export const QuizHomePage = () => {
       setIsAnswerPhase(false);
       setTimerMs(0);
     } else {
-      setShowResult(false); // ✅ 마지막 문제 후에도 모달 닫기
-      alert('퀴즈를 모두 완료했습니다.');
+      setShowResult(false);
+      setIsQuizFinished(true);
+      setTimeout(() => {
+        setIsResultShown(true);
+      }, 1000);
     }
   };
 
@@ -100,10 +122,30 @@ export const QuizHomePage = () => {
 
   return (
     <>
+      {!allow && (
+        <EyesLayout>
+          <div className={styles.quizIntroBox}>
+            <p className={styles.quizLine1}>
+              화면을 보고 간단한 퀴즈를 풀고 있어주세요.
+            </p>
+            <p className={styles.quizLine2}>깜빡이가 눈 분석을 하고있어요!</p>
+            <div
+              className={styles.quizButton}
+              onClick={() => setIsCaptureDone(false)}
+            >
+              <img src={quiz} alt="퀴즈 아이콘" />
+              퀴즈
+            </div>
+          </div>
+        </EyesLayout>
+      )}
       <div
         className={styles.container}
         style={{
-          backgroundImage: `url(${quizbackground})`,
+          backgroundImage:
+            (isQuizFinished && !isResultShown) || isResultShown
+              ? 'none'
+              : `url(${quizbackground})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -111,56 +153,107 @@ export const QuizHomePage = () => {
       >
         <div className={styles.overlay} />
         <Header isHome={true} />
-
-        <div className={styles.quizBox}>
-          <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
-          <ul className={styles.choiceList}>
-            {shuffledChoices.map((choice, index) => (
-              <li key={index} className={styles.choiceItem}>
-                <label className={styles.choiceLabel}>
-                  <input
-                    type="radio"
-                    name="quiz"
-                    value={choice}
-                    checked={selectedChoice === choice}
-                    onChange={() => setSelectedChoice(choice)}
-                    className={styles.hiddenRadio}
-                    disabled={showResult}
-                  />
-                  <span className={styles.labelContent}>
-                    <span className={styles.numberPrefix}>{index + 1}</span>
-                    {choice}
-                  </span>
-                </label>
-              </li>
-            ))}
-          </ul>
-
-          <div className={styles.progressWrapper}>
-            <div className={styles.timeTopLeft}>{timeLabel}</div>
-            {timerMs < 5000 && (
-              <div className={styles.progressBarContainer}>
-                <div
-                  className={styles.progressBar}
-                  style={{ width: `${((5000 - timerMs) / 5000) * 100}%` }}
-                />
-              </div>
-            )}
+        <CameraCapture allow={allow} setAllow={setAllow} />
+        {isQuizFinished && !isResultShown ? (
+          <div className={styles.quizEndWrapper}>
+            <img
+              src={quiz_end}
+              alt="퀴즈 종료"
+              className={styles.quizEndImage}
+            />
+            <p className={styles.quizEndText}>퀴즈가 끝났어요.</p>
           </div>
-        </div>
+        ) : isResultShown ? (
+          <div className={styles.resultWrapper}>
+            <img
+              src={
+                correctCount >= 5
+                  ? quiz_great
+                  : correctCount >= 3
+                  ? quiz_okay
+                  : quiz_bad
+              }
+              alt="결과"
+              className={styles.resultImage}
+            />
+            <p className={styles.resultScore}>{correctCount}/5</p>
+            <p className={styles.resultMessage}>
+              {correctCount >= 5
+                ? '훌륭해요.'
+                : correctCount >= 3
+                ? '오...'
+                : '풉... 아, 죄송합니다.'}
+            </p>
+          </div>
+        ) : (
+          allow(
+            <div className={styles.quizBox}>
+              <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
+              <ul className={styles.choiceList}>
+                {shuffledChoices.map((choice, index) => (
+                  <li key={index} className={styles.choiceItem}>
+                    <label className={styles.choiceLabel}>
+                      <input
+                        type="radio"
+                        name="quiz"
+                        value={choice}
+                        checked={selectedChoice === choice}
+                        onChange={() => setSelectedChoice(choice)}
+                        className={styles.hiddenRadio}
+                        disabled={showResult}
+                      />
+                      <span className={styles.labelContent}>
+                        <span className={styles.numberPrefix}>{index + 1}</span>
+                        {choice}
+                      </span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        )}
       </div>
 
-      {/* ✅ 모달은 container 밖에서 렌더링 */}
+      {!isQuizFinished && (
+        <div className={styles.progressWrapper}>
+          <div className={styles.progressTime}>{timeLabel}</div>
+          <div className={styles.progressBarContainer}>
+            <div
+              className={styles.progressBar}
+              style={{ width: `${((5000 - timerMs) / 5000) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
+
       {showResult && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalBox}>
-            <div className={styles.icon}>{isCorrect ? '✅' : '❌'}</div>
+            <img
+              src={isCorrect ? correct : uncorrect}
+              alt={isCorrect ? '정답' : '오답'}
+              className={styles.resultImage}
+            />
             <p className={styles.resultText}>
               {isCorrect
                 ? '정답이에요!'
                 : `오답이에요. 정답은 ${currentQuiz.answer}입니다.`}
             </p>
           </div>
+        </div>
+      )}
+
+      {isResultShown && (
+        <div className={styles.resultButtonWrapper}>
+          <Link to="/result" className={styles.resultFixedNextButton}>
+            <span>다음</span>
+            <img
+              src={nextbutton}
+              alt="다음 아이콘"
+              className={styles.nextIcon}
+            />
+          </Link>
         </div>
       )}
     </>
