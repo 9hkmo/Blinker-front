@@ -167,11 +167,6 @@ export const AddInfoPage = () => {
     };
   }, [isModal]);
 
-  // 태그 선택되었는지 확인
-  useEffect(() => {
-    console.log(choiceTags);
-  }, [choiceTags]);
-
   // 나이 선택 함수
   const handleAgeChange = (option) => {
     setSelectedAge(option);

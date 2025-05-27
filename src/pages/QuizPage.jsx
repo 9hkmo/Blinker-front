@@ -24,6 +24,8 @@ import {
   id15,
 } from "../assets";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const QuizPage = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,7 +45,7 @@ export const QuizPage = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get("/api/quiz");
+        const response = await axios.get(`${API_URL}/api/quiz`);
         const data = response.data;
         if (!data?.data?.all) throw new Error("퀴즈 데이터 없음");
 
