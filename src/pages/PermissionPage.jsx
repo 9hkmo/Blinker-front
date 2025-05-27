@@ -1,46 +1,44 @@
+import { useEffect, useState } from 'react';
 import { Header } from '../components/Header';
+import { EyesLayout } from '../components/EyesLayout';
 import styles from '../styles/pages/Permission.module.scss';
-import { useEffect, useRef } from 'react';
-import { logo_title_eye } from '../assets';
+import quizStyles from '../styles/pages/QuizHome.module.scss';
+import { quiz } from '../assets';
+import { usePostStore } from '../store/usePostStore';
+import CameraCapture from './CameraCapture';
 
-export const PermissionPage = () => {
-  const videoRef = useRef(null);
+export const QuizHomePage = () => {
+  const [isCaptureDone, setIsCaptureDone] = useState(false);
+  const setImages = usePostStore((state) => state.setImages);
 
   useEffect(() => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then((stream) => {
-        console.log('카메라 허용됨');
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-        }
-      })
-      .catch((err) => {
-        console.error('카메라 거부됨:', err);
-        alert('카메라 접근을 허용해주세요.');
-      });
+    setImages([]);
   }, []);
+
+  if (isCaptureDone) {
+    return (
+      <EyesLayout>
+        <div className={quizStyles.quizIntroBox}>
+          <p className={quizStyles.quizLine1}>
+            화면을 보고 간단한 퀴즈를 풀고 있어주세요.
+          </p>
+          <p className={quizStyles.quizLine2}>깜빡이가 눈 분석을 하고있어요!</p>
+          <div
+            className={quizStyles.quizButton}
+            onClick={() => setIsCaptureDone(false)}
+          >
+            <img src={quiz} alt="퀴즈 아이콘" />
+            퀴즈
+          </div>
+        </div>
+      </EyesLayout>
+    );
+  }
 
   return (
     <div className={styles.container}>
       <Header isHome={true} />
-
-      {/* ✅ 배경처럼 처리할 이미지 */}
-      <img src={logo_title_eye} alt="배경" className={styles.bgImage} />
-
-      <div className={styles.permissionBox}>
-        <h2>카메라 접근 권한이 필요합니다</h2>
-        <p>눈 추적 기능을 위해 카메라 사용을 허용해 주세요</p>
-      </div>
-
-      {/* (선택) 카메라 영상 */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        playsInline
-        className={styles.video}
-      />
+      <CameraCapture setIsCaptureDone={setIsCaptureDone} />
     </div>
   );
 };

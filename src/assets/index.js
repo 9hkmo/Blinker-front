@@ -19,6 +19,22 @@ import quiz from "./quiz.svg";
 import logo_title_eye from "./blinker-title-eye.svg";
 import game_char from "./game-char.svg";
 import game_loading from "./game-loading.svg";
+import quizbackground from "./quizbackground.svg";
+import correct from "./correct.svg";
+import uncorrect from "./uncorrect.svg";
+import quiz_end from "./quiz-end.svg";
+import quiz_great from './quiz-great.svg';
+import quiz_okay from './quiz-okay.svg';
+import quiz_bad from './quiz-bad.svg';
+import nextbutton from './nextbutton.svg';
+import quiz_game from './quiz-game.svg';
+import ready from './ready.svg';
+import id11 from './id11.svg'; 
+import id12 from './id12.svg'; 
+import id13 from './id13.svg'; 
+import id14 from './id14.svg'; 
+import id15 from './id15.svg'; 
+
 import home_quiz from "./home-quiz.svg";
 import eye1 from "./eye1.svg";
 import eye2 from "./eye2.svg";
@@ -26,6 +42,21 @@ import eye3 from "./eye3.svg";
 import game_char_modal from "./game-char-modal.svg";
 
 export {
+  id11,
+  id12,
+  id13,
+  id14,
+  id15,
+  ready,
+  quiz_game,
+  nextbutton,
+  quiz_bad,
+  quiz_okay,
+  quiz_great,
+  quiz_end,
+  correct,
+  uncorrect,
+  quizbackground,
   logo_title_eye,
   quiz,
   minigame,
