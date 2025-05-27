@@ -13,6 +13,8 @@ import {
   quiz_okay,
   nextbutton,
   quiz,
+  quiz_game,
+  ready,
 } from '../assets';
 import CameraCapture from './CameraCapture';
 import { EyesLayout } from '../components/EyesLayout';
@@ -27,15 +29,16 @@ export const QuizHomePage = () => {
   const [timerMs, setTimerMs] = useState(0);
   const [isAnswerPhase, setIsAnswerPhase] = useState(false);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
-  const [isResultShown, setIsResultShown] = useState(false); // ✅ 결과 화면 전환
-  const [correctCount, setCorrectCount] = useState(0); // ✅ 정답 수
+  const [isResultShown, setIsResultShown] = useState(false);
+  const [correctCount, setCorrectCount] = useState(0);
   const [allow, setAllow] = useState(false);
   const [quizStart, setQuizStart] = useState(false);
+  const [cameraStatus, setCameraStatus] = useState('ready');
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get('http://43.202.207.171:8080/api/quiz');
+        const response = await axios.get('/api/quiz');
         const data = response.data;
         if (!data?.data?.all) throw new Error('퀴즈 데이터 없음');
 
@@ -82,10 +85,6 @@ export const QuizHomePage = () => {
     allow,
     quizStart,
   ]);
-
-  useEffect(() => {
-    console.log(allow);
-  }, [allow]);
 
   const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
@@ -140,14 +139,67 @@ export const QuizHomePage = () => {
         setAllow={setAllow}
         quizStart={quizStart}
         setQuizStart={setQuizStart}
+        setCameraStatus={setCameraStatus}
       />
-      {(!allow || !quizStart) && (
+
+      {!quizStart && cameraStatus !== 'granted' && (
+        <div
+          style={{
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: '#000',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Header isHome={true} />
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexGrow: 1,
+            }}
+          >
+            <img
+              src={cameraStatus === 'denied' ? quiz_game : ready}
+              alt="카메라 상태 안내 이미지"
+              style={{
+                width: cameraStatus === 'ready' ? '1280px' : '300px',
+                height: cameraStatus === 'ready' ? '493px' : 'auto',
+                marginBottom: '20px',
+              }}
+            />
+            <p
+              style={{ color: 'white', textAlign: 'center', fontSize: '18px' }}
+            >
+              {cameraStatus === 'denied' ? (
+                <>
+                  카메라 허용을 해주지 않으시면
+                  <br />눈 깜빡임을 측정할 수가 없어요!
+                </>
+              ) : (
+                <>
+                  카메라 권한을 요청 중입니다.
+                  <br />
+                  상단의 팝업에서 허용을 눌러주세요!
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+      )}
+
+      {cameraStatus === 'granted' && !quizStart && (
         <EyesLayout>
           <div className={styles.quizIntroBox}>
             <p className={styles.quizLine1}>
-              화면을 보고 간단한 퀴즈를 풀고 있어주세요.
+              화면을 보고 간단한 퀴즈를 풀어주세요.
             </p>
-            <p className={styles.quizLine2}>깜빡이가 눈 분석을 하고있어요!</p>
+            <p className={styles.quizLine2}>깜빡이가 눈 분석을 하고 있어요!</p>
             <div
               className={styles.quizButton}
               onClick={() => setQuizStart(true)}
@@ -158,6 +210,7 @@ export const QuizHomePage = () => {
           </div>
         </EyesLayout>
       )}
+
       {allow && quizStart && (
         <div
           className={styles.container}

@@ -1,12 +1,13 @@
+// CameraCapture.jsx
 import React, { useEffect, useRef } from 'react';
 import { usePostStore } from '../store/usePostStore';
 
-const CameraCapture = ({ allow, setAllow, quizStart }) => {
+const CameraCapture = ({ allow, setAllow, quizStart, setCameraStatus }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const imageBlobsRef = useRef([]);
   const setImages = usePostStore((state) => state.setImages);
-  // 카메라 시작
+
   useEffect(() => {
     const startCamera = async () => {
       try {
@@ -15,18 +16,18 @@ const CameraCapture = ({ allow, setAllow, quizStart }) => {
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
-          setAllow(true); // 부모의 상태 변경경
+          setAllow(true);
+          setCameraStatus('granted'); // ✅ 권한 허용됨
         }
       } catch (err) {
         console.error('카메라 접근 실패', err);
+        setCameraStatus('denied'); // ❌ 거부됨
       }
     };
     startCamera();
   }, []);
 
-  // 촬영 트리거 발생 시 캡처 시작
   useEffect(() => {
-    console.log(allow, quizStart);
     if (allow && quizStart) {
       startCapturing();
     }

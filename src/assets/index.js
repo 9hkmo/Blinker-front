@@ -27,8 +27,12 @@ import quiz_great from './quiz-great.svg';
 import quiz_okay from './quiz-okay.svg';
 import quiz_bad from './quiz-bad.svg';
 import nextbutton from './nextbutton.svg';
+import quiz_game from './quiz-game.svg';
+import ready from './ready.svg';
 
 export {
+  ready,
+  quiz_game,
   nextbutton,
   quiz_bad,
   quiz_okay,
