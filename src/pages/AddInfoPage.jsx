@@ -140,7 +140,7 @@ export const AddInfoPage = () => {
   const [moveIndex, setMoveIndex] = useState(1);
   const navigate = useNavigate();
 
-  const { setAge, setVision, setTags} = usePostStore();
+  const { setAge, setVision, setTags } = usePostStore();
 
   const handleClick = () => {
     // 태그는 아무것도 없을 수 있음
@@ -191,9 +191,12 @@ export const AddInfoPage = () => {
     }, 3000);
 
     // 초기화
-    setSelectedAge({});
-    setSelectedEye({});
+    setSelectedAge(0);
+    setSelectedEye(0);
     setChoiceTags([]);
+    setAge(selectedAge.value);
+    setVision(selectedEye.value);
+    setTags(choiceTags);
 
     return () => {
       clearInterval(moveCharInterval);

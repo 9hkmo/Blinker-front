@@ -2,16 +2,28 @@ import styles from "../styles/pages/ResultPage.module.scss";
 import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  mini_char,
-  result1,
-  result2,
-  result3,
-  result4,
-} from "../assets";
+import { useNavigate } from "react-router-dom";
+import { mini_char, result1, result2, result3, result4 } from "../assets";
 import { usePostStore } from "../store/usePostStore";
 import { postResult } from "../api/post";
+
+// 점수별 설명 텍스트
+const scoreText = [
+  <>
+    눈 건강에 적신호.. 병원 가보셔야겠는데요?
+    <br />
+    일상적인 눈관리습관과 영양 섭취 개선이 필요합니다.
+  </>,
+  <>
+    당신의 눈 건강은 보통 수준입니다!
+    <br />
+    현재 상태를 유지하며, 정기적인 휴식이 필요합니다.
+  </>,
+  <>
+    당신의 현재 눈 상태는 매우 양호!
+    <br />지금처럼 꾸준한 관리와 올바른 습관을 유지하세요!
+  </>,
+];
 
 export const ResultPage = () => {
   const { age, vision, tags, images } = usePostStore(); // 전역 데이터 꺼내기
@@ -46,10 +58,6 @@ export const ResultPage = () => {
         term: `${result.term}`,
         score: `${result.score}`,
         stretchTips: `${result.stretchTips.join(", ")}`,
-        // tip: `시력 1.0은 정상이나, 질병이 우려됩니다. 같은 연령대에서는 드문 상태입니다.`,
-        // term: `4`,
-        // score: `70`,
-        // stretchTips: `고정 응시 운동(2분), 손바닥 온찜질(1분), 눈 굴리기(5회씩)`,
       },
     });
   };
@@ -100,9 +108,11 @@ export const ResultPage = () => {
                     </div>
                   </div>
                   <div className={styles.scoreContent}>
-                    시력 저하 및 눈건조로 인해 눈 건강에 적신호
-                    <br />
-                    일상적인 눈관리습관과 영양 섭취 개선이 필요합니다.
+                    {result.score >= 85
+                      ? scoreText[2]
+                      : result.score >= 40
+                      ? scoreText[1]
+                      : scoreText[0]}
                   </div>
                 </div>
               </div>

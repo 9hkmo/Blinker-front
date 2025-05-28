@@ -1,18 +1,5 @@
 @use '../variables' as *;
 
-@mixin flex(
-  $direction: row,
-  $align-items: center,
-  $justify-content: center,
-  $gap: null
-) {
-  display: flex;
-  align-items: $align-items;
-  justify-content: $justify-content;
-  flex-direction: $direction;
-  gap: $gap;
-}
-
 @font-face {
   font-family: 'Helvetica Rounded';
   src: url('https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.eot');
@@ -33,59 +20,71 @@
 }
 
 .container {
-  @include flex(column, $gap: 50px);
-  padding-top: 175px;
-  margin-bottom: 200px;
+  @include flex(column, $gap: 5.208vw);
+  padding-top: 9.114vw;
   .header {
     @include flex(column);
     .logo {
       flex: 1;
+      margin-left: 1.563vw;
+      img {
+        width: 19vw;
+      }
     }
     span {
       font-family: 'Helvetica Rounded';
       color: #559472;
-      font-size: 38px;
+      font-size: 1.979vw;
       font-weight: bold;
     }
   }
 
   .contents {
-    @include flex(column, $gap: 38px);
-    max-width: 1632px;
+    @include flex(column, $gap: 1.979vw);
+    max-width: 85vw;
     width: 100%;
     box-shadow: inset 0 0 0 4px #e8f8ee;
-    padding: 50px;
+    padding: 2.604vw;
     border-radius: 15px;
     .content {
-      @include flex($gap: 50px);
+      @include flex($gap: 2.604vw);
       .eyeContainer {
-        @include flex(column, $gap: 35px);
-        min-width: 687px;
+        @include flex(column, $gap: 1.823vw);
+        min-width: 35.781vw;
         .eyeBox {
-          @include flex($align-items: flex-start, $gap: 40px);
+          @include flex($align-items: flex-start, $gap: 2.083vw);
           background-color: #3c4842;
-          border-radius: 15px;
+          border-radius: 0.781vw;
           width: 100%;
-          max-height: 272px;
+          max-height: 14.167vw;
           height: 100%;
-          padding: 50px 26px;
+          padding: 2.604vw 1.354vw;
 
           &:nth-child(2) {
             background-color: #e8f8ee;
           }
           .img {
+            display: flex;
             flex: 1;
+            img {
+              width: 11.8229vw;
+            }
+            &:last-child {
+              img {
+                width: 8.6458vw;
+              }
+            }
           }
           .description {
-            @include flex(column, $align-items: flex-start, $gap: 25px);
+            @include flex(column, $align-items: flex-start, $gap: 1.302vw);
             .title {
               color: white;
-              font-size: 32px;
+              font-size: 1.667vw;
               font-weight: bold;
             }
 
             .text {
-              font-size: 28px;
+              font-size: 1.458vw;
               color: #c8edd4;
             }
           }
@@ -94,28 +93,28 @@
             background-color: #e8f8ee;
             .scoreTitle {
               color: #0e6f3a;
-              font-size: 38px;
+              font-size: 1.979vw;
               font-weight: bold;
             }
             .scoreBox {
-              @include flex($align-items: flex-end, $gap: 50px);
+              @include flex($align-items: flex-end, $gap: 2.604vw);
               .scoreContent {
                 color: #0e6f3a;
-                font-size: 32px;
+                font-size: 1.667vw;
                 font-weight: 600;
                 &:last-child {
-                  max-width: 350px;
+                  max-width: 18.229vw;
                 }
                 @include flex(column, $align-items: flex-start);
                 span {
-                  font-size: 26px;
+                  font-size: 1.354vw;
                   font-weight: 100;
                 }
                 .score {
-                  font-size: 40px;
+                  font-size: 2.083vw;
                   font-weight: bold;
                   span {
-                    font-size: 40px;
+                    font-size: 2.083vw;
                     font-weight: bold;
                     color: #cf0000;
                   }
@@ -127,16 +126,16 @@
       }
 
       .rightContainer {
-        @include flex(column, $gap: 35px);
+        @include flex(column, $gap: 1.823vw);
         .adviceContainer {
-          @include flex(column, $justify-content: flex-start, $gap: 0px);
+          @include flex(column, $justify-content: flex-start);
           height: 100%;
-          padding: 45px;
+          padding: 2.344vw;
           background-color: #3c4842;
           box-shadow: inset 0 0 0 4px #c8edd4;
           border-radius: 15px;
-          min-width: 795px;
-          min-height: 579px;
+          min-width: 41.406vw;
+          min-height: 30.156vw;
 
           .adviceHeader {
             width: 100%;
@@ -145,30 +144,33 @@
               $align-items: flex-start
             );
             .advicetextBox {
-              @include flex(column, $align-items: flex-start, $gap: 4px);
-              max-width: 290px;
+              @include flex(column, $align-items: flex-start, $gap: 0.208vw);
+              max-width: 15.104vw;
               .title {
                 color: white;
-                font-size: 36px;
+                font-size: 1.875vw;
                 font-weight: bold;
               }
               span {
-                font-size: 26px;
+                font-size: 1.354vw;
                 color: #c8edd4;
                 font-weight: 100;
-                line-height: 48px;
+                line-height: 2.5vw;
               }
             }
             .img {
               display: flex;
+              img {
+                width: 11.4583vw;
+              }
             }
           }
           .advice {
-            @include flex(column, flex-start, flex-start, 20px);
+            @include flex(column, flex-start, flex-start, 1.042vw);
             width: 100%;
             .title {
               color: white;
-              font-size: 36px;
+              font-size: 1.875vw;
               font-weight: bold;
             }
             .foodContainer {
@@ -178,9 +180,9 @@
               height: 100%;
               .foodRow {
                 width: 100%;
-                line-height: 53px;
+                line-height: 2.76vw;
                 color: $text-color-main;
-                font-size: 30px;
+                font-size: 1.563vw;
               }
             }
           }
@@ -189,25 +191,27 @@
           @include flex(
             $align-items: flex-start,
             $justify-content: flex-start,
-            $gap: 20px
+            $gap: 1.042vw
           );
-          padding: 0 40px 0 10px;
-          max-width: 1160px;
+          padding: 0 2.083vw 0 0.521vw;
+          max-width: 60.417vw;
           width: 100%;
           background-color: #3c4842;
           border-radius: 15px;
           box-shadow: inset 0 0 0 4px #c8edd4;
-
+          img {
+            width: 10.9375vw;
+          }
           .description {
-            @include flex(column, flex-start, flex-start, 23px);
-            padding-top: 50px;
+            @include flex(column, flex-start, flex-start, 1.198vw);
+            padding-top: 2.604vw;
             .title {
-              font-size: 36px;
+              font-size: 1.875vw;
               color: white;
               font-weight: bold;
             }
             .text {
-              font-size: 32px;
+              font-size: 1.667vw;
               color: #c8edd4;
             }
           }
@@ -216,26 +220,28 @@
     }
   }
   .shareContainer {
-    @include flex(column, $gap: 38px);
+    @include flex(column, $gap: 1.979vw);
+    margin-bottom: 5.208vw;
+
     .shareText {
       color: white;
       text-align: center;
       width: 100%;
-      font-size: 36px;
+      font-size: 1.875vw;
       font-weight: bold;
       span {
         color: #c8edd4;
-        font-size: 26px;
+        font-size: 1.354vw;
         font-weight: 100;
       }
     }
     .shareButton {
       @include flex();
-      border-radius: 15px;
-      padding: 19px 112px;
-      border: 4px solid #1c5f8e;
+      border-radius: 0.781vw;
+      padding: 0.99vw 5.833vw;
+      border: 0.208vw solid #1c5f8e;
       box-shadow: 0 4px 4px #ffffff14;
-      font-size: 24px;
+      font-size: 1.25vw;
       font-weight: 700;
       color: $text-color-main;
       background-color: #0485a2;

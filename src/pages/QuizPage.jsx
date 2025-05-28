@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Header } from '../components/Header';
 import styles from '../styles/pages/QuizPage.module.scss';
-import { Link } from 'react-router-dom';
 import CameraCapture from '../components/CameraCapture';
 import { EyesLayout } from '../components/EyesLayout';
+import { Link, useNavigate } from "react-router-dom";
 import {
   quizearlyend,
   quiz_end,
@@ -24,8 +24,8 @@ import {
   id15,
   modalnextIcon,
 } from '../assets';
+import { usePostStore } from "../store/usePostStore";
 
-const API_URL = import.meta.env.VITE_API_URL;
 const TOTAL_TIME = 30 * 1000;
 
 export const QuizPage = () => {
@@ -45,11 +45,18 @@ export const QuizPage = () => {
   const [cameraStatus, setCameraStatus] = useState('ready');
   const [endedEarly, setEndedEarly] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const { age } = usePostStore(); // 전역 데이터 꺼내기
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // 나이, 시력, 태그가 없으면 홈으로 이동
+    if (!age) {
+      navigate("/test");
+    }
+
     const getData = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/quiz`);
+        const response = await axios.get(`/api/quiz`);
         const data = response.data;
         if (!data?.data?.all) throw new Error('퀴즈 데이터 없음');
 
@@ -163,7 +170,7 @@ export const QuizPage = () => {
       {!quizStart && cameraStatus !== 'granted' && (
         <div className={styles.permissionWrapper}>
           <div className={styles.headerWrapper}>
-            <Header isHome={true} />
+            <Header />
           </div>
           <div className={styles.permissionContent}>
             <img
@@ -225,7 +232,7 @@ export const QuizPage = () => {
               justifyContent: 'center',
             }}
           >
-            <Header isHome={true} />
+            <Header />
           </div>
 
           {isQuizFinished && !isResultShown ? (

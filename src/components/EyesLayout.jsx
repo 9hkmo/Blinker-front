@@ -52,7 +52,7 @@ export const EyesLayout = ({ children }) => {
       <div className={styles.homeImg}>
         <img src={isImg ? home : home_quiz} />
       </div>
-      <Header isHome={true} />
+      <Header />
       <div className={styles.contents1}>
         <div className={styles.eye}>
           <img className={styles.pupil} src={pupil} />
