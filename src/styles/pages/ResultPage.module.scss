@@ -33,13 +33,13 @@
 }
 
 .container {
-  @include flex(column, $gap: 50px);
+  @include flex(column, $gap: 100px);
   padding-top: 175px;
-  margin-bottom: 200px;
   .header {
     @include flex(column);
     .logo {
       flex: 1;
+      margin-left: 30px;
     }
     span {
       font-family: "Helvetica Rounded";
@@ -140,7 +140,10 @@
 
           .adviceHeader {
             width: 100%;
-            @include flex($justify-content: space-between,$align-items: flex-start);
+            @include flex(
+              $justify-content: space-between,
+              $align-items: flex-start
+            );
             .advicetextBox {
               @include flex(column, $align-items: flex-start, $gap: 4px);
               max-width: 290px;
@@ -216,6 +219,8 @@
   }
   .shareContainer {
     @include flex(column, $gap: 38px);
+    margin-bottom: 100px;
+
     .shareText {
       color: white;
       text-align: center;
