@@ -147,9 +147,12 @@ export const GamePage = () => {
   const position = path[currentIndex];
 
   useEffect(() => {
-    setTimeout(() => {
+    const smallChar = setTimeout(() => {
       setCharClicked(false); // 클릭 상태 초기화
     }, 800);
+    return () => {
+      clearTimeout(smallChar); // 컴포넌트 언마운트 시 타이머 제거
+    }
   }, [position]);
 
   const enterGame = () => {
