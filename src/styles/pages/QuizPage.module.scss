@@ -68,54 +68,29 @@
 }
 
 .quizBox {
-  margin-top: 200px;
-  min-width: 1143px;
-  left: 0;
-  text-align: left;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Pretendard-Regular';
+  display: flex; /* 두 요소를 가로로 배치 */
+  flex-direction: row; /* 기본 설정: 왼쪽에 문제, 오른쪽에 이미지 */
+  align-items: flex-start; /* 세로 정렬: 위쪽 정렬 */
+  justify-content: flex-start; /* 수평 정렬 */
+  position: absolute;
+  left: 461px;
+  top: 284px;
 }
 
 .quizBoxContent {
-  max-width: 1181px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  font-family: 'Pretendard-Regular';
+  width: 100%; /* 전체 너비를 차지하게 설정 */
 }
 
 .quizContent {
-  max-width: 1181px;
   font-family: 'Pretendard-Regular';
-}
-
-.quizImage {
-  width: 450px;
-  height: 300px;
-  margin-top: 25px;
-  border-radius: 12px;
-  flex-shrink: 0;
-}
-
-.question {
-  color: #e8f8ee;
-  min-width: 1181px;
-  font-size: 56px;
-  font-weight: 500;
-  margin-bottom: 63px;
-  font-family: 'Pretendard-Regular';
+  flex: 1; /* 문제와 선택지가 왼쪽에 차지할 공간 */
+  margin-right: 150px; /* 이미지와 선택지 사이 간격 */
 }
 
 .choiceList {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 30px 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* 선택지들을 세로로 나열 */
   align-items: flex-start;
   font-family: 'Pretendard-Regular';
 }
@@ -128,6 +103,23 @@
   display: flex;
   align-items: center;
   margin-left: 65px;
+  font-family: 'Pretendard-Regular';
+}
+
+.quizImage {
+  width: 400px; /* 이미지 크기 조정 */
+  height: 301px;
+  margin-left: auto; /* 이미지를 오른쪽에 배치 */
+  margin-right: 0;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.question {
+  color: #e8f8ee;
+  font-size: 56px;
+  font-weight: 500;
+  margin-bottom: 63px;
   font-family: 'Pretendard-Regular';
 }
 

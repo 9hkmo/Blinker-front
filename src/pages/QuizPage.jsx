@@ -256,6 +256,8 @@ export const QuizPage = () => {
               <div className={styles.quizBoxContent}>
                 <div className={styles.quizContent}>
                   <h2 className={styles.question}>Q. {currentQuiz.question}</h2>
+
+                  {/* 선택지 목록 */}
                   <ul className={styles.choiceList}>
                     {shuffledChoices.map((choice, index) => (
                       <li key={index} className={styles.choiceItem}>
@@ -286,6 +288,8 @@ export const QuizPage = () => {
                     ))}
                   </ul>
                 </div>
+
+                {/* 퀴즈 이미지 */}
                 {currentQuiz.image && (
                   <img
                     src={currentQuiz.image}
