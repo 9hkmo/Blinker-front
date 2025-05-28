@@ -2,7 +2,7 @@ import styles from "../styles/pages/ResultPage.module.scss";
 import { useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { Header } from "../components/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { mini_char, result1, result2, result3, result4 } from "../assets";
 import { usePostStore } from "../store/usePostStore";
 import { postResult } from "../api/post";
@@ -36,7 +36,7 @@ export const ResultPage = () => {
   useEffect(() => {
     console.log(age, vision, tags, images);
     const getResult = async () => {
-      if (!age || !vision || !tags || Object.keys(images[0]).length === 0) navigate("/"); // 데이터가 없으면 홈으로 이동
+      if (!age || !vision || !tags || !images) navigate("/"); // 데이터가 없으면 홈으로 이동
       try {
         const data = await postResult({ age, vision, tags, images });
         if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
