@@ -8,6 +8,7 @@
   .home {
     @include flex(column, $gap: 60px);
     height: 100%;
+    transition: all 1s ease, transform 0.5s ease;
     span {
       font-size: 38px;
       color: white;
@@ -46,7 +47,8 @@
   }
 
   .hidden {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
