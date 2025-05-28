@@ -78,15 +78,18 @@
 }
 
 .quizBox {
-  margin-top: 100px;
-  padding: 40px 60px;
-  border-radius: 16px;
+  margin-top: 200px;
+  min-width: 1143px;
+  left: 0;
   text-align: left;
   color: white;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .quizBoxContent {
+  max-width: 1181px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -94,7 +97,7 @@
 }
 
 .quizContent {
-  flex: 1;
+  max-width: 1181px;
 }
 
 .quizImage {
@@ -106,6 +109,7 @@
 }
 
 .question {
+  min-width: 1181px;
   font-size: 56px;
   font-weight: 500;
   margin-bottom: 63px;
@@ -133,8 +137,19 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  font-size: 40px;
+  font-size: 1.25rem;
   color: white;
+  transition: color 0.2s ease;
+}
+
+.choiceLabel.disabledChoice {
+  color: #767676;
+
+  .numberPrefix {
+    background-color: #767676;
+    color: white;
+    border-color: #767676;
+  }
 }
 
 .labelContent {
@@ -192,7 +207,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -200,59 +215,59 @@
 }
 
 .modalBox {
-  background-color: white;
+  background-color: #e6fff6;
+  border-radius: 16px;
   width: 874px;
   height: 537px;
-  padding: 2rem;
-  border-radius: 12px;
+  box-shadow: 0 0 16px rgba(0, 102, 255, 0.4);
   text-align: center;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-  font-family: 'Pretendard-Regular';
-  font-size: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  transform: translateY(-50px); /* 화면 중앙보다 약간 위 */
+
+  .resultImage {
+    margin-top: 141px;
+    width: 128px;
+    height: 128px;
+  }
+}
+
+.resultText {
+  font-size: 32px;
+  color: #356549;
+  margin-top: 50px;
+  font-weight: bold;
+  font-family: 'Pretendard-Regular';
 }
 
 .modalButton {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background-color: #333;
-  color: #356549;
+  background-color: #0485a2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 60px;
+  width: 226px;
+  height: 68px;
+  color: white;
+  border: 4px solid #1c5f8e;
   padding: 12px 28px;
-  border: none;
-  border-radius: 12px;
-  font-size: 20px;
+  border-radius: 15px;
+  font-size: 24px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
+  font-family: 'Pretendard-Regular';
 }
 
 .modalButton:hover {
   background-color: #555;
 }
 
-.icon {
-  font-size: 64px;
-  margin-top: 40px;
-  margin-bottom: 24px;
-  color: #e53935;
-}
-
-.resultText {
-  font-size: 35px;
-  font-weight: 500;
-  color: #333;
-  white-space: pre-wrap;
-  text-align: center;
-}
-
-.resultImage {
-  width: 128px;
-  height: 128px;
-  margin-bottom: 95px;
+.modalnextIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: inline-block;
 }
 
 .loading {
@@ -308,13 +323,13 @@
 .progressDot {
   position: absolute;
   top: 50%;
+  left: var(--progress, 0%);
   transform: translate(-50%, -50%);
-  width: 16px;
-  height: 16px;
+  width: 26px;
+  height: 26px;
   background-color: #0e6f3a;
   border-radius: 50%;
   transition: left 0.1s linear;
-  left: var(--progress, 0%);
 }
 
 .quizEndWrapper {
@@ -347,12 +362,12 @@
   text-align: center;
   height: 100vh; // ✅ 전체 높이 확보
   padding-bottom: 60px; // 버튼이 덮이지 않도록 여백 확보
-}
 
-.resultImage {
-  width: 321px;
-  height: 485px;
-  margin-bottom: 49px;
+  .resultImage {
+    width: 321px;
+    height: 485px;
+    margin-bottom: 49px;
+  }
 }
 
 .resultScore {
@@ -376,6 +391,7 @@
   bottom: 30px;
   right: 40px;
   z-index: 9999;
+  font-family: 'Pretendard-Regular';
 
   display: flex;
   justify-content: center;

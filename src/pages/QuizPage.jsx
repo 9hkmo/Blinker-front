@@ -22,6 +22,7 @@ import {
   id13,
   id14,
   id15,
+  modalnextIcon,
 } from '../assets';
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -122,7 +123,10 @@ export const QuizPage = () => {
 
   const currentQuiz = quizzes[currentIndex];
   const progress = Math.min((elapsedTime / TOTAL_TIME) * 100, 100);
-  const timeLabel = `${Math.floor(elapsedTime / 1000)}s`;
+  const timeLabel = `${String(Math.floor(elapsedTime / 1000 / 60)).padStart(
+    2,
+    '0'
+  )}:${String(Math.floor((elapsedTime / 1000) % 60)).padStart(2, '0')}`;
 
   return (
     <>
@@ -245,7 +249,13 @@ export const QuizPage = () => {
                   <ul className={styles.choiceList}>
                     {shuffledChoices.map((choice, index) => (
                       <li key={index} className={styles.choiceItem}>
-                        <label className={styles.choiceLabel}>
+                        <label
+                          className={`${styles.choiceLabel} ${
+                            selectedChoice && selectedChoice !== choice
+                              ? styles.disabledChoice
+                              : ''
+                          }`}
+                        >
                           <input
                             type="radio"
                             name="quiz"
@@ -310,7 +320,12 @@ export const QuizPage = () => {
                 : `오답이에요. 정답은 ${currentQuiz.answer}입니다.`}
             </p>
             <button onClick={handleNext} className={styles.modalButton}>
-              다음 ⏭
+              다음
+              <img
+                src={modalnextIcon}
+                alt="다음 아이콘"
+                className={styles.nextIcon}
+              />
             </button>
           </div>
         </div>

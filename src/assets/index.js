@@ -34,6 +34,7 @@ import id12 from './id12.svg';
 import id13 from './id13.svg'; 
 import id14 from './id14.svg'; 
 import id15 from './id15.svg'; 
+import modalnextIcon from "./modalnextIcon.svg";
 
 import home_quiz from "./home-quiz.svg";
 import eye1 from "./eye1.svg";
@@ -42,6 +43,7 @@ import eye3 from "./eye3.svg";
 import game_char_modal from "./game-char-modal.svg";
 
 export {
+  modalnextIcon,
   id11,
   id12,
   id13,
