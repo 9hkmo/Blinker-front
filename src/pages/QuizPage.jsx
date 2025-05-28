@@ -13,7 +13,6 @@ import {
   quiz_bad,
   quiz_great,
   quiz_okay,
-  nextbutton,
   quiz,
   quiz_game,
   ready,
@@ -189,7 +188,7 @@ export const QuizPage = () => {
           className={styles.container}
           style={{
             backgroundImage:
-              isQuizFinished && !isResultShown
+              isQuizFinished && isResultShown
                 ? 'none'
                 : `url(${quizbackground})`,
             backgroundRepeat: 'no-repeat',
@@ -197,7 +196,6 @@ export const QuizPage = () => {
             backgroundPosition: 'center',
           }}
         >
-          <div className={styles.overlay} />
           <div
             style={{
               position: 'relative',
@@ -337,7 +335,7 @@ export const QuizPage = () => {
           <Link to="/result" className={styles.resultFixedNextButton}>
             <span>다음</span>
             <img
-              src={nextbutton}
+              src={modalnextIcon}
               alt="다음 아이콘"
               className={styles.nextIcon}
             />
