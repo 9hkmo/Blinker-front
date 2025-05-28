@@ -100,6 +100,14 @@ export const QuizPage = () => {
     if (showResult || isQuizFinished) return;
     setSelectedChoice(choice);
 
+    // 정답 확인 및 상태 업데이트
+    if (choice === currentQuiz.answer) {
+      setIsCorrect(true);
+      setCorrectCount((prevCount) => prevCount + 1);
+    } else {
+      setIsCorrect(false);
+    }
+
     // 0.8초 뒤에 결과 모달을 표시하도록 지연 추가
     setTimeout(() => {
       setShowResult(true); // 모달 표시
@@ -299,9 +307,9 @@ export const QuizPage = () => {
                               <span
                                 className={`${styles.ansText} ${
                                   selectedChoice && selectedChoice !== choice
-                                    ? styles.ansText.notSelectedChoice
+                                    ? styles.notSelectedChoice
                                     : ''
-                                }}`}
+                                }`}
                               >
                                 {choice}
                               </span>
