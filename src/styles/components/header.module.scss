@@ -5,10 +5,15 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: $background-color;
   overflow: hidden;
   z-index: 1000;
 
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.649) 0%,
+    transparent 100%
+  );
+  
   .contents {
     position: relative;
     width: 100%;
@@ -40,12 +45,4 @@
       }
     }
   }
-}
-
-.isHome {
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.649) 0%,
-    transparent 100%
-  );
 }

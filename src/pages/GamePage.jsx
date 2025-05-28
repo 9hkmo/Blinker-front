@@ -183,7 +183,7 @@ export const GamePage = () => {
         </EyesLayout>
       ) : (
         <div className={styles.container}>
-          <Header isHome={true} />
+          <Header />
 
           <div className={`${styles.home} ${!loading && styles.hidden}`}>
             <div className={styles.homeImg}>

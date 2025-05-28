@@ -168,7 +168,7 @@ export const QuizPage = () => {
       {!quizStart && cameraStatus !== "granted" && (
         <div className={styles.permissionWrapper}>
           <div className={styles.headerWrapper}>
-            <Header isHome={true} />
+            <Header />
           </div>
           <div className={styles.permissionContent}>
             <img
@@ -235,7 +235,7 @@ export const QuizPage = () => {
               justifyContent: "center",
             }}
           >
-            <Header isHome={true} />
+            <Header />
           </div>
 
           {isQuizFinished && !isResultShown ? (
