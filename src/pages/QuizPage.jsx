@@ -296,7 +296,12 @@ export const QuizPage = () => {
               className={styles.progressBarTrack}
               style={{ '--progress': `${progress}%` }}
             >
-              <div className={styles.progressBar} />
+              <div className={styles.progressBar}>
+                <div
+                  className={styles.progressFill}
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
               <div className={styles.progressDot} />
             </div>
           </div>

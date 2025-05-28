@@ -282,7 +282,7 @@
 .progressTime {
   font-size: 18px;
   font-weight: bold;
-  color: #fff;
+  color: #e8f8ee;
   margin-right: 12px;
   min-width: 48px;
   text-align: center;
@@ -301,11 +301,18 @@
 }
 
 .progressBar {
-  position: absolute;
+  width: 100%;
+  height: 12px;
+  background-color: #c8edd4; // ← 남은 부분 색
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressFill {
   height: 100%;
-  background-color: #0e6f3a;
-  transition: width 0.1s linear;
-  width: var(--progress, 0%);
+  background-color: #0e6f3a; // ← 진행된 부분 색
+  transition: width 0.3s ease;
 }
 
 .progressDot {
