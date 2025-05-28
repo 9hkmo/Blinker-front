@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Header } from "../components/Header";
 import styles from "../styles/pages/QuizPage.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CameraCapture from "../components/CameraCapture";
 import { EyesLayout } from "../components/EyesLayout";
 import {
@@ -23,6 +23,7 @@ import {
   id14,
   id15,
 } from "../assets";
+import { usePostStore } from "../store/usePostStore";
 
 export const QuizPage = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -39,8 +40,15 @@ export const QuizPage = () => {
   const [allow, setAllow] = useState(false);
   const [quizStart, setQuizStart] = useState(false);
   const [cameraStatus, setCameraStatus] = useState("ready");
+  const { age } = usePostStore(); // 전역 데이터 꺼내기
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // 나이, 시력, 태그가 없으면 홈으로 이동
+    if (!age) {
+      navigate("/test");
+    }
+
     const getData = async () => {
       try {
         const response = await axios.get(`/api/quiz`);
