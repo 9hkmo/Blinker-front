@@ -44,6 +44,7 @@ export const QuizPage = () => {
   const [quizStart, setQuizStart] = useState(false);
   const [cameraStatus, setCameraStatus] = useState('ready');
   const [endedEarly, setEndedEarly] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -98,10 +99,11 @@ export const QuizPage = () => {
   const handleChoiceClick = (choice) => {
     if (showResult || isQuizFinished) return;
     setSelectedChoice(choice);
-    const isCorrectAnswer = choice === quizzes[currentIndex].answer;
-    setIsCorrect(isCorrectAnswer);
-    setShowResult(true);
-    if (isCorrectAnswer) setCorrectCount((prev) => prev + 1);
+
+    // 0.8초 뒤에 결과 모달을 표시하도록 지연 추가
+    setTimeout(() => {
+      setShowResult(true); // 모달 표시
+    }, 800); // 0.8초 지연
   };
 
   const handleNext = () => {
@@ -259,33 +261,55 @@ export const QuizPage = () => {
 
                   {/* 선택지 목록 */}
                   <ul className={styles.choiceList}>
-                    {shuffledChoices.map((choice, index) => (
-                      <li key={index} className={styles.choiceItem}>
-                        <label
-                          className={`${styles.choiceLabel} ${
-                            selectedChoice && selectedChoice !== choice
-                              ? styles.disabledChoice
-                              : ''
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            name="quiz"
-                            value={choice}
-                            checked={selectedChoice === choice}
-                            onChange={() => handleChoiceClick(choice)}
-                            className={styles.hiddenRadio}
-                            disabled={showResult}
-                          />
-                          <span className={styles.labelContent}>
-                            <span className={styles.numberPrefix}>
-                              {index + 1}
+                    {shuffledChoices.map((choice, index) => {
+                      const isChoiceSelected = selectedChoice === choice;
+
+                      return (
+                        <li key={index} className={`${styles.choiceItem} `}>
+                          <label
+                            className={`${styles.choiceLabel} ${
+                              selectedChoice && selectedChoice !== choice
+                                ? styles.disabledChoice
+                                : ''
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="quiz"
+                              value={choice}
+                              checked={isChoiceSelected}
+                              onChange={() => handleChoiceClick(choice)}
+                              className={styles.hiddenRadio}
+                              disabled={showResult}
+                            />
+                            <span
+                              className={`${styles.labelContent} ${
+                                !isChoiceSelected
+                                  ? styles.notSelectedChoice
+                                  : ''
+                              }}`}
+                            >
+                              <span
+                                className={`${styles.numberPrefix} ${
+                                  isChoiceSelected ? styles.selectedNumber : ''
+                                }`}
+                              >
+                                {index + 1}
+                              </span>
+                              <span
+                                className={`${styles.ansText} ${
+                                  selectedChoice && selectedChoice !== choice
+                                    ? styles.ansText.notSelectedChoice
+                                    : ''
+                                }}`}
+                              >
+                                {choice}
+                              </span>
                             </span>
-                            {choice}
-                          </span>
-                        </label>
-                      </li>
-                    ))}
+                          </label>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
 

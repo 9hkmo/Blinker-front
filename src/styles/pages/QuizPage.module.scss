@@ -88,24 +88,6 @@
   margin-right: 150px; /* 이미지와 선택지 사이 간격 */
 }
 
-.choiceList {
-  display: flex;
-  flex-direction: column; /* 선택지들을 세로로 나열 */
-  align-items: flex-start;
-  font-family: 'Pretendard-Regular';
-}
-
-.choiceItem {
-  color: #e8f8ee;
-  margin-bottom: 40px;
-  font-size: 40px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  margin-left: 65px;
-  font-family: 'Pretendard-Regular';
-}
-
 .quizImage {
   width: 400px; /* 이미지 크기 조정 */
   height: 301px;
@@ -123,6 +105,37 @@
   font-family: 'Pretendard-Regular';
 }
 
+.choiceList {
+  display: flex;
+  flex-direction: column; /* 선택지들을 세로로 나열 */
+  align-items: flex-start;
+  font-family: 'Pretendard-Regular';
+}
+
+.choiceItem {
+  color: #e8f8ee;
+  margin-bottom: 40px; /* 40px */
+  font-size: 40px; /* 40px */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin-left: 65px; /* 65px */
+  font-family: 'Pretendard-Regular';
+  background-color: transparent; /* 배경색 기본값은 투명 */
+}
+
+.selectedChoice {
+  background-color: transparent; /* 선택된 텍스트는 배경색 없음 */
+}
+
+.ansText.notSelectedChoice {
+  color: #767676;
+}
+
+.notSelectedChoice {
+  color: #767676;
+}
+
 .choiceLabel {
   cursor: pointer;
   display: inline-flex;
@@ -137,8 +150,7 @@
   color: #767676;
 
   .numberPrefix {
-    background-color: #767676;
-    color: white;
+    color: #767676;
     border-color: #767676;
   }
 }
