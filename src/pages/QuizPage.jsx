@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import CameraCapture from '../components/CameraCapture';
 import { EyesLayout } from '../components/EyesLayout';
 import {
+  quizearlyend,
   quiz_end,
   correct,
   uncorrect,
@@ -25,7 +26,7 @@ import {
 } from '../assets';
 
 const API_URL = import.meta.env.VITE_API_URL;
-const TOTAL_TIME = 30 * 1000; // 총 퀴즈 시간 60초
+const TOTAL_TIME = 30 * 1000;
 
 export const QuizPage = () => {
   const [quizzes, setQuizzes] = useState([]);
@@ -42,6 +43,7 @@ export const QuizPage = () => {
   const [allow, setAllow] = useState(false);
   const [quizStart, setQuizStart] = useState(false);
   const [cameraStatus, setCameraStatus] = useState('ready');
+  const [endedEarly, setEndedEarly] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -76,7 +78,6 @@ export const QuizPage = () => {
   useEffect(() => {
     let timer;
     if (quizStart && !isQuizFinished && !isResultShown) {
-      setStartTime(Date.now());
       timer = setInterval(() => {
         const now = Date.now();
         const elapsed = now - startTime;
@@ -90,7 +91,7 @@ export const QuizPage = () => {
       }, 100);
     }
     return () => clearInterval(timer);
-  }, [quizStart, startTime]);
+  }, [quizStart, startTime, isResultShown, isQuizFinished]);
 
   const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
 
@@ -105,6 +106,7 @@ export const QuizPage = () => {
 
   const handleNext = () => {
     const nextIndex = currentIndex + 1;
+
     if (nextIndex < quizzes.length) {
       setCurrentIndex(nextIndex);
       setShuffledChoices(shuffleArray(quizzes[nextIndex].choices));
@@ -113,8 +115,19 @@ export const QuizPage = () => {
     } else {
       setShowResult(false);
       setIsQuizFinished(true);
-      setTimeout(() => setIsResultShown(true), 1000);
+
+      const now = Date.now();
+      const usedTime = now - startTime;
+      const remainingTime = Math.max(TOTAL_TIME - usedTime, 0);
+
+      setEndedEarly(remainingTime > 0);
+      setTimeout(() => setIsResultShown(true), remainingTime);
     }
+  };
+
+  const handleStartQuiz = () => {
+    setStartTime(Date.now());
+    setQuizStart(true);
   };
 
   if (quizzes.length === 0)
@@ -173,10 +186,7 @@ export const QuizPage = () => {
               화면을 보고 간단한 퀴즈를 풀어주세요.
             </p>
             <p className={styles.quizLine2}>깜빡이가 눈 분석을 하고 있어요!</p>
-            <div
-              className={styles.quizButton}
-              onClick={() => setQuizStart(true)}
-            >
+            <div className={styles.quizButton} onClick={handleStartQuiz}>
               <img src={quiz} alt="퀴즈 아이콘" /> 퀴즈
             </div>
           </div>
@@ -211,11 +221,13 @@ export const QuizPage = () => {
           {isQuizFinished && !isResultShown ? (
             <div className={styles.quizEndWrapper}>
               <img
-                src={quiz_end}
+                src={endedEarly ? quizearlyend : quiz_end}
                 alt="퀴즈 종료"
                 className={styles.quizEndImage}
               />
-              <p className={styles.quizEndText}>퀴즈가 끝났어요.</p>
+              <p className={styles.quizEndText}>
+                {endedEarly ? '너무 빨리 풀었어요.' : '퀴즈가 끝났어요.'}
+              </p>
             </div>
           ) : isResultShown ? (
             <div className={styles.resultWrapper}>
@@ -287,8 +299,7 @@ export const QuizPage = () => {
         </div>
       )}
 
-      {/* 총 퀴즈 시간 기반 프로그래스바 */}
-      {quizStart && allow && !isResultShown && (
+      {quizStart && allow && !isResultShown && !endedEarly && (
         <div className={styles.progressWrapper}>
           <div className={styles.progressTime}>{timeLabel}</div>
           <div className={styles.progressBarContainer}>
@@ -300,15 +311,17 @@ export const QuizPage = () => {
                 <div
                   className={styles.progressFill}
                   style={{ width: `${progress}%` }}
-                ></div>
+                />
+                <div
+                  className={styles.progressDot}
+                  style={{ left: `${progress}%` }}
+                />
               </div>
-              <div className={styles.progressDot} />
             </div>
           </div>
         </div>
       )}
 
-      {/* 정답/오답 모달 */}
       {showResult && allow && quizStart && (
         <div className={styles.modalOverlay}>
           <div className={styles.modalBox}>
@@ -334,7 +347,6 @@ export const QuizPage = () => {
         </div>
       )}
 
-      {/* 결과 페이지로 이동 버튼 */}
       {isResultShown && allow && quizStart && (
         <div className={styles.resultButtonWrapper}>
           <Link to="/result" className={styles.resultFixedNextButton}>
