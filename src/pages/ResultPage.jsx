@@ -10,7 +10,7 @@ import { postResult } from "../api/post";
 // 점수별 설명 텍스트
 const scoreText = [
   <>
-    시력 저하 및 눈건조로 인해 눈 건강에 적신호..
+    눈 건강에 적신호.. 병원 가보셔야겠는데요?
     <br />
     일상적인 눈관리습관과 영양 섭취 개선이 필요합니다.
   </>,
@@ -36,7 +36,7 @@ export const ResultPage = () => {
   useEffect(() => {
     console.log(age, vision, tags, images);
     const getResult = async () => {
-      if (!age || !vision || !tags || !images) navigate("/"); // 데이터가 없으면 홈으로 이동
+      if (!age || !vision || !tags || Object.keys(images[0]).length === 0) navigate("/"); // 데이터가 없으면 홈으로 이동
       try {
         const data = await postResult({ age, vision, tags, images });
         if (!data) throw new Error("결과 데이터가 존재하지 않습니다.");
@@ -58,10 +58,6 @@ export const ResultPage = () => {
         term: `${result.term}`,
         score: `${result.score}`,
         stretchTips: `${result.stretchTips.join(", ")}`,
-        // tip: `시력 1.0은 정상이나, 질병이 우려됩니다. 같은 연령대에서는 드문 상태입니다.`,
-        // term: `4`,
-        // score: `70`,
-        // stretchTips: `고정 응시 운동(2분), 손바닥 온찜질(1분), 눈 굴리기(5회씩)`,
       },
     });
   };
