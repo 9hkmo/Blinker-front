@@ -1,18 +1,18 @@
-@use "../variables" as *;
+@use '../variables' as *;
 
 @font-face {
-  font-family: "Helvetica Rounded";
-  src: url("https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.eot");
-  src: url("https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.eot?#iefix")
-      format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.woff2")
-      format("woff2"),
-    url("https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.woff")
-      format("woff"),
-    url("https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.ttf")
-      format("truetype"),
-    url("https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.svg#Helvetica Rounded")
-      format("svg");
+  font-family: 'Helvetica Rounded';
+  src: url('https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.eot');
+  src: url('https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.woff2')
+      format('woff2'),
+    url('https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.woff')
+      format('woff'),
+    url('https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.ttf')
+      format('truetype'),
+    url('https://db.onlinewebfonts.com/t/72a681ab4895977fc23fbe7c149455be.svg#Helvetica Rounded')
+      format('svg');
 }
 
 * {
@@ -32,7 +32,7 @@
       }
     }
     span {
-      font-family: "Helvetica Rounded";
+      font-family: 'Helvetica Rounded';
       color: #559472;
       font-size: 1.979vw;
       font-weight: bold;
