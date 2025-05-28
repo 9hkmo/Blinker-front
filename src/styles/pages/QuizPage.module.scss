@@ -1,4 +1,6 @@
 /* 공통 초기화 */
+@use '../variables' as *;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -69,6 +71,7 @@
 .permissionText {
   color: white;
   text-align: center;
+  font-family: 'Pretendard-Regular';
   font-size: 36px;
   font-weight: 700;
   line-height: 50px;
@@ -204,6 +207,7 @@
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  font-family: 'Pretendard-Regular';
   font-size: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -264,16 +268,16 @@
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%); // ✅ 수평 가운데 정렬
-  width: 800px; // ✅ 고정 너비
-  height: 26px;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  z-index: 1000;
   display: flex;
   align-items: center;
-  z-index: 1000;
 }
 
 .progressTime {
-  font-size: 18.5px;
+  font-size: 18px;
   font-weight: bold;
   color: #fff;
   margin-right: 12px;
@@ -283,16 +287,34 @@
 
 .progressBarContainer {
   flex: 1;
+}
+
+.progressBarTrack {
+  position: relative;
   height: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progressBar {
+  position: absolute;
   height: 100%;
   background-color: #0e6f3a;
   transition: width 0.1s linear;
+  width: var(--progress, 0%);
+}
+
+.progressDot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background-color: #0e6f3a;
+  border-radius: 50%;
+  transition: left 0.1s linear;
+  left: var(--progress, 0%);
 }
 
 .quizEndWrapper {
@@ -382,8 +404,8 @@
 
 .quizIntroBox {
   position: absolute;
-  top: 60%;
-  left: 50%;
+  top: 680px;
+  left: 960px;
   transform: translate(-50%, -50%);
   text-align: center;
   display: flex;
@@ -398,21 +420,23 @@
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 20px;
+  letter-spacing: -0.025em;
 }
 
 .quizLine2 {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 47px;
+  letter-spacing: -0.025em;
 }
 
 .quizButton {
   width: 226px;
   height: 68px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
-  background-color: #0098d8;
-  color: white;
+  background-color: #0485a2;
+  color: #e8f8ee;
   border-radius: 24px;
   text-decoration: none;
   display: flex;
@@ -420,10 +444,11 @@
   justify-content: center;
   gap: 10px;
   transition: all 0.2s ease-in-out;
+  border: 4px solid #1c5f8e;
 
   img {
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
   }
 
   &:hover {
