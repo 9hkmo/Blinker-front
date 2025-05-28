@@ -35,8 +35,8 @@ const CameraCapture = ({ allow, setAllow, quizStart, setCameraStatus }) => {
 
   const startCapturing = () => {
     let count = 0;
-    const totalFrames = 300;
-    const interval = 100;
+    const totalFrames = 600;
+    const interval = 50;
 
     const intervalId = setInterval(() => {
       if (!canvasRef.current || !videoRef.current) return;
@@ -48,7 +48,7 @@ const CameraCapture = ({ allow, setAllow, quizStart, setCameraStatus }) => {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
 
-      ctx.drawImage(video, 0, 0, canvas.width*0.5, canvas.height*0.5);
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
       canvas.toBlob((blob) => {
         if (blob) {
